@@ -38,7 +38,7 @@
             <!--<li><a class="nav-link scrollto active" href="#hero">Home</a></li>-->
             <li><a class="nav-link scrollto" href="#about">About</a></li>
             <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-            <!--<li><a class="nav-link scrollto " href="#resources">Resources</a></li>-->
+            <li><a class="nav-link" href="resources/resources_index.html">Resources</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
     </nav><!-- .navbar -->
@@ -49,7 +49,7 @@
 <section id="hero">
     <div class="hero-container">
         <h1>Danilo Giuffrida</h1>
-        <h2>Data Scientist</h2>
+        <h2>Data Technical Lead</h2>
         <!--<h3>6+ years of experience</h3>-->
 
         <a href="#about" class="btn-scroll scrollto" title="Scroll Down"><i class="bx bx-chevron-down"></i></a>
@@ -71,8 +71,7 @@
                                 <img src="assets/img/me-photo.jpeg" alt="" class="personal-photo">
                             </div>
                             <h3 class="resume-title">Danilo Giuffrida</h3>
-                            <p>🇮🇹 I am Italian, born in 1991 and I am a Data Scientist with 6+ years of experience.</p>
-                            <p>I am currently a <strong>Senior Data Scientist</strong> at WhatWapp, where I enjoy playing with data for mobile games</p>
+                            <p>🇮🇹 I am Italian, born in 1991, I have <span id="years-experience">9+</span> years of experience and I am the <strong>Technical Lead of the Data Department</strong> in a mobile gaming company. </p>
                             <p>I studied <strong>Theoretical and Computational Physics</strong> and in my previous jobs I've worked with 
                                 <strong>Big data processing</strong> (from mobile GPS and connected cars),
                                 <strong>Complex Networks</strong> (using data from social networks) and 
@@ -107,11 +106,13 @@
 
                         <div class="row job-details">
                             <div class="col-lg-12">
-                                ■ Customers segmentation
-                                ■ ROAS prediction for marketing campaigns on mobile
-                                ■ FTUE optimization
-                                ■ Working in collaboration with project managers and developers for our existing and new games
-                            </div>
+                                ■ Customer segmentation using behavioral analytics and machine learning to identify high-value player segments
+                                ■ ROAS prediction models for UA campaigns across multiple channels (Facebook, Google, TikTok, etc.)
+                                ■ FTUE (First Time User Experience) optimization through funnel analysis and predictive modeling
+                                ■ Churn prediction and retention strategy development using survival analysis
+                                ■ Game economy balancing and monetization optimization through data-driven insights
+                                ■ Real-time dashboard development for live game performance monitoring
+                                ■ Collaboration with product, marketing, and development teams for data-driven game feature development                            </div>
 
                         </div>
                     </div>
@@ -614,6 +615,20 @@
 
 <!-- Template Main JS File -->
 <script src="assets/js/main.js"></script>
+
+<!-- Dynamic years calculation -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const startYear = 2016;
+    const currentYear = new Date().getFullYear();
+    const yearsExperience = currentYear - startYear;
+    
+    const yearsElement = document.getElementById('years-experience');
+    if (yearsElement) {
+        yearsElement.textContent = yearsExperience + '+';
+    }
+});
+</script>
 
 </body>
 
