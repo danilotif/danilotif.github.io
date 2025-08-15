@@ -1,0 +1,177 @@
+/* Common styles for all resource pages */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.container {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Headers */
+h1 {
+    color: #2c3e50;
+    padding-bottom: 10px;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    color: #34495e;
+    margin-top: 30px;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    color: #34495e;
+    margin: 1.5rem 0 0.8rem 0;
+    font-weight: 600;
+}
+
+/* Paragraphs and text */
+p {
+    margin-bottom: 1.2rem;
+}
+
+/* Lists */
+ul, ol {
+    padding-left: 25px;
+    margin: 1rem 0 1.5rem 0;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* Special boxes - these can be customized per page with theme colors */
+.highlight {
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-left: 4px solid var(--theme-color, #3498db);
+    margin: 20px 0;
+    font-style: italic;
+}
+
+.example {
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+    background-color: var(--example-bg, #f8f9fa);
+}
+
+.tips {
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid var(--tips-border, #ffeaa7);
+    background-color: var(--tips-bg, #fff3cd);
+}
+
+.stats {
+    background-color: #ebf3fd;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: #2980b9;
+}
+
+.warning {
+    background-color: #fee;
+    padding: 10px;
+    border-radius: 5px;
+    border-left: 4px solid #e74c3c;
+    margin: 15px 0;
+}
+
+/* Navigation */
+.back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.navigation {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e5e5e5;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-link {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+/* Code styling */
+code {
+    background: #f8f9fa;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 0.9rem;
+}
+
+blockquote {
+    border-left: 4px solid #3498db;
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: #555;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 5px;
+    }
+    
+    .container {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .navigation {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* Special components for Dunning-Kruger */
+.curve {
+    background-color: #e8f6f3;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 20px 0;
+    font-family: monospace;
+}
+
+.stages {
+    background-color: #fdf2e9;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #f39c12;
+}
