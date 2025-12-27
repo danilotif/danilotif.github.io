@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wirth's Law: Software Gets Slower Faster Than Hardware Gets Faster</title>
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <a href="resources_index.html" class="back-link">← Back to Resources</a>
+    <div class="container">
+        <h1>Wirth's Law</h1>
+
+        <div class="highlight">
+            "Software is getting slower more rapidly than hardware is getting faster."
+            <br><strong>— Niklaus Wirth, 1995</strong>
+        </div>
+
+        <h2>What Wirth's Law Means</h2>
+        <p>Wirth's Law, formulated by computer scientist Niklaus Wirth (creator of Pascal and other programming languages), observes that software tends to become slower faster than hardware improvements can compensate. Despite exponential increases in computing power, software often feels no faster—and sometimes slower—than it did years ago.</p>
+
+        <p>This is the flip side of Moore's Law. While transistor density doubles every couple of years, software bloat, abstraction layers, and feature creep consume those gains and then some. The result: today's computer running today's software often performs comparably to yesterday's computer running yesterday's software.</p>
+
+        <h2>Why It Happens</h2>
+
+        <div class="example">
+            <strong>Abstraction Layers:</strong> Modern software sits atop multiple abstraction layers—operating systems, frameworks, libraries, runtimes. Each layer adds convenience for developers but overhead for execution.
+        </div>
+
+        <div class="example">
+            <strong>Feature Creep:</strong> Software gains features continuously. Each feature adds code that consumes resources, even when you're not using it.
+        </div>
+
+        <div class="example">
+            <strong>Developer Productivity Priority:</strong> When hardware is cheap and developer time is expensive, optimizing for developer convenience beats optimizing for performance.
+        </div>
+
+        <div class="example">
+            <strong>Hardware as Safety Net:</strong> Knowing hardware will improve, developers write inefficient code, trusting Moore's Law to bail them out.
+        </div>
+
+        <div class="example">
+            <strong>Electron and Web Tech:</strong> Desktop apps increasingly use web technologies (via Electron, etc.), trading efficiency for cross-platform development. A "simple" app may embed an entire browser.
+        </div>
+
+        <h2>Real-World Evidence</h2>
+
+        <div class="example">
+            <strong>Operating Systems:</strong> A modern operating system on modern hardware may boot no faster than a 1990s OS on 1990s hardware—despite thousandfold improvements in CPU speed and memory.
+        </div>
+
+        <div class="example">
+            <strong>Web Browsers:</strong> Despite faster networks and processors, many websites feel no faster than they did on dial-up—because they now load megabytes of JavaScript, trackers, and ads.
+        </div>
+
+        <div class="example">
+            <strong>Office Software:</strong> Word processors and spreadsheets that ran smoothly on machines with megabytes of RAM now require gigabytes for similar core functionality.
+        </div>
+
+        <div class="example">
+            <strong>Mobile Apps:</strong> Apps that could run on early smartphones now require devices with many times the processing power.
+        </div>
+
+        <h2>The Underlying Economics</h2>
+
+        <ul>
+            <li><strong>Developer Time > CPU Time:</strong> Developer hours are expensive; CPU cycles are cheap. Optimizing for developer productivity makes economic sense even if it wastes hardware resources.</li>
+            <li><strong>Time-to-Market:</strong> Speed of development beats speed of execution. First-mover advantage justifies technical debt.</li>
+            <li><strong>User Expectations:</strong> Users expect new features, not just performance. Resources go to features, not optimization.</li>
+            <li><strong>Hardware Abundance:</strong> When everyone expects more powerful hardware, there's less pressure to be efficient.</li>
+        </ul>
+
+        <h2>Consequences</h2>
+
+        <div class="tips">
+            <h3>Negative Effects:</h3>
+            <ul>
+                <li><strong>Energy Waste:</strong> Inefficient software consumes more power, with environmental and economic costs</li>
+                <li><strong>Hardware Requirements:</strong> Users must upgrade hardware just to run increasingly bloated software</li>
+                <li><strong>E-Waste:</strong> Functional hardware becomes obsolete not because it fails but because software demands grow</li>
+                <li><strong>Performance Debt:</strong> Organizations accumulate layers of inefficiency that become hard to remove</li>
+            </ul>
+
+            <h3>Countervailing Forces:</h3>
+            <ul>
+                <li><strong>Mobile Constraints:</strong> Battery life and mobile processors create pressure for efficiency</li>
+                <li><strong>Cloud Costs:</strong> When you pay per CPU cycle, efficiency becomes economic</li>
+                <li><strong>User Experience:</strong> Latency-sensitive applications (games, real-time systems) must remain efficient</li>
+                <li><strong>Competitive Pressure:</strong> Sometimes efficiency becomes a differentiator</li>
+            </ul>
+        </div>
+
+        <h2>Fighting Wirth's Law</h2>
+
+        <div class="example">
+            <strong>Performance Budgets:</strong> Set explicit limits on memory, CPU, or load time and enforce them through development.
+        </div>
+
+        <div class="example">
+            <strong>Profiling and Measurement:</strong> You can't optimize what you don't measure. Regular performance testing catches creeping bloat.
+        </div>
+
+        <div class="example">
+            <strong>Lean Dependencies:</strong> Every library or framework adds weight. Question whether each dependency earns its overhead.
+        </div>
+
+        <div class="example">
+            <strong>Efficiency as Feature:</strong> Treat performance as a feature users value, not just a technical concern.
+        </div>
+
+        <h2>The Bottom Line</h2>
+        <p>Wirth's Law explains why exponential hardware improvements haven't delivered exponentially faster user experiences. Software absorbs hardware gains through added complexity, abstraction, and features. The forces driving software bloat are largely economic: developer time is expensive, hardware is cheap, and users want features more than speed.</p>
+
+        <p>This isn't entirely negative—abstraction and features provide real value. But understanding Wirth's Law helps explain why your new computer doesn't feel 100x faster than your old one, and why deliberate effort is required to build efficient software. Left to natural incentives, software will always find ways to consume whatever hardware advances provide.</p>
+    </div>
+</body>
+</html>

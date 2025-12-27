@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finagle's Law: Anything That Can Go Wrong Will, at the Worst Time</title>
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <a href="resources_index.html" class="back-link">← Back to Resources</a>
+    <div class="container">
+        <h1>Finagle's Law</h1>
+
+        <div class="highlight">
+            "Anything that can go wrong, will—at the worst possible moment."
+            <br><strong>— Finagle's Law of Dynamic Negatives</strong>
+        </div>
+
+        <h2>What Finagle's Law Is</h2>
+        <p>Finagle's Law is an extension of Murphy's Law, adding the cruel twist of timing: not only will things go wrong, but they'll go wrong at the moment when the consequences are most severe. The demo will crash when the CEO is watching. The server will fail during peak traffic. The backup system will be needed precisely when it's broken.</p>
+
+        <p>While sometimes attributed to science fiction author Larry Niven (who used it in his Known Space stories), the law captures a phenomenon that engineers, project managers, and presenters know all too well: failures cluster around high-stakes moments.</p>
+
+        <h2>Why Timing Seems Malicious</h2>
+
+        <div class="example">
+            <strong>Increased Stress:</strong> High-stakes moments create stress, which leads to mistakes. The importance of the moment contributes to the failure.
+        </div>
+
+        <div class="example">
+            <strong>Higher Usage:</strong> Important events often involve higher load—more users, more features enabled, more eyes watching. Higher usage increases failure probability.
+        </div>
+
+        <div class="example">
+            <strong>Edge Conditions:</strong> Important moments often involve unusual conditions (the big demo, the massive sale, the critical report). Edge cases that never triggered before suddenly matter.
+        </div>
+
+        <div class="example">
+            <strong>Confirmation Bias:</strong> We remember failures at bad times more than failures at convenient times. The timing makes the memory salient.
+        </div>
+
+        <div class="example">
+            <strong>Latent Failures:</strong> Problems that have been building up (disk almost full, certificate expiring, race condition that rarely triggers) finally manifest when stakes are highest.
+        </div>
+
+        <h2>Real-World Examples</h2>
+
+        <div class="example">
+            <strong>The Demo Disaster:</strong> Software that worked perfectly in testing crashes during the customer demo. The added pressure, different environment, or just bad luck strikes at the worst moment.
+        </div>
+
+        <div class="example">
+            <strong>Launch Day Crashes:</strong> Websites crash on launch day, when traffic is highest and media attention is greatest. The one day that matters most is the day the system can't handle.
+        </div>
+
+        <div class="example">
+            <strong>Presentation Equipment:</strong> The projector works fine until the actual presentation. The video that played in rehearsal won't play in front of the audience.
+        </div>
+
+        <div class="example">
+            <strong>Deadline Failures:</strong> The piece that was going to be finished "any day now" reveals unforeseen complexity the day before the deadline.
+        </div>
+
+        <h2>Defensive Strategies</h2>
+
+        <div class="tips">
+            <h3>Pre-emptive Measures:</h3>
+            <ul>
+                <li><strong>Dress Rehearsals:</strong> Test in conditions as close to real as possible, including stress and audience</li>
+                <li><strong>Load Testing:</strong> Don't wait for peak load to discover capacity limits</li>
+                <li><strong>Chaos Engineering:</strong> Deliberately inject failures in controlled ways before they happen naturally</li>
+                <li><strong>Margin Building:</strong> Plan for things to take longer and require more resources than estimated</li>
+                <li><strong>Pre-Mortems:</strong> Imagine the failure and work backward to what could cause it</li>
+            </ul>
+
+            <h3>Damage Control:</h3>
+            <ul>
+                <li><strong>Graceful Degradation:</strong> Design systems to fail partially rather than completely</li>
+                <li><strong>Rollback Capability:</strong> Ensure you can quickly return to known-working states</li>
+                <li><strong>Backup Plans:</strong> Have Plan B ready for critical moments (backup slides, fallback demo, manual override)</li>
+                <li><strong>Communication Plans:</strong> Know how you'll communicate if things go wrong during important events</li>
+            </ul>
+        </div>
+
+        <h2>Finagle's Corollaries</h2>
+        <p>Various extensions have been proposed:</p>
+        <ul>
+            <li><strong>First Corollary:</strong> If anything simply cannot go wrong, it will anyway</li>
+            <li><strong>Second Corollary:</strong> Once a problem is solved, someone will simplify the solution until it stops working</li>
+            <li><strong>Third Corollary:</strong> The effort to detect problems will itself introduce problems</li>
+            <li><strong>O'Toole's Corollary:</strong> Murphy was an optimist</li>
+        </ul>
+
+        <h2>A Healthy Perspective</h2>
+        <p>Finagle's Law isn't pure pessimism—it's defensive realism. Expecting failure at critical moments isn't defeatist; it's preparation. The law encourages:</p>
+        <ul>
+            <li>Building robustness into systems</li>
+            <li>Testing under realistic conditions</li>
+            <li>Maintaining backup plans</li>
+            <li>Accepting that some failures are inevitable and planning for recovery</li>
+        </ul>
+
+        <h2>The Bottom Line</h2>
+        <p>Finagle's Law captures a truth about timing and failure: important moments have more ways to go wrong and more severe consequences when they do. Whether through increased stress, unusual conditions, or just bad luck, failures seem to cluster around the times we can least afford them.</p>
+
+        <p>The response isn't despair but diligence. Test in realistic conditions. Build in margins. Prepare backup plans. Assume something will go wrong at the worst time and be ready when it does. Finagle's Law isn't a curse—it's a reminder to plan defensively for the moments that matter most.</p>
+    </div>
+</body>
+</html>
