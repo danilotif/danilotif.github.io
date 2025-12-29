@@ -119,6 +119,48 @@
           ],
           "explanation": "Dunbar's Number suggests humans can maintain stable social relationships with about 150 people. Beyond this, we can't keep track of everyone's relationships, reputations, and histories. The informal trust-based culture that worked at 50 people breaks down at 200. You can't know everyone anymore - you need formal processes, documented norms, and explicit structures.",
           "takeaway": "As organizations grow past ~150, accept that culture must become more explicit. Design structures that preserve small-team dynamics within larger organizations."
+        },
+        {
+          "id": 48,
+          "title": "The Incompetent Boss",
+          "scenario": "Your company promotes technical people who are good at their jobs into management. But it also promotes the politically savvy people who are mediocre at actual work but excellent at appearing busy and taking credit. After years of this, you notice something: the middle management layer is filled with people who got there through politics rather than competence. The technical stars either left or got stuck.",
+          "question": "How does this scenario differ from the Peter Principle? What systemic force is at work?",
+          "laws": [
+            {
+              "name": "Dilbert Principle",
+              "link": "laws/dilbert-principle.html"
+            }
+          ],
+          "explanation": "The Dilbert Principle (named after the comic strip) suggests that companies systematically promote incompetent employees to management to get them out of the workflow where they can do damage. Unlike the Peter Principle (where competent people rise until they become incompetent), the Dilbert Principle says incompetent people are deliberately moved to where they'll do least harm - which unfortunately is often management.",
+          "takeaway": "Distinguish between promoting people out of important work vs. promoting based on potential. If management is where you put people who can't do the real work, your management will be terrible."
+        },
+        {
+          "id": 49,
+          "title": "The Delegation Dilemma",
+          "scenario": "You're a senior engineer who can complete a task in 2 hours. You could delegate it to a junior engineer who would take 6 hours and need 2 hours of your guidance. Total: 8 hours vs your 2 hours. You decide to just do it yourself. This pattern repeats for months. Your junior engineer isn't growing, you're overloaded, and when you go on vacation, everything stops.",
+          "question": "What should you have done differently? When is \"doing it yourself\" the wrong choice even when it's faster?",
+          "laws": [
+            {
+              "name": "Delegation Paradox",
+              "link": "laws/delegation-paradox.html"
+            }
+          ],
+          "explanation": "The Delegation Paradox: in the short term, doing something yourself is often faster than teaching someone else. But this creates a bottleneck at you, prevents team growth, and doesn't scale. The 8-hour investment in teaching creates future capacity. After a few iterations, the junior can do it in 3 hours alone. After more practice, 2 hours. You've multiplied yourself.",
+          "takeaway": "Invest in delegation even when it's slower initially. Ask: \"Will this task come up again?\" If yes, the teaching time is an investment, not a cost."
+        },
+        {
+          "id": 50,
+          "title": "The Message Drift",
+          "scenario": "The CEO announces a new company strategy in an all-hands meeting. By the time it reaches front-line employees through 4 layers of management, the message has transformed completely. The CEO said \"focus on customer value,\" which became \"increase sales calls\" at the VP level, \"hit call quotas\" at director level, and \"make 50 calls per day regardless of quality\" at manager level.",
+          "question": "What phenomenon caused this message transformation? How could it be prevented?",
+          "laws": [
+            {
+              "name": "Chinese Whispers",
+              "link": "laws/chinese-whispers.html"
+            }
+          ],
+          "explanation": "Like the children's game where a message gets distorted as it passes from person to person, corporate communications degrade through hierarchical layers. Each translator adds their interpretation, biases, and simplifications. By the time it reaches the bottom, the original intent may be unrecognizable or even reversed.",
+          "takeaway": "Important messages should come directly from the source when possible. Use multiple channels. Have people repeat back what they understood. Check what actually reached the front lines."
         }
       ]
     },
@@ -273,6 +315,76 @@
           ],
           "explanation": "Hindsight bias is the \"I knew it all along\" effect - after an outcome is known, we misremember ourselves as having predicted it. This distorts learning: if everything seems obvious in retrospect, we don't examine why we didn't actually predict it, and we overestimate our ability to predict future events.",
           "takeaway": "Keep records of your predictions and reasoning before outcomes are known. Review them afterward to calibrate your actual forecasting ability."
+        },
+        {
+          "id": 51,
+          "title": "The Suspicious Colleague",
+          "scenario": "Your coworker's code deployment caused a major outage. You immediately assume they were careless and didn't test properly. But when you caused an outage last month, you knew it was because the deployment system had an undocumented quirk that no one warned you about.",
+          "question": "You're applying different standards. What principle should guide how you interpret your colleague's mistake?",
+          "laws": [
+            {
+              "name": "Hanlon's Razor",
+              "link": "laws/hanlons-razor.html"
+            }
+          ],
+          "explanation": "Hanlon's Razor states: \"Never attribute to malice that which can be adequately explained by ignorance\" (or incompetence, or circumstance). Your colleague probably wasn't careless - they likely encountered the same kind of unexpected situation you did. Assuming negative intent when simpler explanations exist damages relationships and prevents learning from systemic issues.",
+          "takeaway": "When something goes wrong, assume good intentions first. Ask \"What made this mistake easy to make?\" rather than \"Who should I blame?\""
+        },
+        {
+          "id": 52,
+          "title": "The Favor Exchange",
+          "scenario": "A salesperson gives you a free coffee before their pitch. A charity sends you a small gift before asking for donations. A colleague helps you move apartments, then asks you to cover their shift. In each case, you feel obligated to say yes, even when you'd rather not.",
+          "question": "What social principle are these people (consciously or not) exploiting? How can you defend against it?",
+          "laws": [
+            {
+              "name": "Reciprocity Principle",
+              "link": "laws/reciprocity-principle.html"
+            }
+          ],
+          "explanation": "The reciprocity principle is one of the most powerful forces in human psychology: we feel obligated to return favors, even unsolicited ones. Gift-giving creates psychological debt. This is why \"free\" samples work, why charities include address labels, and why your colleague's favor feels like it comes with strings attached.",
+          "takeaway": "Recognize when gifts are creating obligation. You can accept favors without owing infinite compliance. Reframe unsolicited \"gifts\" as what they often are: manipulation tactics."
+        },
+        {
+          "id": 53,
+          "title": "The In-Crowd",
+          "scenario": "Your company's engineering team dismisses every idea from the marketing team. \"They don't understand technology.\" Meanwhile, marketing dismisses engineering's input on campaigns. \"They don't understand customers.\" Both teams think they're the smart ones. Both are making worse decisions by ignoring valuable perspectives.",
+          "question": "What bias is causing both teams to overvalue their own group's opinions? What's the fix?",
+          "laws": [
+            {
+              "name": "In-Group Bias",
+              "link": "laws/in-group-bias.html"
+            }
+          ],
+          "explanation": "In-group bias makes us favor members of our own group while dismissing or devaluing outsiders. We assume our group is smarter, more competent, and more trustworthy. This tribal instinct helped our ancestors but creates silos in modern organizations where cross-functional collaboration is essential.",
+          "takeaway": "Deliberately seek input from \"out-groups.\" Create mixed teams for important decisions. Ask: \"What might the other team see that we're missing?\""
+        },
+        {
+          "id": 54,
+          "title": "The Sugar Pill",
+          "scenario": "A new pain medication is tested. Group A gets the real drug. Group B gets a sugar pill but is told it's the medication. Both groups report significant pain reduction - Group B's improvement is 30% of Group A's. The sugar pill \"worked\" for many patients.",
+          "question": "If you're designing a product or experience, how could you ethically apply this phenomenon?",
+          "laws": [
+            {
+              "name": "Placebo Effect",
+              "link": "laws/placebo-effect.html"
+            }
+          ],
+          "explanation": "The placebo effect demonstrates that belief and expectation can produce real, measurable changes. It's not \"fake\" - the brain's expectation of improvement triggers actual physiological responses. This extends beyond medicine: expensive wine tastes better, branded pills work better than generic (same ingredient), and products we believe in perform better for us.",
+          "takeaway": "Presentation and framing matter. Build confidence in your products. This isn't deception - it's recognizing that human experience is shaped by expectation as much as reality."
+        },
+        {
+          "id": 55,
+          "title": "The Accelerating Future",
+          "scenario": "In 1990, you might have predicted gradual improvement in computers. By 2000, you'd have been shocked by the internet's impact. By 2010, smartphones changed everything. By 2020, AI started writing code. Each decade brought changes that would have seemed like science fiction to the previous decade.",
+          "question": "If technological change is accelerating exponentially, what does that imply for predictions about 2030 or 2040?",
+          "laws": [
+            {
+              "name": "Moore's Law",
+              "link": "laws/moores-law.html"
+            }
+          ],
+          "explanation": "Moore's Law (computing power doubles roughly every 18-24 months) is one example of exponential growth. Humans are bad at intuiting exponentials - we naturally think linearly. This means we systematically underestimate how different the future will be. Changes in the next 20 years may be greater than changes in the last 50.",
+          "takeaway": "When predicting the future, your linear extrapolation is probably too conservative. Consider: what would you have predicted in 2005 about 2025? Your 2045 predictions are probably similarly limited."
         }
       ]
     },
@@ -417,6 +529,98 @@
           ],
           "explanation": "Clarke's Third Law states: \"Any sufficiently advanced technology is indistinguishable from magic.\" When we can't understand the mechanism, technology becomes a black box that just \"works.\" This isn't necessarily bad - we use electricity without understanding quantum mechanics - but it can lead to misplaced trust or fear.",
           "takeaway": "You don't need to understand everything you use. But for critical systems, someone should understand how they work, and you should understand their limitations."
+        },
+        {
+          "id": 56,
+          "title": "The Cobra Bounty",
+          "scenario": "Colonial India had a cobra problem. The British government offered a bounty for dead cobras. Initially it worked - people killed cobras for money. Then enterprising locals started breeding cobras to collect more bounties. When the government discovered this and canceled the program, breeders released their now-worthless cobras. The cobra population ended up larger than before.",
+          "question": "You're designing an incentive system for your company. What does this story teach about what to watch for?",
+          "laws": [
+            {
+              "name": "Cobra Effect",
+              "link": "laws/cobra-effect.html"
+            },
+            {
+              "name": "Unintended Consequences",
+              "link": "laws/unintended-consequences.html"
+            }
+          ],
+          "explanation": "The Cobra Effect describes how incentives designed to solve a problem can make it worse. People optimize for the reward, not the intended outcome. The bounty rewarded dead cobras, not fewer cobras - a crucial distinction. Similarly, rewarding lines of code produces verbose code; rewarding bug fixes might incentivize introducing bugs first.",
+          "takeaway": "Before implementing incentives, ask: \"How could someone game this?\" Measure outcomes, not proxies. Pilot programs before full rollout."
+        },
+        {
+          "id": 57,
+          "title": "The Flexible Parser",
+          "scenario": "Your API accepts data in a loose format - it auto-corrects typos, accepts dates in any format, and ignores extra fields. Users love how forgiving it is. Years later, you need to update the API. Every quirk you accommodated has become a de facto standard. Changing anything breaks someone's workflow.",
+          "question": "What design principle would have prevented this trap? What's the right balance between flexibility and strictness?",
+          "laws": [
+            {
+              "name": "Postel's Law",
+              "link": "laws/postels-law.html"
+            }
+          ],
+          "explanation": "Postel's Law states: \"Be conservative in what you send, be liberal in what you accept.\" This sounds wise but has a dark side - being liberal in what you accept means you eventually must support every malformed input anyone ever sent. Modern thinking suggests being strict in what you accept prevents this accidental standard problem.",
+          "takeaway": "Loose validation creates implicit contracts. Be thoughtful about what you accept - every accommodation becomes an expectation. Document what's supported vs. what happens to work."
+        },
+        {
+          "id": 58,
+          "title": "The Self-Preserving Problem",
+          "scenario": "A company builds a successful spam filtering service. It works so well that spam becomes rare. Executives question why they're paying for spam filtering when there's no spam problem. They cut the budget. Spam returns with a vengeance.",
+          "question": "What happens to organizations that successfully solve the problem justifying their existence? How should they communicate value?",
+          "laws": [
+            {
+              "name": "Shirky Principle",
+              "link": "laws/shirky-principle.html"
+            }
+          ],
+          "explanation": "The Shirky Principle states: \"Institutions will try to preserve the problem to which they are the solution.\" Success at solving a problem threatens the solver's existence. This creates perverse incentives: security teams that would lose budget if attacks stopped, consultants whose business depends on problems persisting. The spam team did their job too well.",
+          "takeaway": "Success should be visible even when problems disappear. Show counterfactuals: \"Here's what would happen without us.\" Align incentives with outcomes, not problem persistence."
+        },
+        {
+          "id": 59,
+          "title": "The Winning Platform",
+          "scenario": "A new social network launches. It's okay, but so are five competitors. Randomly, a few celebrities join this one. Their fans follow. More creators join because that's where the audience is. Advertisers follow the audience. Within 2 years, this network dominates while identical competitors fail. The first-mover advantage became insurmountable.",
+          "question": "If you're the #2 player in this market, what are your strategic options? Can you catch up through being better?",
+          "laws": [
+            {
+              "name": "Winner-Take-All",
+              "link": "laws/winner-take-all.html"
+            },
+            {
+              "name": "Network Effect",
+              "link": "laws/network-effect.html"
+            }
+          ],
+          "explanation": "In markets with strong network effects, small early leads compound into dominant positions - winner-take-all dynamics. Being 10% better doesn't matter if competitors have 10x the users. The #2 player can rarely catch up by being better; they need to find a different niche, wait for the leader to stumble, or target a segment underserved by the winner.",
+          "takeaway": "In network effect businesses, being early and fast matters more than being perfect. If you're behind, compete on dimensions where network effects don't apply."
+        },
+        {
+          "id": 60,
+          "title": "The Bandwidth Explosion",
+          "scenario": "In 1995, a web page was 15KB. By 2005, average pages were 500KB. By 2015, 2MB. By 2025, 5MB+. Internet speeds increased 100x, but web pages feel about as fast as they did in 2005. All the speed gains were absorbed by bigger images, more JavaScript, and more tracking scripts.",
+          "question": "Bandwidth improved dramatically. Why didn't the user experience improve proportionally? What should developers prioritize?",
+          "laws": [
+            {
+              "name": "Wirth's Law",
+              "link": "laws/wirths-law.html"
+            }
+          ],
+          "explanation": "Wirth's Law: software gets slower faster than hardware gets faster. When resources become abundant, we use them less efficiently. Each generation of developers assumes abundant bandwidth/memory/CPU and builds accordingly. The result: despite exponential hardware improvements, software performance stays roughly constant.",
+          "takeaway": "Treat performance as a feature, not something hardware will solve. The cheapest byte to transfer is the one you don't send. Constraints often produce better user experiences."
+        },
+        {
+          "id": 61,
+          "title": "The Butterfly Hurricane",
+          "scenario": "A junior developer changes a default timeout from 30 seconds to 5 seconds. Seems reasonable - why wait 30 seconds? A month later, during a traffic spike, cascading failures bring down the entire platform. The timeout change interacted with retry logic, which overwhelmed downstream services, which triggered more timeouts and retries.",
+          "question": "How should your team approach \"small\" changes to complex systems? What processes would have caught this?",
+          "laws": [
+            {
+              "name": "Butterfly Effect",
+              "link": "laws/butterfly-effect.html"
+            }
+          ],
+          "explanation": "The Butterfly Effect describes how small changes in complex systems can have disproportionate, unpredictable consequences. In interconnected systems, there's no such thing as an isolated change. The timeout adjustment was \"correct\" in isolation but catastrophic in context. Complex systems fail in complex ways.",
+          "takeaway": "Treat \"simple\" changes to production systems with respect. Understand the system holistically. Use canary deployments, monitoring, and rollback plans even for small changes."
         }
       ]
     },
@@ -565,6 +769,76 @@
           ],
           "explanation": "We often confuse fame with expertise. The actor's charisma and celebrity status created a halo effect that made them seem authoritative on a topic outside their expertise. Meanwhile, the scientists' actual expertise was less compelling because they lacked media polish. Authority bias doesn't distinguish between relevant and irrelevant credentials.",
           "takeaway": "Ask: \"Why should I trust this person on this topic?\" Fame, confidence, and communication skills don't equal expertise. Seek out actual domain experts."
+        },
+        {
+          "id": 62,
+          "title": "The Prison Experiment",
+          "scenario": "College students are randomly assigned to play \"guards\" or \"prisoners\" in a mock prison. Within days, guards become cruel and authoritarian. Prisoners become passive and depressed. The experiment is terminated early because the situation became dangerous. These were ordinary students - no one selected for cruelty.",
+          "question": "If ordinary people can become abusive in certain situations, what does this imply for designing institutions, workplaces, or online platforms?",
+          "laws": [
+            {
+              "name": "Stanford Prison Experiment",
+              "link": "laws/stanford-prison-experiment.html"
+            }
+          ],
+          "explanation": "The Stanford Prison Experiment (despite methodological criticisms) demonstrated how powerfully situations shape behavior. Give people power without accountability and many will abuse it. Put people in powerless positions and many will become passive. Character matters less than we think; environment and incentive structures matter more.",
+          "takeaway": "Design systems assuming people will respond to incentives and power dynamics, not assuming everyone will behave virtuously. Build in accountability, transparency, and checks on power."
+        },
+        {
+          "id": 63,
+          "title": "The Imperfect Expert",
+          "scenario": "You've been programming for 15 years. You're considered an expert. But every day, you feel like you're barely keeping up. New frameworks emerge constantly. Juniors ask questions you can't answer. You're convinced that soon everyone will discover you don't really know what you're doing.",
+          "question": "Many successful professionals feel this way. What's happening, and how should you reframe it?",
+          "laws": [
+            {
+              "name": "Imposter Syndrome",
+              "link": "laws/imposter-syndrome.html"
+            }
+          ],
+          "explanation": "Imposter Syndrome is the feeling that you're not as competent as others perceive you, and that you'll eventually be \"found out.\" Paradoxically, it often afflicts high achievers who have high standards and are aware of how much they don't know. The more you learn, the more you realize how vast the unknown is. Actual imposters rarely feel like imposters.",
+          "takeaway": "Your awareness of limitations is a sign of expertise, not inadequacy. Everyone is figuring it out as they go. The feeling doesn't mean you don't belong."
+        },
+        {
+          "id": 64,
+          "title": "The Luxury Paradox",
+          "scenario": "A fashion brand raises prices 40%. Sales increase. A wine is relabeled with a higher price - taste testers rate it better (same wine). A consulting firm charges twice competitors' rates - clients assume they must be better. In each case, higher price led to higher perceived value.",
+          "question": "How can price increases cause demand to rise rather than fall? When does this work and when does it backfire?",
+          "laws": [
+            {
+              "name": "Veblen Effect",
+              "link": "laws/veblen-effect.html"
+            }
+          ],
+          "explanation": "The Veblen Effect describes goods where demand increases with price because high price is part of the value - it signals status, quality, or exclusivity. For luxury goods, consulting, and expert services, cheap can actually hurt demand. People use price as a quality signal when they can't directly evaluate quality.",
+          "takeaway": "In some markets, underpricing signals low quality. Consider whether your pricing strategy accidentally undermines perceived value. This works for luxury/prestige goods, not commodities."
+        },
+        {
+          "id": 65,
+          "title": "The Bad Money",
+          "scenario": "Imagine two types of currency: gold coins and paper money that might become worthless. People spend the paper money and hoard the gold coins. Over time, only the paper circulates while gold disappears from daily commerce. The bad money has driven out the good money.",
+          "question": "This principle applies beyond currency. What happens in a workplace where mediocrity is tolerated alongside excellence?",
+          "laws": [
+            {
+              "name": "Gresham's Law",
+              "link": "laws/greshams-law.html"
+            }
+          ],
+          "explanation": "Gresham's Law (\"bad money drives out good\") applies wherever there's no mechanism to distinguish quality. In workplaces that reward presence over output, high performers leave for places that recognize them, while low performers stay. In markets flooded with fakes, authentic goods retreat. Without quality signals, low quality dominates.",
+          "takeaway": "Create mechanisms to recognize and reward quality, or watch it disappear. Without differentiation, mediocrity drives out excellence."
+        },
+        {
+          "id": 66,
+          "title": "The Feedback System",
+          "scenario": "A thermostat keeps your house at 70°F. When it drops to 68°, heating turns on. When it reaches 72°, heating turns off. The system self-corrects. Now imagine if the thermostat had no off switch - the heating would continue until the house burned down.",
+          "question": "Your startup is growing rapidly. What \"thermostats\" (feedback mechanisms) do you need to prevent runaway problems?",
+          "laws": [
+            {
+              "name": "Feedback Loops",
+              "link": "laws/feedback-loops.html"
+            }
+          ],
+          "explanation": "Negative feedback loops (like thermostats) maintain stability by counteracting changes. Positive feedback loops amplify changes and can spiral out of control. Healthy systems have both: positive loops for growth, negative loops for stability. Problems occur when feedback is delayed, absent, or when positive loops have no brakes.",
+          "takeaway": "Design systems with appropriate feedback. Ask: \"What would stop this if it went too far?\" Watch for situations where success accelerates success without any corrective force."
         }
       ]
     },
@@ -659,6 +933,48 @@
           ],
           "explanation": "The Pareto Principle (80/20 rule) observes that roughly 80% of effects come from 20% of causes. It's not always exactly 80/20, but the insight is that inputs and outputs are rarely equal. A minority of efforts produce a majority of results. This applies to time management, business, software, and countless other domains.",
           "takeaway": "Identify your high-leverage 20%. Focus relentlessly on what actually moves the needle rather than treating all tasks as equally important."
+        },
+        {
+          "id": 67,
+          "title": "The Second System",
+          "scenario": "Version 1 of your product was scrappy but successful. Now you're building Version 2 with \"all the features you couldn't do the first time.\" The team adds abstraction layers \"for flexibility,\" configuration options \"just in case,\" and refactors working code to be \"more elegant.\" V2 is 2 years late, twice as complex, and users prefer V1.",
+          "question": "What trap did the team fall into? How do successful teams approach rewrites?",
+          "laws": [
+            {
+              "name": "Parkinson's Second Law",
+              "link": "laws/parkinsons-second-law.html"
+            }
+          ],
+          "explanation": "Parkinson's Second Law addresses how complexity expands to fill available resources, particularly on second systems. After initial success, teams often over-engineer the next version, adding features for hypothetical future needs. The constraint and focus that made V1 successful is replaced by ambition and perfectionism.",
+          "takeaway": "Resist the urge to \"fix everything\" in V2. Set strict scope constraints. Rewrite incrementally rather than all-at-once. The constraints of V1 were features, not bugs."
+        },
+        {
+          "id": 68,
+          "title": "The Bureaucratic Budget",
+          "scenario": "Your department spends exactly 100% of its annual budget every year. If you underspend, next year's budget gets cut. So in November, you rush to buy equipment you don't need. Meanwhile, worthwhile projects go unfunded because they weren't in the original budget.",
+          "question": "What organizational dynamic causes this wasteful behavior? How could the incentive structure be redesigned?",
+          "laws": [
+            {
+              "name": "Pournelle's Iron Law",
+              "link": "laws/pournelle-iron-law.html"
+            }
+          ],
+          "explanation": "Pournelle's Iron Law of Bureaucracy: in any organization, those dedicated to the organization's goals eventually get replaced by those dedicated to preserving the organization itself. Budget-protection behavior (spending to avoid cuts) is rational for individual managers but wasteful for the organization. The system punishes efficiency and rewards empire-building.",
+          "takeaway": "Align incentives with organizational goals, not self-preservation. Consider letting departments keep savings or carry over budgets. Reward efficiency, not spending."
+        },
+        {
+          "id": 69,
+          "title": "The Noise Filter",
+          "scenario": "Your Slack has 50 channels. Your email gets 200+ messages daily. You're in 6 group chats. Twitter/X, LinkedIn, and news compete for attention. Somewhere in this flood is actually important information - a customer escalation, a critical bug, a message from your boss - but it's buried in noise.",
+          "question": "How should you restructure your information intake to surface what matters?",
+          "laws": [
+            {
+              "name": "Signal-to-Noise Ratio",
+              "link": "laws/signal-to-noise.html"
+            }
+          ],
+          "explanation": "Signal-to-noise ratio: the proportion of useful information to total information. As communication channels multiply, noise grows faster than signal. Important messages get lost. The solution isn't consuming more information - it's ruthlessly filtering to increase signal-to-noise ratio.",
+          "takeaway": "Audit your information channels. Unsubscribe, mute, filter aggressively. Create high-signal channels for critical information. Don't try to read everything - try to read the right things."
         }
       ]
     },
@@ -735,6 +1051,134 @@
           ],
           "explanation": "The Wadsworth Constant (named after a Reddit user) observes that the first 30% of most videos can be skipped without missing anything important. This accounts for intros, sponsorships, recaps, and preamble. YouTube even once tested adding a feature to automatically skip the first 30%.",
           "takeaway": "For most online video content, skip ahead 30% to get to the actual content. Your time is valuable."
+        },
+        {
+          "id": 70,
+          "title": "The Teacher Scorecard",
+          "scenario": "A university implements student evaluations for professors. Popular professors (entertaining, easy graders) get excellent reviews. Rigorous professors who challenge students get poor reviews. Over time, the university optimizes for popular professors. Grade inflation soars. Students are happier but learn less.",
+          "question": "The evaluation was meant to measure teaching quality. What happened?",
+          "laws": [
+            {
+              "name": "Campbell's Law",
+              "link": "laws/campbells-law.html"
+            },
+            {
+              "name": "Goodhart's Law",
+              "link": "laws/goodharts-law.html"
+            }
+          ],
+          "explanation": "Campbell's Law: \"The more any quantitative social indicator is used for decision-making, the more subject it will be to corruption pressures.\" Like Goodhart's Law, it describes how measurement distorts what it measures. Student evaluations measure likability and entertainment, which correlates weakly with learning. Optimizing for the metric harmed the actual goal.",
+          "takeaway": "When choosing metrics, ask: \"How could this be gamed? What perverse behaviors might it encourage?\" Use multiple measures. Be willing to abandon metrics that get corrupted."
+        },
+        {
+          "id": 71,
+          "title": "The Economic Forecast",
+          "scenario": "The government changes how unemployment is calculated. People adapt their behavior to the new definition. Businesses adjust hiring practices based on the expected statistics. The statistic that was supposed to passively measure the economy has changed the economy itself.",
+          "question": "Why do economic predictions often fail to come true - not because they're wrong, but because people react to them?",
+          "laws": [
+            {
+              "name": "Lucas Critique",
+              "link": "laws/lucas-critique.html"
+            }
+          ],
+          "explanation": "The Lucas Critique argues that people change their behavior in response to policy changes or predictions, invalidating models based on past behavior. If everyone knows a recession is predicted, they might cut spending, causing the recession. Or they might prepare, preventing it. The prediction becomes part of the system it's predicting.",
+          "takeaway": "In systems with intelligent agents (people, markets), predictions change what they predict. Consider how your forecasts or policies might alter behavior in ways that affect the outcome."
+        },
+        {
+          "id": 72,
+          "title": "The Information Channel",
+          "scenario": "You're trying to communicate a complex technical decision to your team. The message goes through: 1) Your summary in the meeting, 2) Meeting notes someone took, 3) Slack discussion afterward, 4) Documentation someone wrote later. By the time a new team member reads the docs 6 months later, critical context and nuance are lost.",
+          "question": "Information degrades through transmission. What determines how much information can reliably pass through a channel?",
+          "laws": [
+            {
+              "name": "Shannon's Limit",
+              "link": "laws/shannons-limit.html"
+            }
+          ],
+          "explanation": "Shannon's work on information theory established that every communication channel has a maximum rate at which information can be reliably transmitted. Beyond that limit, errors occur. This applies to digital channels but also to human communication: meetings, documents, and handoffs all have bandwidth limits. Complex, nuanced information requires high-bandwidth channels.",
+          "takeaway": "Match information complexity to channel bandwidth. Complex decisions need high-bandwidth communication (face-to-face, detailed docs). Simple information can use low-bandwidth channels (email, chat)."
+        },
+        {
+          "id": 73,
+          "title": "The Confident Manager",
+          "scenario": "Your manager is confident and decisive. They make quick decisions and rarely express doubt. You assume they must be very competent. Then you become a manager and realize: you now also project confidence while being uncertain, because that's what managers do. Your former certainty that confidence equals competence evaporates.",
+          "question": "What did you learn about the relationship between displayed confidence and actual competence?",
+          "laws": [
+            {
+              "name": "Putt's Law",
+              "link": "laws/putts-law.html"
+            },
+            {
+              "name": "Putt's Corollary",
+              "link": "laws/putts-corollary.html"
+            }
+          ],
+          "explanation": "Putt's Law states that \"Technology is dominated by two types of people: those who understand what they do not manage, and those who manage what they do not understand.\" Putt's Corollary adds that every hierarchy is inevitably led by those who don't fully understand what they're managing. Confidence is a performance, not a measure of competence.",
+          "takeaway": "Don't confuse confidence with competence. Seek evidence of actual knowledge, not just certainty. Be appropriately humble about your own expertise as you advance."
+        },
+        {
+          "id": 74,
+          "title": "The Conversation Drift",
+          "scenario": "You start a Zoom meeting with your colleague in Tokyo to discuss a specific technical decision. The audio cuts out occasionally, you talk over each other due to lag, and you can't read their facial expressions well. After 30 minutes, you realize you've been discussing slightly different interpretations of the problem, and you're no more aligned than when you started.",
+          "question": "Beyond the technical issues, what fundamental communication challenges does this illustrate?",
+          "laws": [
+            {
+              "name": "Hofstadter-Möller Law",
+              "link": "laws/hofstadter-moller-law.html"
+            }
+          ],
+          "explanation": "The Hofstadter-Möller Law states that it's very hard to communicate complex ideas across different conceptual frameworks. Add in language differences, cultural context, and degraded audio/video, and alignment becomes nearly impossible. Each party thinks they understand, but they're constructing different mental models from the same words.",
+          "takeaway": "For important cross-cultural or complex communications, explicitly verify understanding. Use visual aids, written summaries, and specific examples. Don't assume shared interpretation."
+        },
+        {
+          "id": 75,
+          "title": "The Understated Resume",
+          "scenario": "A senior engineer joins your team. Their resume mentions they \"contributed to\" a major system. You later learn they architected the entire thing, led a team of 20, and their design handles millions of requests. They didn't mention any of this in interviews. Their less-accomplished colleague, meanwhile, claimed credit for being \"instrumental\" in a minor project.",
+          "question": "The expert undersells while the novice oversells. How do you design interview processes that account for this?",
+          "laws": [
+            {
+              "name": "Peter's Corollary",
+              "link": "laws/peters-corollary.html"
+            },
+            {
+              "name": "Dunning-Kruger Effect",
+              "link": "laws/dunning-kruger-effect.html"
+            }
+          ],
+          "explanation": "Dunning-Kruger works in both directions: the incompetent overestimate themselves, while the highly competent often underestimate themselves (or their skills seem obvious to them). Peter's Corollary notes that in hierarchies, cream rises until it sours - but getting there requires self-promotion that experts often avoid.",
+          "takeaway": "Actively probe modest candidates for accomplishments. Ask for specific examples and follow up. Calibrate self-reported confidence against demonstrated competence."
+        },
+        {
+          "id": 76,
+          "title": "The Inherited Rules",
+          "scenario": "Your company has a rule that all code changes require approval from two senior engineers. No one remembers why. It slows everything down. You propose removing it. A grizzled veteran speaks up: \"That rule exists because in 2018, a junior engineer pushed code that deleted the production database. The two-approval rule has prevented similar disasters three times since.\"",
+          "question": "The rule seemed pointless until you learned its history. What principle should guide decisions about removing organizational rules or processes?",
+          "laws": [
+            {
+              "name": "Chesterton's Fence",
+              "link": "laws/chestertons-fence.html"
+            }
+          ],
+          "explanation": "Chesterton's Fence principle states that before removing something, you should understand why it was put there. Rules and processes often exist for reasons that aren't obvious - they solved problems that have been forgotten because the solutions worked. Removing them without understanding reintroduces the original problems.",
+          "takeaway": "Before eliminating rules or processes, actively investigate their origin. The lack of obvious justification might mean the rule is working perfectly - problems it prevents don't happen."
+        },
+        {
+          "id": 77,
+          "title": "The Department Growth",
+          "scenario": "The compliance department was created with 3 people to handle new regulations. Five years later, it has 30 people. The regulations haven't changed much. Each year, the department head justifies new hires for \"emerging challenges\" and \"proactive risk management.\" The department now creates work for itself: new forms, new approval processes, new training requirements.",
+          "question": "What forces cause bureaucracies to grow even when their original purpose doesn't require it?",
+          "laws": [
+            {
+              "name": "Parkinson's Law",
+              "link": "laws/parkinsons-law.html"
+            },
+            {
+              "name": "Pournelle's Iron Law",
+              "link": "laws/pournelle-iron-law.html"
+            }
+          ],
+          "explanation": "Parkinson's original law was about bureaucracies: \"Work expands to fill the time available\" and officials multiply regardless of work volume. Pournelle's Iron Law adds that bureaucracies eventually become devoted to self-preservation rather than their original mission. Departments grow because growth means power, budget, and prestige - not because more work exists.",
+          "takeaway": "Question whether growth reflects genuine need or bureaucratic expansion. Set clear metrics for departmental success. Be willing to shrink successful departments that have solved their problem."
         }
       ]
     }
