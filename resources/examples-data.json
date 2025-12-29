@@ -6,7 +6,6 @@
       "examples": [
         {
           "id": 1,
-          "difficulty": "easy",
           "title": "The Expanding Report",
           "scenario": "Your manager asks for a quick summary of last month's sales. She says \"take your time, no rush - maybe by the end of the week?\" You have 5 days. By day 4, you're still tweaking fonts, adding charts you weren't asked for, and rewriting sections that were already fine.",
           "question": "Which law explains why a simple task consumed your entire week?",
@@ -21,7 +20,6 @@
         },
         {
           "id": 2,
-          "difficulty": "medium",
           "title": "The Star Developer",
           "scenario": "Sarah was the best software engineer on the team - she solved complex problems, mentored others, and shipped features fast. The company promoted her to Engineering Manager. Now she spends her days in meetings, doing performance reviews, and handling HR issues. She's miserable, the team misses her technical leadership, and her managerial skills are... developing.",
           "question": "What principle predicts this outcome? Was the promotion a mistake?",
@@ -36,7 +34,6 @@
         },
         {
           "id": 3,
-          "difficulty": "hard",
           "title": "The Bike Shed Meeting",
           "scenario": "The company board meets to approve two items: (1) a $10 million budget for a new data center, and (2) the design of a bike shed for employees. The data center discussion takes 10 minutes - nobody really understands the technical requirements, so they trust the CTO. The bike shed discussion takes 2 hours - everyone has opinions about colors, location, and whether it needs a roof.",
           "question": "Why do trivial decisions consume more time than important ones? What hidden danger does this create?",
@@ -48,6 +45,80 @@
           ],
           "explanation": "People give disproportionate weight to trivial issues because they're easier to understand and have opinions about. The data center is complex - most board members can't meaningfully contribute. But everyone understands bike sheds and paint colors, so everyone wants to participate. The hidden danger: important complex decisions get rubber-stamped while trivial ones consume all the critical thinking energy.",
           "takeaway": "Notice when you're bike-shedding. The ease of having an opinion doesn't correlate with the importance of the decision."
+        },
+        {
+          "id": 13,
+          "title": "The Late Project Rescue",
+          "scenario": "A critical project is 2 months behind schedule. The team of 5 developers is overwhelmed. Management's solution: hire 4 more developers immediately to \"double the velocity.\" Three months later, the project is now 4 months behind schedule.",
+          "question": "What will most likely happen when you add more people to a late software project?",
+          "laws": [
+            {
+              "name": "Brooks's Law",
+              "link": "laws/brooks-law.html"
+            }
+          ],
+          "explanation": "Adding manpower to a late software project makes it later. New developers need onboarding (taking time from existing developers), communication overhead increases exponentially with team size, and the work often can't be parallelized effectively. The mythical \"man-month\" assumes work can be divided like digging a ditch - but software development doesn't work that way.",
+          "takeaway": "When a project is late, adding people usually makes it worse. Instead, reduce scope, extend deadlines, or remove obstacles for the existing team."
+        },
+        {
+          "id": 14,
+          "title": "The Watched Workers",
+          "scenario": "A factory conducts a study on how lighting affects productivity. They increase the lighting - productivity goes up. They decrease the lighting - productivity goes up again. They change nothing but tell workers they're being observed - productivity goes up. Every change seems to improve output.",
+          "question": "What's actually causing the productivity increase? Is it the lighting?",
+          "laws": [
+            {
+              "name": "Hawthorne Effect",
+              "link": "laws/hawthorne-effect.html"
+            }
+          ],
+          "explanation": "People modify their behavior when they know they're being observed. The productivity increases weren't caused by lighting changes - they were caused by workers knowing they were part of a study and being paid attention to. This effect confounds many workplace experiments and studies.",
+          "takeaway": "Be skeptical of studies where participants know they're being observed. The observation itself changes behavior. Consider this when implementing workplace changes."
+        },
+        {
+          "id": 15,
+          "title": "The Hands-On Manager",
+          "scenario": "Tom manages a team of 6 experienced professionals. He reviews every email before it's sent, sits in on every client call, and requires approval for decisions the team used to make independently. His calendar is packed. His team members have stopped taking initiative - they just wait for Tom's input on everything.",
+          "question": "What trap has Tom fallen into? What are the long-term consequences?",
+          "laws": [
+            {
+              "name": "Micromanagement Trap",
+              "link": "laws/micromanagement-trap.html"
+            }
+          ],
+          "explanation": "Micromanagement creates a vicious cycle: the manager controls everything, team members lose autonomy and stop thinking independently, the manager sees this as proof they need to control more. Tom has become a bottleneck - nothing moves without him, and his team's skills are atrophying. He's also burning out from doing everyone's job.",
+          "takeaway": "Delegate outcomes, not tasks. Set clear expectations and let people figure out how to achieve them. Your job is to remove obstacles, not create them."
+        },
+        {
+          "id": 16,
+          "title": "The Tug of War Team",
+          "scenario": "In a rope-pulling experiment, individuals pull with an average force of 85 kg alone. But in a team of 8, each person's average contribution drops to just 49 kg. The team of 8 pulls less than 4 individuals would combined.",
+          "question": "Why does individual effort decrease as team size increases?",
+          "laws": [
+            {
+              "name": "Ringelmann Effect",
+              "link": "laws/ringelmann-effect.html"
+            },
+            {
+              "name": "Social Loafing",
+              "link": "laws/social-loafing.html"
+            }
+          ],
+          "explanation": "When individual contributions can't be identified, people exert less effort - this is social loafing. The Ringelmann Effect shows this scales with group size: the larger the group, the less each individual contributes. People assume others will pick up the slack, or feel their individual effort won't be noticed anyway.",
+          "takeaway": "Make individual contributions visible and accountable, even in team settings. Small teams with clear ownership outperform large anonymous groups."
+        },
+        {
+          "id": 17,
+          "title": "The 150-Person Company",
+          "scenario": "A startup grows from 50 to 200 employees in a year. At 50 people, everyone knew everyone. Decisions happened in hallway conversations. Culture was strong and implicit. At 200, the founders notice cliques forming, communication breaking down, and people who've never met each other. They try all-hands meetings, but something fundamental has changed.",
+          "question": "What cognitive limit did the company cross? Can they get the old culture back?",
+          "laws": [
+            {
+              "name": "Dunbar's Number",
+              "link": "laws/dunbars-number.html"
+            }
+          ],
+          "explanation": "Dunbar's Number suggests humans can maintain stable social relationships with about 150 people. Beyond this, we can't keep track of everyone's relationships, reputations, and histories. The informal trust-based culture that worked at 50 people breaks down at 200. You can't know everyone anymore - you need formal processes, documented norms, and explicit structures.",
+          "takeaway": "As organizations grow past ~150, accept that culture must become more explicit. Design structures that preserve small-team dynamics within larger organizations."
         }
       ]
     },
@@ -57,7 +128,6 @@
       "examples": [
         {
           "id": 4,
-          "difficulty": "easy",
           "title": "The Movie Investment",
           "scenario": "You've watched 90 minutes of a terrible movie. It's not getting better. Your friend suggests leaving, but you say: \"We already paid $15 for tickets and spent an hour and a half here. We might as well finish it.\"",
           "question": "Is this good reasoning? What fallacy is at play?",
@@ -72,7 +142,6 @@
         },
         {
           "id": 5,
-          "difficulty": "medium",
           "title": "The Startup Success Story",
           "scenario": "A famous entrepreneur gives a talk: \"I dropped out of college, maxed out my credit cards, and worked 100-hour weeks. That's what it takes to succeed!\" The audience is inspired. Several people quit their jobs the next week to start companies.",
           "question": "What's missing from this success story? Why might following this advice be dangerous?",
@@ -87,7 +156,6 @@
         },
         {
           "id": 6,
-          "difficulty": "medium",
           "title": "The Netflix Paralysis",
           "scenario": "You sit down to watch something on Netflix. There are thousands of options. You spend 45 minutes scrolling, reading descriptions, checking ratings. Eventually you give up, put on a show you've seen before, and feel vaguely dissatisfied.",
           "question": "What phenomenon explains why more choices made you less happy?",
@@ -103,6 +171,108 @@
           ],
           "explanation": "More options don't always lead to better outcomes or more satisfaction. With thousands of choices, you can't evaluate them all, so you worry you're missing something better. The cognitive load of deciding becomes exhausting. Even if you choose well, you might feel regret wondering about paths not taken. Analysis paralysis kicks in when you have so many options that deciding becomes harder than not deciding.",
           "takeaway": "Artificially limit your options. Pick from a shortlist, set a time limit for deciding, or use external constraints. \"Good enough\" often beats \"optimal.\""
+        },
+        {
+          "id": 18,
+          "title": "The Confident Novice",
+          "scenario": "Jake just completed a 2-hour online course on investing. He's now explaining to his experienced financial advisor why her strategy is wrong, confidently recommending cryptocurrency and meme stocks. Six months ago, he didn't know what a stock was. His advisor has 20 years of experience.",
+          "question": "What cognitive bias explains Jake's misplaced confidence?",
+          "laws": [
+            {
+              "name": "Dunning-Kruger Effect",
+              "link": "laws/dunning-kruger-effect.html"
+            }
+          ],
+          "explanation": "The Dunning-Kruger effect describes how people with low ability at a task overestimate their competence, while experts often underestimate theirs. Jake has learned just enough to think he understands investing, but not enough to recognize how much he doesn't know. His advisor, having seen countless market cycles, is appropriately humble about uncertainty.",
+          "takeaway": "The more you learn about a subject, the more you realize how much you don't know. Be suspicious of your own confidence, especially when you're new to something."
+        },
+        {
+          "id": 19,
+          "title": "The Renovation Budget",
+          "scenario": "Maria is planning a kitchen renovation. The contractor quotes $30,000 and 6 weeks. Based on historical data of similar projects, what should Maria actually expect?",
+          "question": "What psychological trap should Maria prepare for, and what's a practical countermeasure?",
+          "laws": [
+            {
+              "name": "Planning Fallacy",
+              "link": "laws/planning-fallacy.html"
+            },
+            {
+              "name": "Hofstadter's Law",
+              "link": "laws/hofstadters-law.html"
+            }
+          ],
+          "explanation": "The Planning Fallacy describes our tendency to underestimate time, costs, and risks of future projects while overestimating benefits. Hofstadter's Law states: \"It always takes longer than you expect, even when you take into account Hofstadter's Law.\" Studies show home renovations typically cost 20-50% more than estimated and take twice as long.",
+          "takeaway": "Use \"reference class forecasting\" - look at how similar projects actually turned out, not just your optimistic plan. Budget 1.5-2x the estimate for time and money."
+        },
+        {
+          "id": 20,
+          "title": "The First Number",
+          "scenario": "In a salary negotiation, the recruiter asks: \"What are your salary expectations?\" You hadn't researched the market rate. You say \"Maybe around $70,000?\" The recruiter immediately agrees. You later discover the role typically pays $90,000-$100,000.",
+          "question": "What psychological effect did the recruiter exploit? What should you have done differently?",
+          "laws": [
+            {
+              "name": "Anchoring Bias",
+              "link": "laws/anchoring-bias.html"
+            }
+          ],
+          "explanation": "Anchoring bias means we rely too heavily on the first piece of information offered (the \"anchor\") when making decisions. By getting you to name a number first, the entire negotiation became centered around your low anchor. Even if they'd offered more, it would have been framed relative to your $70,000. The anchor pulled the whole conversation down.",
+          "takeaway": "In negotiations, let the other party anchor first if you're uncertain, or anchor high if you must go first. Research market rates before any negotiation."
+        },
+        {
+          "id": 21,
+          "title": "The Obvious Solution",
+          "scenario": "A patient presents with chest pain. The young doctor immediately thinks \"heart attack\" and orders cardiac tests. All come back negative. The patient actually has acid reflux - a much more common cause of chest pain that was obvious in retrospect from the patient's eating habits.",
+          "question": "What principle did the doctor violate by jumping to the dramatic diagnosis?",
+          "laws": [
+            {
+              "name": "Occam's Razor",
+              "link": "laws/occams-razor.html"
+            }
+          ],
+          "explanation": "Occam's Razor suggests that the simplest explanation is usually correct. Heart attacks are dramatic but rare; acid reflux is mundane but common. The doctor's training focused on not missing emergencies, but this led to overlooking the statistically more likely (and simpler) explanation. Sometimes zebras exist, but hoofbeats usually mean horses.",
+          "takeaway": "Start with the most common explanations before investigating exotic ones. The boring answer is usually right."
+        },
+        {
+          "id": 22,
+          "title": "The Pattern Seeker",
+          "scenario": "After a series of news stories about plane crashes, your friend refuses to fly and insists on driving 12 hours to your destination instead. Statistically, they're about 100 times more likely to die in the car than on the plane.",
+          "question": "What mental shortcut is distorting your friend's risk assessment?",
+          "laws": [
+            {
+              "name": "Availability Heuristic",
+              "link": "laws/availability-heuristic.html"
+            }
+          ],
+          "explanation": "The availability heuristic makes us judge probability based on how easily examples come to mind. Plane crashes are dramatic, heavily covered by news, and emotionally memorable - so they feel more likely. Car accidents are routine, rarely newsworthy, and quickly forgotten - so they feel less dangerous. Ease of recall doesn't equal actual probability.",
+          "takeaway": "When assessing risk, look up actual statistics rather than trusting your intuition. What feels dangerous and what is dangerous are often very different."
+        },
+        {
+          "id": 23,
+          "title": "The New Evidence",
+          "scenario": "You believe vaccines are dangerous. You read a study showing vaccines are safe and effective, with robust methodology. You also read a blog post with anecdotes about vaccine injuries. After this, your anti-vaccine belief is actually stronger than before.",
+          "question": "What cognitive pattern causes contradictory evidence to strengthen rather than weaken beliefs?",
+          "laws": [
+            {
+              "name": "Confirmation Bias",
+              "link": "laws/confirmation-bias.html"
+            }
+          ],
+          "explanation": "Confirmation bias leads us to seek, interpret, and remember information that confirms existing beliefs while dismissing contradictory evidence. The scientific study gets scrutinized and dismissed (\"funded by Big Pharma\"), while the anecdotes are accepted uncritically because they match your existing view. This is why beliefs become more entrenched, not less, when challenged.",
+          "takeaway": "Actively seek out the strongest arguments against your position. Ask: \"What evidence would change my mind?\" If nothing would, you're not reasoning - you're rationalizing."
+        },
+        {
+          "id": 24,
+          "title": "The Perfect Hindsight",
+          "scenario": "After a startup fails, investors say \"It was obvious they were going to fail - their business model never made sense.\" But these same investors didn't predict the failure when they chose not to invest. Some even almost invested before backing out for unrelated reasons.",
+          "question": "What bias makes past events seem more predictable than they actually were?",
+          "laws": [
+            {
+              "name": "Hindsight Bias",
+              "link": "laws/hindsight-bias.html"
+            }
+          ],
+          "explanation": "Hindsight bias is the \"I knew it all along\" effect - after an outcome is known, we misremember ourselves as having predicted it. This distorts learning: if everything seems obvious in retrospect, we don't examine why we didn't actually predict it, and we overestimate our ability to predict future events.",
+          "takeaway": "Keep records of your predictions and reasoning before outcomes are known. Review them afterward to calibrate your actual forecasting ability."
         }
       ]
     },
@@ -112,7 +282,6 @@
       "examples": [
         {
           "id": 7,
-          "difficulty": "easy",
           "title": "The Launch Day Crash",
           "scenario": "Your team has tested the new payment system for months. Everything works perfectly in staging. You launch on Black Friday - your biggest sales day. Within 30 minutes, the entire system crashes. Transactions fail. The CEO is calling.",
           "question": "Which law predicted this would happen at the worst possible moment?",
@@ -131,7 +300,6 @@
         },
         {
           "id": 8,
-          "difficulty": "hard",
           "title": "The Feature Factory",
           "scenario": "Your app started simple and fast. Over 3 years, you've added: social sharing, a built-in chat, notifications, gamification badges, a marketplace, AI recommendations, and a \"stories\" feature. Users now complain the app is slow, confusing, and crashes often. New developers take months to become productive in the codebase.",
           "question": "What laws explain this trajectory? Was each individual feature decision wrong?",
@@ -150,7 +318,6 @@
         },
         {
           "id": 9,
-          "difficulty": "medium",
           "title": "The Microservices Migration",
           "scenario": "The company has 4 development teams that don't communicate well. They decide to migrate from a monolith to microservices. Six months later, they have... 4 microservices. Each team owns one. The services have complex, poorly documented APIs between them. Cross-team features take forever to ship.",
           "question": "Why did the architecture end up mirroring the org structure? Is this always bad?",
@@ -162,6 +329,94 @@
           ],
           "explanation": "Organizations design systems that mirror their own communication structure. If teams don't talk, their systems won't integrate well either. The microservices architecture didn't fix the organizational problem - it encoded it into the software. This isn't always bad - sometimes you should design your org structure to get the architecture you want (the \"Inverse Conway Maneuver\").",
           "takeaway": "Technical architecture and organizational structure are deeply linked. You can't fix one without addressing the other. Consider changing team structure before or alongside technical changes."
+        },
+        {
+          "id": 25,
+          "title": "The Open Source Paradox",
+          "scenario": "A major security bug is found in a popular open-source library used by millions of applications. Critics ask: \"How did nobody catch this?\" But when researchers analyze the code's history, thousands of developers had access to the code over 10 years. Nobody reviewed this particular function.",
+          "question": "What principle failed here? What's the common misconception about open source security?",
+          "laws": [
+            {
+              "name": "Linus's Law",
+              "link": "laws/linus-law.html"
+            }
+          ],
+          "explanation": "Linus's Law states \"Given enough eyeballs, all bugs are shallow.\" But this assumes the eyeballs are actually looking. Open source doesn't guarantee review - it only makes review possible. Critical but boring code (like security libraries) often goes unexamined because everyone assumes someone else is checking. The assumption that \"many eyes\" equals \"thoroughly reviewed\" is often wrong.",
+          "takeaway": "Don't assume popular open source code is secure just because it's open. Fund security audits for critical dependencies. \"Many eyeballs\" means nothing if nobody's actually looking."
+        },
+        {
+          "id": 26,
+          "title": "The Legacy Feature",
+          "scenario": "Your app has a \"Quick Export\" button that only 5% of users click. Product wants to remove it to simplify the UI. Engineering says it's old code nobody understands, so removal is low-risk. The feature has existed since v1.0, five years ago. No one remembers why it was added.",
+          "question": "What principle suggests you should investigate before removing it?",
+          "laws": [
+            {
+              "name": "Chesterton's Fence",
+              "link": "laws/chestertons-fence.html"
+            }
+          ],
+          "explanation": "Chesterton's Fence: don't remove something until you understand why it was put there. That 5% might be power users who generate 40% of revenue. The feature might exist because of a legal requirement, a key client's demand, or a subtle UX problem it solved. The fact that no one remembers why it was added is a reason for caution, not removal.",
+          "takeaway": "Before removing anything - features, processes, rules - understand why it exists. If you can't find out, that's a red flag, not a green light."
+        },
+        {
+          "id": 27,
+          "title": "The Productivity Dashboard",
+          "scenario": "A call center implements a metric: \"calls resolved per hour.\" Within weeks, resolution rates skyrocket. Management celebrates. Three months later, customer satisfaction has plummeted and repeat calls have tripled. Agents were hanging up quickly or giving wrong answers to hit their numbers.",
+          "question": "What went wrong with this measurement approach?",
+          "laws": [
+            {
+              "name": "Goodhart's Law",
+              "link": "laws/goodharts-law.html"
+            }
+          ],
+          "explanation": "Goodhart's Law: \"When a measure becomes a target, it ceases to be a good measure.\" The metric was meant to indicate efficiency, but once people optimized for it directly, it lost its meaning. Agents found ways to game the metric that destroyed the actual goal (customer satisfaction). The metric measured resolution speed, not resolution quality.",
+          "takeaway": "Be careful what you measure - people will optimize for it. Use multiple metrics that are hard to game simultaneously. Measure outcomes, not just outputs."
+        },
+        {
+          "id": 28,
+          "title": "The Fuel-Efficient Cars",
+          "scenario": "The government mandates more fuel-efficient cars to reduce total fuel consumption. Cars become 30% more efficient. But total fuel consumption stays roughly the same. People drive more miles, buy bigger vehicles, and take trips they wouldn't have before when gas was effectively more expensive per mile.",
+          "question": "What paradox explains why efficiency gains didn't reduce consumption?",
+          "laws": [
+            {
+              "name": "Jevons Paradox",
+              "link": "laws/jevons-paradox.html"
+            }
+          ],
+          "explanation": "Jevons Paradox: increased efficiency in resource use often increases total consumption of that resource, rather than decreasing it. When something becomes cheaper or easier, we use more of it. This applies to fuel, bandwidth, storage, energy, and many other resources. Efficiency gains can be offset or even reversed by increased usage.",
+          "takeaway": "Don't assume efficiency improvements will automatically reduce consumption. Consider behavioral responses. Sometimes caps or prices work better than efficiency mandates."
+        },
+        {
+          "id": 29,
+          "title": "The Fax Machine",
+          "scenario": "The first fax machine was nearly worthless - who would you fax? The second was slightly more valuable. But the millionth fax machine made every other fax machine more valuable. Now with billions of internet users, every new user makes the network more valuable for everyone else.",
+          "question": "What effect describes why some products become more valuable as more people use them?",
+          "laws": [
+            {
+              "name": "Network Effect",
+              "link": "laws/network-effect.html"
+            },
+            {
+              "name": "Metcalfe's Law",
+              "link": "laws/metcalfes-law.html"
+            }
+          ],
+          "explanation": "Network effects occur when a product becomes more valuable as more people use it. Metcalfe's Law quantifies this: the value of a network is proportional to the square of the number of users. This is why social networks, marketplaces, and communication platforms tend toward winner-take-all dynamics. The biggest network isn't just a little better - it's exponentially better.",
+          "takeaway": "When building products with network effects, growth is everything early on - even at the cost of short-term profit. Once network effects kick in, they create powerful moats."
+        },
+        {
+          "id": 30,
+          "title": "The Magic Technology",
+          "scenario": "A friend shows you a new AI tool. It can generate images, write essays, and answer complex questions. \"How does it work?\" you ask. \"I have no idea,\" they say, \"it's basically magic.\" Arthur C. Clarke would smile.",
+          "question": "What famous law describes why advanced technology seems indistinguishable from magic?",
+          "laws": [
+            {
+              "name": "Clarke's Third Law",
+              "link": "laws/clarkes-third-law.html"
+            }
+          ],
+          "explanation": "Clarke's Third Law states: \"Any sufficiently advanced technology is indistinguishable from magic.\" When we can't understand the mechanism, technology becomes a black box that just \"works.\" This isn't necessarily bad - we use electricity without understanding quantum mechanics - but it can lead to misplaced trust or fear.",
+          "takeaway": "You don't need to understand everything you use. But for critical systems, someone should understand how they work, and you should understand their limitations."
         }
       ]
     },
@@ -171,7 +426,6 @@
       "examples": [
         {
           "id": 10,
-          "difficulty": "easy",
           "title": "The Crowded Emergency",
           "scenario": "A man collapses on a busy subway platform during rush hour. Hundreds of people see it happen. Everyone looks around, waiting. For a full minute, nobody helps. Finally, one person steps forward and others follow.",
           "question": "Why did more witnesses mean slower response? What would have helped?",
@@ -186,7 +440,6 @@
         },
         {
           "id": 11,
-          "difficulty": "medium",
           "title": "The Leaked Document",
           "scenario": "A celebrity's lawyers send aggressive legal threats to websites hosting an embarrassing photo, demanding its removal. Before the threats, maybe 10,000 people had seen it. After news of the legal action spreads, the photo goes viral - millions see it, and it becomes permanently associated with the celebrity's name.",
           "question": "What effect caused the suppression attempt to backfire so spectacularly?",
@@ -201,7 +454,6 @@
         },
         {
           "id": 12,
-          "difficulty": "hard",
           "title": "The Meeting That Agreed Too Fast",
           "scenario": "The leadership team meets to decide on a major strategic pivot. The CEO shares her preferred direction. One by one, each executive voices support. Concerns go unspoken. The decision is unanimous. Six months later, the pivot fails catastrophically. In the post-mortem, several executives admit they had serious doubts but didn't want to be the only dissenting voice.",
           "question": "What phenomenon caused smart people to collectively make a bad decision? How could it have been prevented?",
@@ -213,6 +465,276 @@
           ],
           "explanation": "Groupthink occurs when the desire for harmony or conformity overrides realistic appraisal of alternatives. Warning signs include: the leader sharing their view first, quick consensus, self-censorship of doubts, and pressure on dissenters. Each person thinks they're the only one with concerns, so they stay quiet. Prevention methods include: having leaders speak last, assigning a \"devil's advocate\" role, anonymous feedback, and actively soliciting dissent.",
           "takeaway": "Unanimous agreement on complex decisions is a red flag, not a green light. Build processes that surface disagreement before decisions are final."
+        },
+        {
+          "id": 31,
+          "title": "The Restaurant Choice",
+          "scenario": "You're walking in an unfamiliar city looking for dinner. One restaurant is packed with people waiting outside. Another is completely empty. You choose the crowded one, even though you might wait 30 minutes. \"If all those people chose it, it must be good,\" you think.",
+          "question": "What principle guided your decision? When does this heuristic fail?",
+          "laws": [
+            {
+              "name": "Social Proof",
+              "link": "laws/social-proof.html"
+            }
+          ],
+          "explanation": "Social proof is the tendency to assume the actions of others reflect correct behavior. In an unfamiliar situation, we look to others for guidance. Often this works - crowds do signal quality. But it can lead to cascades: if early random diners happen to choose one restaurant, everyone follows, regardless of actual quality. The empty restaurant might be equally good.",
+          "takeaway": "Social proof is a useful shortcut, but recognize when you're using it. In some situations, the crowd is just following earlier random choices, not quality signals."
+        },
+        {
+          "id": 32,
+          "title": "The Viral Petition",
+          "scenario": "A petition to ban a controversial book reaches 100,000 signatures in a week. Most signers haven't read the book. Many signed because their friends shared it, and they wanted to be on the \"right side.\" The controversy drives the book to #1 on bestseller lists.",
+          "question": "Multiple laws are at play here. Which one is NOT relevant: A) Streisand Effect, B) Bandwagon Effect, C) Dunbar's Number, D) Social Proof?",
+          "laws": [
+            {
+              "name": "Bandwagon Effect",
+              "link": "laws/bandwagon-effect.html"
+            },
+            {
+              "name": "Streisand Effect",
+              "link": "laws/streisand-effect.html"
+            },
+            {
+              "name": "Social Proof",
+              "link": "laws/social-proof.html"
+            }
+          ],
+          "explanation": "Dunbar's Number (about cognitive limits on relationships) isn't relevant here. The others all apply: people signed because others did (Bandwagon/Social Proof), and the suppression attempt backfired by drawing attention to the book (Streisand Effect). The petition accomplished the opposite of its goal.",
+          "takeaway": "Viral outrage often amplifies what it tries to suppress. Before joining a campaign, consider whether your participation might backfire."
+        },
+        {
+          "id": 33,
+          "title": "The Obedient Participants",
+          "scenario": "In a psychology experiment, participants are told by an authority figure in a lab coat to administer increasingly powerful electric shocks to another person (actually an actor) who screams in pain. 65% of participants continued to the maximum voltage despite the victim's apparent distress.",
+          "question": "What does this famous experiment reveal about human behavior?",
+          "laws": [
+            {
+              "name": "Milgram Effect",
+              "link": "laws/milgram-effect.html"
+            },
+            {
+              "name": "Authority Bias",
+              "link": "laws/authority-bias.html"
+            }
+          ],
+          "explanation": "The Milgram experiments showed that ordinary people will follow authority figures even when asked to do things that conflict with their conscience. Authority bias makes us defer to perceived experts. Participants weren't sadists - they were uncomfortable, but the legitimacy of the \"scientist\" override their moral objections.",
+          "takeaway": "Be aware of how much you defer to authority. Credentials and confidence don't make someone right. Your moral compass exists for a reason."
+        },
+        {
+          "id": 34,
+          "title": "The Halo Interview",
+          "scenario": "A job candidate walks in: tall, well-dressed, firm handshake, excellent posture, and a warm smile. The interviewer immediately feels this candidate is competent, intelligent, and trustworthy - before they've answered a single question. They get the job over a more qualified but less polished candidate.",
+          "question": "What cognitive bias influenced the interviewer's judgment?",
+          "laws": [
+            {
+              "name": "Halo Effect",
+              "link": "laws/halo-effect.html"
+            }
+          ],
+          "explanation": "The halo effect causes our impression of one trait to influence how we perceive unrelated traits. The candidate's attractive appearance and confident body language created a positive halo that colored the interviewer's perception of their intelligence and competence. Physical attractiveness, in particular, creates strong halos.",
+          "takeaway": "Be aware of halo effects in your judgments. Try to evaluate traits independently. Structured interviews with consistent questions reduce bias."
+        },
+        {
+          "id": 35,
+          "title": "The Blame Game",
+          "scenario": "Your colleague misses an important deadline. You think: \"She's lazy and doesn't care about this project.\" Later, you miss a deadline yourself. You think: \"The requirements kept changing, and I had too many meetings - it wasn't my fault.\"",
+          "question": "Why do we attribute others' failures to character but our own failures to circumstances?",
+          "laws": [
+            {
+              "name": "Fundamental Attribution Error",
+              "link": "laws/fundamental-attribution-error.html"
+            }
+          ],
+          "explanation": "The Fundamental Attribution Error is our tendency to overemphasize personal characteristics and underemphasize situational factors when judging others' behavior, while doing the opposite for ourselves. We know our own circumstances but not others'. Your colleague might have had the same pressures you did.",
+          "takeaway": "When someone fails, ask \"What situation might have caused this?\" before assuming it's their character. Grant others the same understanding you give yourself."
+        },
+        {
+          "id": 36,
+          "title": "The Wrong Expert",
+          "scenario": "A famous actor speaks passionately at a congressional hearing about climate policy. Their testimony is persuasive - they're articulate, confident, and emotionally compelling. Afterward, legislators cite the actor's \"expert testimony\" when explaining their votes. The actual climate scientists who testified got less attention.",
+          "question": "Why did legislators find the actor more persuasive than the scientists?",
+          "laws": [
+            {
+              "name": "Authority Bias",
+              "link": "laws/authority-bias.html"
+            },
+            {
+              "name": "Halo Effect",
+              "link": "laws/halo-effect.html"
+            }
+          ],
+          "explanation": "We often confuse fame with expertise. The actor's charisma and celebrity status created a halo effect that made them seem authoritative on a topic outside their expertise. Meanwhile, the scientists' actual expertise was less compelling because they lacked media polish. Authority bias doesn't distinguish between relevant and irrelevant credentials.",
+          "takeaway": "Ask: \"Why should I trust this person on this topic?\" Fame, confidence, and communication skills don't equal expertise. Seek out actual domain experts."
+        }
+      ]
+    },
+    {
+      "id": "productivity",
+      "title": "Personal Productivity",
+      "examples": [
+        {
+          "id": 37,
+          "title": "The Deadline Rush",
+          "scenario": "The project is due in 2 weeks. You have plenty of time, so you start slowly, doing research and \"getting organized.\" With 2 days left, you panic and work through the night. You finish just in time, exhausted. Next project: exact same pattern.",
+          "question": "What syndrome describes this pattern of delay followed by last-minute panic?",
+          "laws": [
+            {
+              "name": "Student Syndrome",
+              "link": "laws/student-syndrome.html"
+            }
+          ],
+          "explanation": "Student Syndrome is the tendency to delay work until the last possible moment, regardless of how much time is given. Named after the common student pattern of cramming before exams, it explains why adding buffer time to projects often doesn't help - the buffer just becomes more delay time. The panic is part of the process.",
+          "takeaway": "Set intermediate milestones with real consequences. Create artificial urgency early. Start with the hardest parts when you have the most time."
+        },
+        {
+          "id": 38,
+          "title": "The Unfinished Business",
+          "scenario": "You start writing an important email but get interrupted. For the rest of the day, that unfinished email keeps popping into your head. During dinner, in the shower, trying to sleep - your brain won't let it go. Once you finally finish and send it, the intrusive thoughts stop instantly.",
+          "question": "What psychological effect keeps unfinished tasks stuck in your mind?",
+          "laws": [
+            {
+              "name": "Zeigarnik Effect",
+              "link": "laws/zeigarnik-effect.html"
+            }
+          ],
+          "explanation": "The Zeigarnik Effect: uncompleted tasks create mental tension and are remembered better than completed ones. Your brain keeps the task \"open\" like an unsaved document, using cognitive resources to prevent forgetting. Once completed, the tension releases and the task leaves working memory. This is why half-done tasks are so mentally draining.",
+          "takeaway": "Either complete tasks or write them down to \"close the loop\" mentally. A task list externalizes the remembering, freeing mental resources."
+        },
+        {
+          "id": 39,
+          "title": "The Two-Minute Email",
+          "scenario": "You're checking email and see a message that needs a quick reply - maybe 2 minutes of work. You think \"I'll do it later\" and move on. By end of day, you have 15 such emails. You spend the evening dreading them. Each one still takes 2 minutes.",
+          "question": "What simple rule could have prevented this accumulation?",
+          "laws": [
+            {
+              "name": "Two-Minute Rule",
+              "link": "laws/two-minute-rule.html"
+            }
+          ],
+          "explanation": "The Two-Minute Rule states: if a task takes less than two minutes, do it immediately. The overhead of tracking, remembering, and context-switching back to small tasks exceeds the time to just complete them. Letting two-minute tasks accumulate creates an anxiety-inducing backlog that feels much larger than it actually is.",
+          "takeaway": "Handle quick tasks immediately. The mental overhead of postponing is often greater than just doing it. This keeps your inbox and task list from overwhelming you."
+        },
+        {
+          "id": 40,
+          "title": "The 25-Minute Focus",
+          "scenario": "You need to write a report but keep getting distracted. You try something new: set a timer for 25 minutes, work with complete focus, then take a 5-minute break. Repeat. By the end of the day, you've accomplished more than the entire previous week.",
+          "question": "What time management technique are you applying?",
+          "laws": [
+            {
+              "name": "Pomodoro Technique",
+              "link": "laws/pomodoro-technique.html"
+            },
+            {
+              "name": "Timeboxing",
+              "link": "laws/timeboxing-law.html"
+            }
+          ],
+          "explanation": "The Pomodoro Technique uses focused work sprints (traditionally 25 minutes) followed by short breaks. Timeboxing means allocating fixed time periods to tasks. Both work by creating artificial constraints that prevent perfectionism, procrastination, and scope creep. The timer makes the work feel finite and manageable.",
+          "takeaway": "Constrain your work time to focus your attention. Short, intense bursts with clear endpoints often beat long, unfocused sessions."
+        },
+        {
+          "id": 41,
+          "title": "The Urgent vs Important",
+          "scenario": "Your day is consumed by emails, meetings, and fires to put out. You're exhausted but feel like you accomplished nothing important. The strategic project that could transform your career? \"I'll get to it when things calm down.\" Things never calm down.",
+          "question": "What framework helps distinguish between what demands attention and what deserves it?",
+          "laws": [
+            {
+              "name": "Eisenhower Matrix",
+              "link": "laws/eisenhower-matrix.html"
+            }
+          ],
+          "explanation": "The Eisenhower Matrix categorizes tasks by urgency and importance. Urgent tasks demand attention now; important tasks matter for long-term goals. The trap: urgent-but-not-important tasks (most emails, many meetings) crowd out important-but-not-urgent tasks (strategic thinking, relationship building). Urgency wins by default unless you deliberately prioritize importance.",
+          "takeaway": "Schedule time for important-not-urgent work before urgent tasks fill your calendar. What's urgent is rarely what matters most."
+        },
+        {
+          "id": 42,
+          "title": "The 80/20 Split",
+          "scenario": "An analysis of a software company reveals: 20% of features are used 80% of the time. 20% of customers generate 80% of revenue. 20% of bugs cause 80% of crashes. 20% of employees produce 80% of the output. The pattern appears everywhere.",
+          "question": "What principle describes this recurring 80/20 distribution?",
+          "laws": [
+            {
+              "name": "Pareto Principle",
+              "link": "laws/pareto-principle.html"
+            }
+          ],
+          "explanation": "The Pareto Principle (80/20 rule) observes that roughly 80% of effects come from 20% of causes. It's not always exactly 80/20, but the insight is that inputs and outputs are rarely equal. A minority of efforts produce a majority of results. This applies to time management, business, software, and countless other domains.",
+          "takeaway": "Identify your high-leverage 20%. Focus relentlessly on what actually moves the needle rather than treating all tasks as equally important."
+        }
+      ]
+    },
+    {
+      "id": "internet",
+      "title": "Online & Internet Culture",
+      "examples": [
+        {
+          "id": 43,
+          "title": "The Wikipedia Trap",
+          "scenario": "You want to know how to correctly use a semicolon. Rather than looking it up, you post on a forum: \"Semicolons are useless and nobody uses them correctly anymore.\" Within minutes, dozens of people reply with detailed explanations of proper semicolon usage, correcting you extensively.",
+          "question": "What law describes this effective (if annoying) method of getting information?",
+          "laws": [
+            {
+              "name": "Cunningham's Law",
+              "link": "laws/cunninghams-law.html"
+            }
+          ],
+          "explanation": "Cunningham's Law states: \"The best way to get the right answer on the Internet is not to ask a question, but to post the wrong answer.\" People are more motivated to correct errors than to help with questions. This exploits the human desire to demonstrate knowledge and fix mistakes.",
+          "takeaway": "This is more observation than advice. But it explains why confidently wrong posts generate more engagement than humble questions."
+        },
+        {
+          "id": 44,
+          "title": "The Satire Confusion",
+          "scenario": "Someone posts an absurd conspiracy theory online. Half the commenters think it's satire and applaud the humor. The other half take it seriously and add supporting \"evidence.\" The original poster's intent becomes impossible to determine.",
+          "question": "What law describes why it's impossible to parody extreme views convincingly online?",
+          "laws": [
+            {
+              "name": "Poe's Law",
+              "link": "laws/poes-law.html"
+            }
+          ],
+          "explanation": "Poe's Law states that without a clear indicator of intent, it's impossible to create a parody of extreme views that someone won't mistake for the real thing. Online, stripped of tone and context, satire and sincerity become indistinguishable. For every exaggerated parody, there's someone who genuinely believes it.",
+          "takeaway": "Don't assume extreme content is satire - or sincere. Use clear signals (/s, context) when being sarcastic online. Assume the worst interpretation is how someone will read it."
+        },
+        {
+          "id": 45,
+          "title": "The Nazi Comparison",
+          "scenario": "An online debate about parking regulations continues for 200+ comments. Eventually, someone writes: \"These parking enforcement officers are basically Nazis.\" The other commenter declares the debate over, claiming victory by default.",
+          "question": "What internet law describes this inevitable trajectory of long online arguments?",
+          "laws": [
+            {
+              "name": "Godwin's Law",
+              "link": "laws/godwins-law.html"
+            }
+          ],
+          "explanation": "Godwin's Law states that as an online discussion grows longer, the probability of a comparison involving Nazis approaches 1. Traditionally, whoever makes the Nazi comparison is considered to have lost the argument. The law reflects how hyperbole escalates in extended debates until reaching for the ultimate example of evil.",
+          "takeaway": "If you find yourself reaching for extreme historical comparisons, you've probably lost the argument. It's also a sign the discussion has run its course."
+        },
+        {
+          "id": 46,
+          "title": "The Question Headline",
+          "scenario": "\"Is This New Supplement the Cure for Cancer?\" reads the headline. You click, excited. The article spends 1,500 words discussing a minor study, then concludes: \"More research is needed.\" The answer to the headline question is, of course, \"No.\"",
+          "question": "What law predicts the answer to any headline phrased as a question?",
+          "laws": [
+            {
+              "name": "Betteridge's Law",
+              "link": "laws/betteridges-law.html"
+            }
+          ],
+          "explanation": "Betteridge's Law of Headlines states: \"Any headline that ends in a question mark can be answered by the word 'No.'\" If the answer were yes, the headline would state it as fact. The question format allows sensational claims without the burden of proof, while technically being accurate.",
+          "takeaway": "When you see a question headline, the answer is almost certainly \"no\" or \"we don't know.\" Save yourself a click."
+        },
+        {
+          "id": 47,
+          "title": "The Skip Button",
+          "scenario": "You're watching a YouTube video. The intro is 90 seconds of the creator asking you to like, subscribe, and talking about sponsors. You notice that the actual content starts at 30% of the video length - exactly where most people would skip to.",
+          "question": "What informal law describes where the actual content of a video begins?",
+          "laws": [
+            {
+              "name": "Wadsworth Constant",
+              "link": "laws/wadsworth-constant.html"
+            }
+          ],
+          "explanation": "The Wadsworth Constant (named after a Reddit user) observes that the first 30% of most videos can be skipped without missing anything important. This accounts for intros, sponsorships, recaps, and preamble. YouTube even once tested adding a feature to automatically skip the first 30%.",
+          "takeaway": "For most online video content, skip ahead 30% to get to the actual content. Your time is valuable."
         }
       ]
     }
