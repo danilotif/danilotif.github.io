@@ -27,30 +27,31 @@
             line-height: 1.6;
             color: #333;
             background-color: #fafafa;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto;
             padding: 2rem;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
             border-bottom: 1px solid #e5e5e5;
         }
 
         .header h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
             color: #2c3e50;
         }
 
         .header p {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #7f8c8d;
             font-weight: 300;
         }
@@ -67,85 +68,88 @@
             text-decoration: underline;
         }
 
-        /* Category Section */
-        .category {
-            margin-bottom: 3rem;
+        /* Progress Bar */
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        .category-title {
-            font-size: 1.4rem;
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #3498db;
-            font-weight: 600;
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            background: #e5e5e5;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            font-weight: 500;
+            white-space: nowrap;
         }
 
         /* Example Card */
         .example-card {
             background: white;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             overflow: hidden;
-            transition: box-shadow 0.2s;
+            animation: fadeIn 0.3s ease;
         }
 
-        .example-card:hover {
-            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-        }
-
-        .example-number {
-            display: inline-block;
-            background: #3498db;
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 0.25rem 0.6rem;
-            border-radius: 12px;
-            margin-bottom: 0.75rem;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .example-content {
             padding: 1.5rem;
         }
 
-        .scenario {
-            margin-bottom: 1rem;
-        }
-
         .scenario-title {
-            font-weight: 600;
+            font-weight: 700;
             color: #2c3e50;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
         }
 
         .scenario-text {
             color: #555;
-            line-height: 1.7;
+            line-height: 1.8;
+            font-size: 1rem;
         }
 
         .question {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
+            background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+            padding: 1.25rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
             border-left: 4px solid #e74c3c;
         }
 
         .question-label {
             font-weight: 600;
             color: #e74c3c;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.5rem;
         }
 
         .question-text {
             color: #2c3e50;
             font-weight: 500;
+            font-size: 1.05rem;
         }
 
         /* Answer Toggle */
@@ -157,7 +161,7 @@
             padding: 1rem 1.5rem;
             cursor: pointer;
             font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 500;
             display: flex;
             justify-content: space-between;
@@ -186,7 +190,7 @@
         }
 
         .answer-content.show {
-            max-height: 500px;
+            max-height: 600px;
         }
 
         .answer-inner {
@@ -201,8 +205,8 @@
             display: inline-block;
             background: #27ae60;
             color: white;
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
             font-weight: 600;
             font-size: 0.95rem;
             margin-right: 0.5rem;
@@ -220,14 +224,15 @@
 
         .answer-explanation {
             color: #444;
-            line-height: 1.7;
+            line-height: 1.8;
+            font-size: 0.95rem;
         }
 
         .answer-takeaway {
             margin-top: 1rem;
-            padding: 0.75rem 1rem;
+            padding: 1rem;
             background: #e8f6e9;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 0.9rem;
             color: #1e7e34;
         }
@@ -237,105 +242,62 @@
             margin-bottom: 0.25rem;
         }
 
-        /* Difficulty Badge */
-        .difficulty {
-            display: inline-block;
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            margin-left: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .difficulty-easy {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .difficulty-medium {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .difficulty-hard {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        /* Stats */
-        .stats {
+        /* Navigation */
+        .navigation {
             display: flex;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            padding: 1rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 1rem;
         }
 
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #3498db;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: #7f8c8d;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Filter Buttons */
-        .filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .filter-btn {
-            padding: 0.5rem 1rem;
-            border: 2px solid #e5e5e5;
-            background: white;
-            border-radius: 20px;
+        .nav-btn {
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 30px;
             cursor: pointer;
             font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: #555;
+            font-size: 1rem;
+            font-weight: 600;
             transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .filter-btn:hover {
+        .nav-btn-next {
+            background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .nav-btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .nav-btn-restart {
+            background: white;
+            color: #555;
+            border: 2px solid #e5e5e5;
+        }
+
+        .nav-btn-restart:hover {
             border-color: #3498db;
             color: #3498db;
-        }
-
-        .filter-btn.active {
-            background: #3498db;
-            border-color: #3498db;
-            color: white;
         }
 
         /* Loading State */
         .loading {
             text-align: center;
-            padding: 3rem;
+            padding: 4rem 2rem;
             color: #7f8c8d;
         }
 
         .loading-spinner {
             display: inline-block;
-            width: 40px;
-            height: 40px;
-            border: 3px solid #e5e5e5;
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e5e5e5;
             border-top-color: #3498db;
             border-radius: 50%;
             animation: spin 1s linear infinite;
@@ -351,8 +313,32 @@
             text-align: center;
             padding: 2rem;
             background: #f8d7da;
-            border-radius: 8px;
+            border-radius: 12px;
             color: #721c24;
+        }
+
+        /* Completion State */
+        .completion {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .completion-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .completion h2 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .completion p {
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
         }
 
         @media (max-width: 768px) {
@@ -361,20 +347,20 @@
             }
 
             .header h1 {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
 
             .example-content {
-                padding: 1rem;
+                padding: 1.25rem;
             }
 
-            .stats {
-                flex-wrap: wrap;
+            .scenario-title {
+                font-size: 1.1rem;
             }
 
-            .stat-item {
-                flex: 1;
-                min-width: 80px;
+            .nav-btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -386,28 +372,7 @@
 
     <a href="resources_index.html" class="back-link">← Back to Laws & Principles</a>
 
-    <div class="header">
-        <h1>Real-World Examples</h1>
-        <p>Test your understanding with these scenarios. Think about which law or principle applies, then reveal the answer.</p>
-    </div>
-
-    <div class="stats">
-        <div class="stat-item">
-            <div class="stat-number" id="total-count">-</div>
-            <div class="stat-label">Examples</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number" id="category-count">-</div>
-            <div class="stat-label">Categories</div>
-        </div>
-    </div>
-
-    <div class="filters" id="filters">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <!-- Filter buttons will be dynamically added -->
-    </div>
-
-    <div id="examples-container">
+    <div id="app">
         <div class="loading">
             <div class="loading-spinner"></div>
             <div>Loading examples...</div>
@@ -421,8 +386,10 @@
     const DATA_URL = 'examples-data.json';
 
     // State
-    let examplesData = null;
-    let currentFilter = 'all';
+    let allExamples = [];
+    let shuffledExamples = [];
+    let currentIndex = 0;
+    let answerRevealed = false;
 
     // Initialize
     document.addEventListener('DOMContentLoaded', loadExamples);
@@ -431,11 +398,22 @@
         try {
             const response = await fetch(DATA_URL);
             if (!response.ok) throw new Error('Failed to load examples');
-            examplesData = await response.json();
-            renderPage();
+            const data = await response.json();
+
+            // Flatten all examples into a single array with category info
+            allExamples = data.categories.flatMap(cat =>
+                cat.examples.map(ex => ({
+                    ...ex,
+                    category: cat.title
+                }))
+            );
+
+            // Shuffle and start
+            shuffleExamples();
+            renderCurrentExample();
         } catch (error) {
             console.error('Error loading examples:', error);
-            document.getElementById('examples-container').innerHTML = `
+            document.getElementById('app').innerHTML = `
                 <div class="error">
                     <strong>Error loading examples</strong>
                     <p>Please try refreshing the page.</p>
@@ -444,121 +422,112 @@
         }
     }
 
-    function renderPage() {
-        updateStats();
-        renderFilters();
-        renderExamples();
-        setupFilterListeners();
+    function shuffleExamples() {
+        shuffledExamples = [...allExamples];
+        // Fisher-Yates shuffle
+        for (let i = shuffledExamples.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledExamples[i], shuffledExamples[j]] = [shuffledExamples[j], shuffledExamples[i]];
+        }
+        currentIndex = 0;
     }
 
-    function updateStats() {
-        const totalExamples = examplesData.categories.reduce(
-            (sum, cat) => sum + cat.examples.length, 0
-        );
-        document.getElementById('total-count').textContent = totalExamples;
-        document.getElementById('category-count').textContent = examplesData.categories.length;
-    }
+    function renderCurrentExample() {
+        const app = document.getElementById('app');
+        answerRevealed = false;
 
-    function renderFilters() {
-        const filtersContainer = document.getElementById('filters');
+        // Check if we've gone through all examples
+        if (currentIndex >= shuffledExamples.length) {
+            renderCompletion();
+            return;
+        }
 
-        examplesData.categories.forEach(category => {
-            const btn = document.createElement('button');
-            btn.className = 'filter-btn';
-            btn.dataset.filter = category.id;
-            btn.textContent = category.title.split(' ')[0]; // First word only for brevity
-            filtersContainer.appendChild(btn);
-        });
-    }
-
-    function setupFilterListeners() {
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                currentFilter = this.dataset.filter;
-
-                // Update active button
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-
-                // Re-render examples
-                renderExamples();
-            });
-        });
-    }
-
-    function renderExamples() {
-        const container = document.getElementById('examples-container');
-        container.innerHTML = '';
-
-        const categoriesToShow = currentFilter === 'all'
-            ? examplesData.categories
-            : examplesData.categories.filter(c => c.id === currentFilter);
-
-        categoriesToShow.forEach(category => {
-            const categoryEl = document.createElement('div');
-            categoryEl.className = 'category';
-            categoryEl.dataset.category = category.id;
-
-            categoryEl.innerHTML = `<h2 class="category-title">${category.title}</h2>`;
-
-            category.examples.forEach(example => {
-                categoryEl.appendChild(createExampleCard(example));
-            });
-
-            container.appendChild(categoryEl);
-        });
-    }
-
-    function createExampleCard(example) {
-        const card = document.createElement('div');
-        card.className = 'example-card';
-
-        const difficultyClass = `difficulty-${example.difficulty}`;
-        const difficultyLabel = example.difficulty.charAt(0).toUpperCase() + example.difficulty.slice(1);
+        const example = shuffledExamples[currentIndex];
+        const progress = ((currentIndex + 1) / shuffledExamples.length) * 100;
 
         const lawsHtml = example.laws.map(law =>
             `<span class="answer-law"><a href="${law.link}">${law.name}</a></span>`
         ).join('');
 
-        card.innerHTML = `
-            <div class="example-content">
-                <span class="example-number">#${example.id}</span>
-                <span class="difficulty ${difficultyClass}">${difficultyLabel}</span>
-                <div class="scenario">
+        app.innerHTML = `
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${progress}%"></div>
+                </div>
+                <div class="progress-text">${currentIndex + 1} / ${shuffledExamples.length}</div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-content">
                     <div class="scenario-title">${example.title}</div>
                     <div class="scenario-text">${example.scenario}</div>
+                    <div class="question">
+                        <div class="question-label">Think about it</div>
+                        <div class="question-text">${example.question}</div>
+                    </div>
                 </div>
-                <div class="question">
-                    <div class="question-label">Think about it</div>
-                    <div class="question-text">${example.question}</div>
-                </div>
-            </div>
-            <button class="answer-toggle" onclick="toggleAnswer(this)">
-                <span>Reveal Answer</span>
-                <span class="arrow">▼</span>
-            </button>
-            <div class="answer-content">
-                <div class="answer-inner">
-                    <div class="answer-laws">${lawsHtml}</div>
-                    <div class="answer-explanation">${example.explanation}</div>
-                    <div class="answer-takeaway">
-                        <strong>Takeaway:</strong>
-                        ${example.takeaway}
+
+                <button class="answer-toggle" onclick="toggleAnswer(this)">
+                    <span>Reveal Answer</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="answer-content">
+                    <div class="answer-inner">
+                        <div class="answer-laws">${lawsHtml}</div>
+                        <div class="answer-explanation">${example.explanation}</div>
+                        <div class="answer-takeaway">
+                            <strong>Takeaway:</strong>
+                            ${example.takeaway}
+                        </div>
                     </div>
                 </div>
             </div>
-        `;
 
-        return card;
+            <div class="navigation">
+                <button class="nav-btn nav-btn-next" onclick="nextExample()">
+                    Next Example
+                    <span>→</span>
+                </button>
+            </div>
+        `;
+    }
+
+    function renderCompletion() {
+        const app = document.getElementById('app');
+        app.innerHTML = `
+            <div class="completion">
+                <div class="completion-icon">🎉</div>
+                <h2>Well done!</h2>
+                <p>You've gone through all ${allExamples.length} examples.</p>
+                <button class="nav-btn nav-btn-next" onclick="restart()">
+                    Start Again (Reshuffled)
+                    <span>↻</span>
+                </button>
+            </div>
+        `;
     }
 
     function toggleAnswer(button) {
         const content = button.nextElementSibling;
         button.classList.toggle('active');
         content.classList.toggle('show');
+        answerRevealed = content.classList.contains('show');
 
         const buttonText = button.querySelector('span:first-child');
-        buttonText.textContent = content.classList.contains('show') ? 'Hide Answer' : 'Reveal Answer';
+        buttonText.textContent = answerRevealed ? 'Hide Answer' : 'Reveal Answer';
+    }
+
+    function nextExample() {
+        currentIndex++;
+        renderCurrentExample();
+        // Scroll to top smoothly
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function restart() {
+        shuffleExamples();
+        renderCurrentExample();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 </script>
 
