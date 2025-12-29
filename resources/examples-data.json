@@ -1,0 +1,220 @@
+{
+  "categories": [
+    {
+      "id": "workplace",
+      "title": "Workplace & Organizations",
+      "examples": [
+        {
+          "id": 1,
+          "difficulty": "easy",
+          "title": "The Expanding Report",
+          "scenario": "Your manager asks for a quick summary of last month's sales. She says \"take your time, no rush - maybe by the end of the week?\" You have 5 days. By day 4, you're still tweaking fonts, adding charts you weren't asked for, and rewriting sections that were already fine.",
+          "question": "Which law explains why a simple task consumed your entire week?",
+          "laws": [
+            {
+              "name": "Parkinson's Law",
+              "link": "laws/parkinsons-law.html"
+            }
+          ],
+          "explanation": "Work expands to fill the time available for its completion. Given 5 days, the task grew to fill 5 days. If you had been given 2 hours, you likely would have produced a similar quality summary in 2 hours.",
+          "takeaway": "Set artificial deadlines shorter than what's given. The constraint forces focus on what actually matters."
+        },
+        {
+          "id": 2,
+          "difficulty": "medium",
+          "title": "The Star Developer",
+          "scenario": "Sarah was the best software engineer on the team - she solved complex problems, mentored others, and shipped features fast. The company promoted her to Engineering Manager. Now she spends her days in meetings, doing performance reviews, and handling HR issues. She's miserable, the team misses her technical leadership, and her managerial skills are... developing.",
+          "question": "What principle predicts this outcome? Was the promotion a mistake?",
+          "laws": [
+            {
+              "name": "Peter Principle",
+              "link": "laws/peter-principle.html"
+            }
+          ],
+          "explanation": "In hierarchies, people tend to rise to their level of incompetence. Sarah was excellent at engineering, so she was promoted. But the skills that made her great at coding (deep focus, technical problem-solving) are different from management skills (people coordination, delegation, political navigation). She was promoted based on her current performance, not her aptitude for the new role.",
+          "takeaway": "Promotion should be based on potential for the new role, not just excellence in the current one. Many companies now offer \"individual contributor\" tracks for this reason."
+        },
+        {
+          "id": 3,
+          "difficulty": "hard",
+          "title": "The Bike Shed Meeting",
+          "scenario": "The company board meets to approve two items: (1) a $10 million budget for a new data center, and (2) the design of a bike shed for employees. The data center discussion takes 10 minutes - nobody really understands the technical requirements, so they trust the CTO. The bike shed discussion takes 2 hours - everyone has opinions about colors, location, and whether it needs a roof.",
+          "question": "Why do trivial decisions consume more time than important ones? What hidden danger does this create?",
+          "laws": [
+            {
+              "name": "Parkinson's Law of Triviality (Bike-Shedding)",
+              "link": "laws/parkinsons-law-triviality.html"
+            }
+          ],
+          "explanation": "People give disproportionate weight to trivial issues because they're easier to understand and have opinions about. The data center is complex - most board members can't meaningfully contribute. But everyone understands bike sheds and paint colors, so everyone wants to participate. The hidden danger: important complex decisions get rubber-stamped while trivial ones consume all the critical thinking energy.",
+          "takeaway": "Notice when you're bike-shedding. The ease of having an opinion doesn't correlate with the importance of the decision."
+        }
+      ]
+    },
+    {
+      "id": "decisions",
+      "title": "Decision Making",
+      "examples": [
+        {
+          "id": 4,
+          "difficulty": "easy",
+          "title": "The Movie Investment",
+          "scenario": "You've watched 90 minutes of a terrible movie. It's not getting better. Your friend suggests leaving, but you say: \"We already paid $15 for tickets and spent an hour and a half here. We might as well finish it.\"",
+          "question": "Is this good reasoning? What fallacy is at play?",
+          "laws": [
+            {
+              "name": "Sunk Cost Fallacy",
+              "link": "laws/sunk-cost-fallacy.html"
+            }
+          ],
+          "explanation": "The money and time are already gone - they're \"sunk costs.\" They shouldn't factor into your decision about what to do next. The only relevant question is: \"Will the next 30 minutes of my life be better spent watching this movie or doing something else?\" The past investment is irrelevant to that calculation.",
+          "takeaway": "When deciding whether to continue something, ignore what you've already invested. Only consider future costs and benefits."
+        },
+        {
+          "id": 5,
+          "difficulty": "medium",
+          "title": "The Startup Success Story",
+          "scenario": "A famous entrepreneur gives a talk: \"I dropped out of college, maxed out my credit cards, and worked 100-hour weeks. That's what it takes to succeed!\" The audience is inspired. Several people quit their jobs the next week to start companies.",
+          "question": "What's missing from this success story? Why might following this advice be dangerous?",
+          "laws": [
+            {
+              "name": "Survivorship Bias",
+              "link": "laws/survivorship-bias.html"
+            }
+          ],
+          "explanation": "You're only hearing from the one who succeeded. For every entrepreneur who dropped out, maxed credit cards, and became a billionaire, there are thousands who did the exact same things and failed catastrophically. The failures don't give TED talks. The successful entrepreneur's path might have worked despite these choices, not because of them.",
+          "takeaway": "Before copying successful people's strategies, ask: \"How many people did this same thing and failed?\" The graveyard of failed attempts is invisible but important."
+        },
+        {
+          "id": 6,
+          "difficulty": "medium",
+          "title": "The Netflix Paralysis",
+          "scenario": "You sit down to watch something on Netflix. There are thousands of options. You spend 45 minutes scrolling, reading descriptions, checking ratings. Eventually you give up, put on a show you've seen before, and feel vaguely dissatisfied.",
+          "question": "What phenomenon explains why more choices made you less happy?",
+          "laws": [
+            {
+              "name": "Paradox of Choice",
+              "link": "laws/paradox-of-choice.html"
+            },
+            {
+              "name": "Analysis Paralysis",
+              "link": "laws/analysis-paralysis.html"
+            }
+          ],
+          "explanation": "More options don't always lead to better outcomes or more satisfaction. With thousands of choices, you can't evaluate them all, so you worry you're missing something better. The cognitive load of deciding becomes exhausting. Even if you choose well, you might feel regret wondering about paths not taken. Analysis paralysis kicks in when you have so many options that deciding becomes harder than not deciding.",
+          "takeaway": "Artificially limit your options. Pick from a shortlist, set a time limit for deciding, or use external constraints. \"Good enough\" often beats \"optimal.\""
+        }
+      ]
+    },
+    {
+      "id": "technology",
+      "title": "Technology & Software",
+      "examples": [
+        {
+          "id": 7,
+          "difficulty": "easy",
+          "title": "The Launch Day Crash",
+          "scenario": "Your team has tested the new payment system for months. Everything works perfectly in staging. You launch on Black Friday - your biggest sales day. Within 30 minutes, the entire system crashes. Transactions fail. The CEO is calling.",
+          "question": "Which law predicted this would happen at the worst possible moment?",
+          "laws": [
+            {
+              "name": "Murphy's Law",
+              "link": "laws/murphys-law.html"
+            },
+            {
+              "name": "Finagle's Law",
+              "link": "laws/finagles-law.html"
+            }
+          ],
+          "explanation": "Murphy's Law states that anything that can go wrong, will go wrong. Finagle's Law adds: at the worst possible time. Systems that have hidden failure modes will expose them under real stress. Black Friday has different traffic patterns, user behaviors, and load characteristics than any test environment. The bug was always there - it just needed the right conditions to manifest.",
+          "takeaway": "Never launch major changes during critical periods. Test under realistic conditions. Have rollback plans. Assume something will go wrong and plan for it."
+        },
+        {
+          "id": 8,
+          "difficulty": "hard",
+          "title": "The Feature Factory",
+          "scenario": "Your app started simple and fast. Over 3 years, you've added: social sharing, a built-in chat, notifications, gamification badges, a marketplace, AI recommendations, and a \"stories\" feature. Users now complain the app is slow, confusing, and crashes often. New developers take months to become productive in the codebase.",
+          "question": "What laws explain this trajectory? Was each individual feature decision wrong?",
+          "laws": [
+            {
+              "name": "Zawinski's Law",
+              "link": "laws/zawinskis-law.html"
+            },
+            {
+              "name": "Wirth's Law",
+              "link": "laws/wirths-law.html"
+            }
+          ],
+          "explanation": "Zawinski's Law (humorously) states that every program attempts to expand until it can read mail - software naturally bloats toward doing everything. Wirth's Law observes that software gets slower faster than hardware gets faster. Each individual feature might have been justified, but the cumulative effect is an unmaintainable, slow, confusing product. No single decision caused this - it's the pattern of always adding, never removing.",
+          "takeaway": "Features have ongoing costs (maintenance, complexity, cognitive load). Sometimes the best feature is removing one. Protect simplicity as actively as you pursue functionality."
+        },
+        {
+          "id": 9,
+          "difficulty": "medium",
+          "title": "The Microservices Migration",
+          "scenario": "The company has 4 development teams that don't communicate well. They decide to migrate from a monolith to microservices. Six months later, they have... 4 microservices. Each team owns one. The services have complex, poorly documented APIs between them. Cross-team features take forever to ship.",
+          "question": "Why did the architecture end up mirroring the org structure? Is this always bad?",
+          "laws": [
+            {
+              "name": "Conway's Law",
+              "link": "laws/conways-law.html"
+            }
+          ],
+          "explanation": "Organizations design systems that mirror their own communication structure. If teams don't talk, their systems won't integrate well either. The microservices architecture didn't fix the organizational problem - it encoded it into the software. This isn't always bad - sometimes you should design your org structure to get the architecture you want (the \"Inverse Conway Maneuver\").",
+          "takeaway": "Technical architecture and organizational structure are deeply linked. You can't fix one without addressing the other. Consider changing team structure before or alongside technical changes."
+        }
+      ]
+    },
+    {
+      "id": "social",
+      "title": "Social Dynamics",
+      "examples": [
+        {
+          "id": 10,
+          "difficulty": "easy",
+          "title": "The Crowded Emergency",
+          "scenario": "A man collapses on a busy subway platform during rush hour. Hundreds of people see it happen. Everyone looks around, waiting. For a full minute, nobody helps. Finally, one person steps forward and others follow.",
+          "question": "Why did more witnesses mean slower response? What would have helped?",
+          "laws": [
+            {
+              "name": "Bystander Effect",
+              "link": "laws/bystander-effect.html"
+            }
+          ],
+          "explanation": "When many people witness an emergency, each individual feels less personal responsibility to act. Everyone assumes someone else will help, or looks to others to determine if it's really an emergency. Paradoxically, you're more likely to get help if only one person sees you than if a hundred do.",
+          "takeaway": "If you need help in a crowd, point at one specific person: \"You in the blue jacket - call 911.\" Assigning individual responsibility breaks the diffusion effect."
+        },
+        {
+          "id": 11,
+          "difficulty": "medium",
+          "title": "The Leaked Document",
+          "scenario": "A celebrity's lawyers send aggressive legal threats to websites hosting an embarrassing photo, demanding its removal. Before the threats, maybe 10,000 people had seen it. After news of the legal action spreads, the photo goes viral - millions see it, and it becomes permanently associated with the celebrity's name.",
+          "question": "What effect caused the suppression attempt to backfire so spectacularly?",
+          "laws": [
+            {
+              "name": "Streisand Effect",
+              "link": "laws/streisand-effect.html"
+            }
+          ],
+          "explanation": "Named after Barbara Streisand's attempt to suppress photos of her mansion (which drew massive attention to photos almost nobody had seen), this effect describes how attempts to hide or censor information often draw more attention to it. The suppression attempt itself becomes newsworthy, and people are naturally curious about what someone is trying to hide.",
+          "takeaway": "Sometimes the best response to embarrassing information is no response. Consider whether fighting something will draw more attention than ignoring it."
+        },
+        {
+          "id": 12,
+          "difficulty": "hard",
+          "title": "The Meeting That Agreed Too Fast",
+          "scenario": "The leadership team meets to decide on a major strategic pivot. The CEO shares her preferred direction. One by one, each executive voices support. Concerns go unspoken. The decision is unanimous. Six months later, the pivot fails catastrophically. In the post-mortem, several executives admit they had serious doubts but didn't want to be the only dissenting voice.",
+          "question": "What phenomenon caused smart people to collectively make a bad decision? How could it have been prevented?",
+          "laws": [
+            {
+              "name": "Groupthink",
+              "link": "laws/groupthink.html"
+            }
+          ],
+          "explanation": "Groupthink occurs when the desire for harmony or conformity overrides realistic appraisal of alternatives. Warning signs include: the leader sharing their view first, quick consensus, self-censorship of doubts, and pressure on dissenters. Each person thinks they're the only one with concerns, so they stay quiet. Prevention methods include: having leaders speak last, assigning a \"devil's advocate\" role, anonymous feedback, and actively soliciting dissent.",
+          "takeaway": "Unanimous agreement on complex decisions is a red flag, not a green light. Build processes that surface disagreement before decisions are final."
+        }
+      ]
+    }
+  ]
+}
