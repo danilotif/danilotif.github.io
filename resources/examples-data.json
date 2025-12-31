@@ -1181,6 +1181,254 @@
           "takeaway": "Question whether growth reflects genuine need or bureaucratic expansion. Set clear metrics for departmental success. Be willing to shrink successful departments that have solved their problem."
         }
       ]
+    },
+    {
+      "id": "ux-design",
+      "title": "UX & Design Psychology",
+      "examples": [
+        {
+          "id": 78,
+          "title": "The Restaurant Menu",
+          "scenario": "A restaurant has 200 items on its menu. Customers spend 15 minutes deciding, often ask the waiter for recommendations, and frequently express dissatisfaction with their choices afterward. A competing restaurant has 20 carefully curated items. Customers decide in 2 minutes and report higher satisfaction.",
+          "question": "Why did fewer options lead to faster decisions AND happier customers? How would you apply this to a software product?",
+          "laws": [
+            {
+              "name": "Hick's Law",
+              "link": "laws/hicks-law.html"
+            },
+            {
+              "name": "Paradox of Choice",
+              "link": "laws/paradox-of-choice.html"
+            }
+          ],
+          "explanation": "Hick's Law states that decision time increases logarithmically with options. But it's not just about speed—more options also increase cognitive load, decision anxiety, and post-decision regret. The 20-item menu lets customers actually evaluate options rather than feeling overwhelmed and choosing randomly.",
+          "takeaway": "When designing products, menus, or interfaces, resist the temptation to offer everything. Curate ruthlessly. Often, removing options improves the experience more than adding features."
+        },
+        {
+          "id": 79,
+          "title": "The Tiny Button Problem",
+          "scenario": "Your mobile app has a 'Delete Account' button that's small and tucked in the corner. Users rarely hit it accidentally—great! But your 'Submit Order' button is the same size and also in a corner. Users frequently mis-tap, hit cancel instead, or take multiple attempts to complete purchases. Mobile conversion rates are half of desktop.",
+          "question": "What principle should guide how you size and position these buttons differently?",
+          "laws": [
+            {
+              "name": "Fitts's Law",
+              "link": "laws/fitts-law.html"
+            }
+          ],
+          "explanation": "Fitts's Law says the time to hit a target is a function of its size and distance. Important, frequently-used actions (Submit Order) should be large and easy to reach. Dangerous or rarely-used actions (Delete Account) can be smaller and harder to hit. The same sizing for both ignores their different importance.",
+          "takeaway": "Size buttons proportional to their importance and frequency of use. Place primary actions where fingers naturally rest. Make destructive actions smaller and require more precision."
+        },
+        {
+          "id": 80,
+          "title": "The Streaming Cancel Flow",
+          "scenario": "You decide to cancel a streaming service. The cancel button is buried. When you find it, you're shown what you'll LOSE: your watchlist, your viewing history, your personalized recommendations. Then you're offered a discount. Even though you planned to cancel, you hesitate. You've had the service for 2 years—it feels like giving up something that's yours.",
+          "question": "Multiple psychological principles are being used here. Identify at least two and explain how they're being applied.",
+          "laws": [
+            {
+              "name": "Loss Aversion",
+              "link": "laws/loss-aversion.html"
+            },
+            {
+              "name": "Endowment Effect",
+              "link": "laws/endowment-effect.html"
+            }
+          ],
+          "explanation": "Loss aversion makes the prospect of losing things (watchlist, recommendations) feel worse than the equivalent gain of keeping them. The endowment effect makes you value these things more because they're 'yours'—your history, your recommendations. The company isn't lying about what you'd lose, but they're strategically highlighting losses over the gains of canceling (saving money, simplifying).",
+          "takeaway": "Recognize when framing emphasizes losses to manipulate you. Ask: 'Would I sign up for this today at this price?' Ignore what you'd 'lose' and focus on whether the service is worth the cost going forward."
+        },
+        {
+          "id": 81,
+          "title": "The Medium Popcorn Trap",
+          "scenario": "A movie theater sells popcorn in three sizes: Small ($4), Medium ($7.50), and Large ($8). Almost nobody buys the medium. Why does the theater even offer it?",
+          "question": "The medium is rarely purchased, yet it's crucial to the pricing strategy. What role is it playing?",
+          "laws": [
+            {
+              "name": "Decoy Effect",
+              "link": "laws/decoy-effect.html"
+            }
+          ],
+          "explanation": "The medium is a decoy. It's asymmetrically dominated by the large—for just 50 cents more, you get much more popcorn. This makes the large seem like an obvious great deal. Without the medium, customers would compare small vs. large and more would choose small. The decoy shifts preferences toward the higher-margin large size.",
+          "takeaway": "When you see pricing tiers, identify the decoy. Which option is clearly inferior to another? That's not there to be chosen—it's there to make another option look better."
+        },
+        {
+          "id": 82,
+          "title": "The IKEA Bookshelf",
+          "scenario": "You spend 3 hours assembling a bookshelf from IKEA, getting frustrated, making mistakes, and finally completing it. Your neighbor buys an identical bookshelf pre-assembled for the same price. A month later, you're moving. Your neighbor sells their bookshelf at market price. You can't bear to part with yours—you'd want at least double what it's worth.",
+          "question": "Why do you value your bookshelf more than an identical one? Is this rational?",
+          "laws": [
+            {
+              "name": "IKEA Effect",
+              "link": "laws/ikea-effect.html"
+            }
+          ],
+          "explanation": "The IKEA effect shows that labor creates love—we value things more when we've invested effort in creating them, regardless of the objective quality of the result. Your frustration and effort became embedded in the bookshelf. It's not rational in market terms, but it's a predictable psychological response. The labor itself generated value—for you.",
+          "takeaway": "For products: let users participate in creation to increase perceived value. For yourself: recognize that your emotional attachment to things you built may not reflect their actual worth."
+        },
+        {
+          "id": 83,
+          "title": "The Hotel Stay",
+          "scenario": "Guest A stays at a hotel. Day 1 is okay. Day 2 has a major problem—the AC breaks in summer. Day 3, the hotel fixes it and upgrades them to a suite as an apology. Guest B stays at the same hotel. All three days are consistently good—nice room, no problems, standard service. Guest A rates the hotel higher than Guest B.",
+          "question": "The guest who had a problem rates the hotel higher than the guest with no problems. What explains this counterintuitive result?",
+          "laws": [
+            {
+              "name": "Peak-End Rule",
+              "link": "laws/peak-end-rule.html"
+            }
+          ],
+          "explanation": "The Peak-End Rule says we judge experiences by their peak (most intense moment) and ending, not the average. Guest A's peak was the suite upgrade and personal attention; their ending was excellent. Guest B had no peaks—just consistent okayness. The memory of the experience, which drives ratings and return visits, favors dramatic highs and strong endings over uniformity.",
+          "takeaway": "Design experiences with memorable peaks and strong endings. A consistently okay experience may be remembered worse than one with problems that were dramatically resolved."
+        },
+        {
+          "id": 84,
+          "title": "The Limited Edition",
+          "scenario": "A sneaker brand announces a new shoe: 'Limited to 500 pairs. One per customer. Available Saturday 9 AM.' People line up overnight. The shoes sell out in 90 seconds. Resale prices hit 10x retail within hours. The shoes are objectively identical to a standard model with a different colorway.",
+          "question": "The shoes aren't better—just scarcer. Why does artificial limitation increase desire so dramatically?",
+          "laws": [
+            {
+              "name": "Scarcity Principle",
+              "link": "laws/scarcity-principle.html"
+            }
+          ],
+          "explanation": "Scarcity signals value (rare things must be valuable) and triggers loss aversion (fear of missing the opportunity). The limitation creates competition, social proof (if others want it, it must be good), and a deadline that forces immediate action. The sneakers aren't scarce because they're valuable—they're perceived as valuable because they're scarce.",
+          "takeaway": "Recognize artificial scarcity as a persuasion tactic. Ask: 'Would I want this if it were abundantly available?' Your urgency may be manufactured."
+        },
+        {
+          "id": 85,
+          "title": "The Free Trial Trap",
+          "scenario": "A software company offers a 30-day free trial. You sign up, configure it for your workflow, import your data, learn the interface. Day 28, you get a reminder: 'Your trial ends in 2 days. Enter payment to keep your settings and data.' You hadn't planned to subscribe, but now you're entering your credit card.",
+          "question": "Why is converting from free trial so effective? What would make it easier to walk away?",
+          "laws": [
+            {
+              "name": "Endowment Effect",
+              "link": "laws/endowment-effect.html"
+            },
+            {
+              "name": "Loss Aversion",
+              "link": "laws/loss-aversion.html"
+            },
+            {
+              "name": "Commitment and Consistency",
+              "link": "laws/commitment-consistency.html"
+            }
+          ],
+          "explanation": "After 30 days, you feel ownership (endowment effect). The decision isn't 'should I buy this?'—it's 'should I lose what I already have?' (loss aversion). Plus, you've invested time configuring it, and abandoning that investment feels inconsistent with your past effort (commitment and consistency).",
+          "takeaway": "Before starting free trials, decide your criteria for subscribing. At the end, ask: 'Knowing what I know now, would I choose to buy this from scratch?' Don't let temporary ownership cloud permanent decisions."
+        },
+        {
+          "id": 86,
+          "title": "The Presentation Middle",
+          "scenario": "You attend a 60-minute presentation. The speaker opens with a powerful story. The middle 40 minutes cover important details. The conclusion has a memorable call to action. A week later, you remember the opening story and the call to action. The middle? Mostly gone.",
+          "question": "How should this affect how you structure important communications?",
+          "laws": [
+            {
+              "name": "Serial Position Effect",
+              "link": "laws/serial-position-effect.html"
+            },
+            {
+              "name": "Peak-End Rule",
+              "link": "laws/peak-end-rule.html"
+            }
+          ],
+          "explanation": "The serial position effect means items at the beginning (primacy) and end (recency) are remembered better than the middle. The peak-end rule adds that the most intense moment matters disproportionately. Your important points should go at the beginning, end, or as a designed 'peak moment'—not buried in the middle.",
+          "takeaway": "Structure communications with openings and closings that carry your key messages. If critical information must go in the middle, make it distinctive. Never end with Q&A—end with your message."
+        },
+        {
+          "id": 87,
+          "title": "The Privacy Settings",
+          "scenario": "A social media app has 47 privacy settings. Most users never touch them. The company's defaults: share everything with everyone, allow data collection for advertising, enable location tracking. Users who would choose more privacy if asked simply... don't ask. They accept defaults.",
+          "question": "If users would prefer more privacy, why don't they change the settings? How should ethical companies handle this?",
+          "laws": [
+            {
+              "name": "Default Bias",
+              "link": "laws/default-bias.html"
+            },
+            {
+              "name": "Cognitive Load",
+              "link": "laws/cognitive-load.html"
+            }
+          ],
+          "explanation": "Default bias means people stick with pre-selected options. Cognitive load from evaluating 47 settings is overwhelming. The defaults carry implicit endorsement ('this must be what's normal'). Changing requires active effort; accepting requires none. Together, these forces mean most users accept whatever privacy invasion is defaulted.",
+          "takeaway": "Companies: choose defaults that serve users, not just engagement metrics. Users: audit your defaults periodically. The settings you never changed were chosen by someone else—with their interests in mind."
+        },
+        {
+          "id": 88,
+          "title": "The Surgery Decision",
+          "scenario": "A doctor tells Patient A: 'This surgery has a 90% survival rate.' Patient B is told: 'This surgery has a 10% mortality rate.' Both patients have the same surgery recommended. Patient A agrees immediately. Patient B asks for alternatives and second opinions.",
+          "question": "The statistics are identical. Why do patients respond so differently?",
+          "laws": [
+            {
+              "name": "Framing Effect",
+              "link": "laws/framing-effect.html"
+            },
+            {
+              "name": "Loss Aversion",
+              "link": "laws/loss-aversion.html"
+            }
+          ],
+          "explanation": "The framing effect shows that how information is presented changes decisions. '90% survival' frames it as a gain; '10% mortality' frames it as a loss. Loss aversion means the loss frame (dying) has more psychological weight than the equivalent gain frame (surviving). Same facts, different frames, different decisions.",
+          "takeaway": "When receiving information, reframe it yourself. Convert percentages both ways. Ask: 'Would I decide differently if this were presented differently?' If yes, the frame is affecting you more than the facts."
+        },
+        {
+          "id": 89,
+          "title": "The Loyalty Card Progress",
+          "scenario": "Coffee shop A gives you a card: 'Buy 10 coffees, get one free.' You have an empty card with 10 stamps to collect. Coffee shop B gives you a card: 'Buy 12 coffees, get one free'—but it already has 2 stamps. Both require 10 purchases. Customers at Shop B complete their cards 34% faster.",
+          "question": "Both cards require the same number of purchases. Why do pre-stamped cards get completed faster?",
+          "laws": [
+            {
+              "name": "Goal Gradient Effect",
+              "link": "laws/goal-gradient-effect.html"
+            },
+            {
+              "name": "Endowment Effect",
+              "link": "laws/endowment-effect.html"
+            }
+          ],
+          "explanation": "The goal gradient effect shows we accelerate as we approach goals. Starting with 2/12 stamps feels closer to completion than 0/10, even though the remaining distance is identical. The pre-filled stamps also create a sense of ownership (endowment effect)—you already 'have' progress you don't want to lose.",
+          "takeaway": "When designing progress systems, give users a head start. When pursuing goals yourself, find ways to make the goal feel closer—reframe your progress in terms of what you've done, not just what remains."
+        },
+        {
+          "id": 90,
+          "title": "The Bad Review Vortex",
+          "scenario": "A product has 100 reviews: 90 five-star, 10 one-star. Shoppers spend most of their time reading the one-star reviews. A single detailed negative review makes them hesitate on a product with 90% positive ratings. The company responds helpfully to the criticism, but the damage feels disproportionate.",
+          "question": "Why do negative reviews have outsized impact? What can the company do?",
+          "laws": [
+            {
+              "name": "Negativity Bias",
+              "link": "laws/negativity-bias.html"
+            }
+          ],
+          "explanation": "Negativity bias means bad information carries more weight than equivalent good information. One negative review isn't balanced by one positive—it takes roughly 5 positive reviews to offset one negative. Shoppers aren't irrational; they're adapting to a world where losses (bad purchases) hurt more than equivalent gains (good purchases) feel good.",
+          "takeaway": "For businesses: prioritize eliminating sources of bad reviews over generating good ones. The ratio matters—but preventing negatives is more valuable than generating positives."
+        },
+        {
+          "id": 91,
+          "title": "The End-of-Day Diet Collapse",
+          "scenario": "You start each day committed to healthy eating. Breakfast: great choices. Lunch: healthy selection. By 7 PM, you're exhausted from work decisions—what to prioritize, how to respond to emails, which meetings to schedule. You order pizza and eat ice cream from the carton. Tomorrow, the same pattern repeats.",
+          "question": "Your commitment doesn't change throughout the day. What does?",
+          "laws": [
+            {
+              "name": "Decision Fatigue",
+              "link": "laws/decision-fatigue.html"
+            }
+          ],
+          "explanation": "Decision fatigue depletes your mental resources throughout the day. Each decision at work—even small ones—draws from the same limited pool that diet willpower requires. By evening, the tank is empty. You're not less committed; you're mentally exhausted. The pizza isn't a character failure—it's a resource depletion problem.",
+          "takeaway": "Make important decisions early in the day. Reduce trivial decisions (meal prep, routines, automation). Recognize evening vulnerability and plan for it—don't rely on willpower when the tank is empty."
+        },
+        {
+          "id": 92,
+          "title": "The Commitment Escalation",
+          "scenario": "A charity asks if you support clean water for children. You say yes. They ask if you'd sign a petition. You do. They ask if you'd put a small window sticker on your car. Sure. They ask for a $20 monthly donation. You find yourself saying yes—even though you didn't intend to commit financially when you signed the petition.",
+          "question": "How did signing a petition lead to a monthly donation? What principle explains this escalation?",
+          "laws": [
+            {
+              "name": "Commitment and Consistency",
+              "link": "laws/commitment-consistency.html"
+            }
+          ],
+          "explanation": "The commitment and consistency principle shows that once we take a position, we feel pressure to behave consistently with it. Each small yes changed your self-image: you became 'someone who supports this cause.' Refusing the donation would be inconsistent with that identity. The charity didn't start big—they started small and escalated.",
+          "takeaway": "Recognize foot-in-the-door tactics. Small commitments change your self-image, making larger requests feel consistent. It's okay to say: 'I agreed to the petition, but I'm not committing to more right now.'"
+        }
+      ]
     }
   ]
 }

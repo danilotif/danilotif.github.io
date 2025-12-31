@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitts's Law: The Science of Clickable Targets</title>
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <a href="../resources_index.html" class="back-link">← Back to Resources</a>
+    <div class="container">
+        <h1>Fitts's Law</h1>
+
+        <div class="highlight">
+            "The time to acquire a target is a function of the distance to and size of the target"
+            <br><strong>— Paul Fitts, 1954</strong>
+        </div>
+
+        <h2>What Fitts's Law Means</h2>
+        <p>Fitts's Law predicts that the time required to move to a target area (like clicking a button) is determined by two factors: the distance to the target and the size of the target. Larger targets that are closer are faster to reach; smaller targets that are farther away take longer.</p>
+
+        <p>The mathematical relationship is: MT = a + b × log₂(2D/W), where MT is movement time, D is distance to target, W is width of target, and a and b are constants. This means that doubling the distance or halving the size has roughly equivalent effects on movement time.</p>
+
+        <h2>Why This Matters for Design</h2>
+        <p>Every clickable element on a screen is a target. Fitts's Law tells us:</p>
+
+        <ul>
+            <li><strong>Bigger buttons are easier to click:</strong> Important actions deserve larger tap targets</li>
+            <li><strong>Closer is better:</strong> Related actions should be near each other</li>
+            <li><strong>Edges and corners are special:</strong> Screen edges act as infinitely large targets because the cursor can't overshoot</li>
+            <li><strong>Current position matters:</strong> Consider where users' cursors/fingers are when designing interactions</li>
+        </ul>
+
+        <h2>Real-World Applications</h2>
+
+        <div class="example">
+            <strong>Why Mac's Menu Bar Works:</strong> The Mac menu bar is at the top edge of the screen. Users can "throw" their cursor upward without precision—the screen edge stops it. Windows menus inside windows require more precision because you can overshoot.
+        </div>
+
+        <div class="example">
+            <strong>Mobile Button Sizing:</strong> Apple recommends 44x44 pixel minimum tap targets. This isn't arbitrary—it's the size needed for reliable finger targeting. Smaller buttons cause frustrating mis-taps.
+        </div>
+
+        <div class="example">
+            <strong>Right-Click Context Menus:</strong> Context menus appear at the cursor position, minimizing distance to all options. The most common actions should be at the top (closest to click position).
+        </div>
+
+        <div class="example">
+            <strong>Corner Actions:</strong> Windows' close button is in the corner—you can move diagonally without precision. The corner "catches" your cursor. Similarly, macOS hot corners leverage this principle.
+        </div>
+
+        <h2>Practical Design Guidelines</h2>
+
+        <div class="tips">
+            <h3>For Desktop Interfaces:</h3>
+            <ul>
+                <li><strong>Use screen edges:</strong> Place frequently-used controls at edges or corners</li>
+                <li><strong>Size primary actions larger:</strong> Make important buttons bigger than secondary ones</li>
+                <li><strong>Minimize travel:</strong> Group related actions together</li>
+                <li><strong>Consider cursor position:</strong> After completing one action, where will users need to go next?</li>
+            </ul>
+
+            <h3>For Mobile Interfaces:</h3>
+            <ul>
+                <li><strong>Thumb zones:</strong> Place primary actions where thumbs naturally rest</li>
+                <li><strong>Generous tap targets:</strong> 44pt minimum, 48pt preferred for important actions</li>
+                <li><strong>Spacing matters:</strong> Leave enough space between targets to prevent mis-taps</li>
+                <li><strong>Bottom navigation:</strong> Easier to reach than top navigation on phones</li>
+            </ul>
+        </div>
+
+        <h2>The Index of Difficulty</h2>
+        <p>Fitts's Law introduces the concept of "Index of Difficulty" (ID):</p>
+
+        <ul>
+            <li>A small button far away = high difficulty</li>
+            <li>A large button nearby = low difficulty</li>
+            <li>Difficulty increases logarithmically, not linearly</li>
+            <li>Making a button 2x bigger has diminishing returns</li>
+        </ul>
+
+        <div class="warning">
+            <strong>Common Mistake:</strong> Making all buttons the same size. Fitts's Law suggests primary actions should be larger than secondary ones, and destructive actions might intentionally be smaller or require more precision.
+        </div>
+
+        <h2>Beyond Simple Pointing</h2>
+        <p>Fitts's Law extends to many interaction patterns:</p>
+
+        <ul>
+            <li><strong>Drag and drop:</strong> Both the pickup and drop targets affect difficulty</li>
+            <li><strong>Scrolling:</strong> Longer scroll bars are easier to grab and manipulate</li>
+            <li><strong>Gaming:</strong> Hit boxes and target sizes are tuned for desired difficulty</li>
+            <li><strong>Gesture interfaces:</strong> Swipe target areas follow similar principles</li>
+        </ul>
+
+        <h2>The Bottom Line</h2>
+        <p>Fitts's Law is one of the most robust findings in human-computer interaction. It provides a mathematical foundation for interface design decisions that might otherwise be subjective. When debating button sizes, element placement, or interaction patterns, Fitts's Law gives you objective criteria.</p>
+
+        <p>The practical takeaway: make important things big and close, make unimportant (or dangerous) things small and far. Use screen edges strategically. And always consider where users' pointers or fingers are before designing the next interaction.</p>
+    </div>
+</body>
+</html>
