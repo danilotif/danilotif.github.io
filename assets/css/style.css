@@ -65,15 +65,15 @@ h1, h2, h3, h4, h5, h6 {
 #header {
   z-index: 997;
   transition: all 0.5s;
-  height: 80px;
-  background: rgba(25, 28, 31, 0.8);
+  height: 70px;
+  background: #1a1d21;
 }
 #header.header-transparent {
-  background: transparent;
+  background: #1a1d21;
 }
 #header.header-scrolled {
-  height: 60px;
-  background: rgba(25, 28, 31, 0.8);
+  height: 70px;
+  background: #1a1d21;
 }
 
 /*--------------------------------------------------------------
@@ -98,16 +98,18 @@ h1, h2, h3, h4, h5, h6 {
 .navbar a, .navbar a:focus {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px 15px;
+  justify-content: center;
+  padding: 10px 24px;
   color: #fff;
   white-space: nowrap;
   transition: 0.3s;
-  font-size: 12px;
+  font-size: 14px;
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 1px;
+  background: #ffb727;
+  border-radius: 6px;
 }
 .navbar a i, .navbar a:focus i {
   font-size: 12px;
@@ -115,7 +117,11 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 5px;
 }
 .navbar a:hover, .navbar .active, .navbar .active:focus, .navbar li:hover > a {
-  color: #ffb727;
+  color: #fff;
+  background: #e5a422;
+}
+.navbar li {
+  margin: 0 8px;
 }
 .navbar .dropdown ul {
   display: block;
@@ -197,12 +203,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 .navbar-mobile {
   position: fixed;
-  overflow: hidden;
+  overflow: visible;
   top: 0;
   right: 0;
   left: 0;
-  bottom: 0;
-  background: rgba(36, 41, 46, 0.9);
+  height: 70px;
+  background: #1a1d21;
   transition: 0.3s;
   z-index: 999;
 }
@@ -214,23 +220,33 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-mobile ul {
   display: block;
   position: absolute;
-  top: 55px;
+  top: 60px;
   right: 15px;
-  bottom: 15px;
-  left: 15px;
-  padding: 10px 0;
+  left: auto;
+  padding: 15px;
   border-radius: 10px;
-  background-color: #fff;
+  background-color: #1a1d21;
   overflow-y: auto;
   transition: 0.3s;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  min-width: 180px;
 }
 .navbar-mobile a, .navbar-mobile a:focus {
-  padding: 10px 20px;
+  padding: 12px 20px;
   font-size: 14px;
-  color: #3b434a;
+  color: #fff;
+  background: #ffb727;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  display: block;
+  text-align: center;
+}
+.navbar-mobile li:last-child a {
+  margin-bottom: 0;
 }
 .navbar-mobile a:hover, .navbar-mobile .active, .navbar-mobile li:hover > a {
-  color: #ffb727;
+  color: #fff;
+  background: #e5a422;
 }
 .navbar-mobile .getstarted, .navbar-mobile .getstarted:focus {
   margin: 15px;
