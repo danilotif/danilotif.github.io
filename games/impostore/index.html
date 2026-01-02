@@ -84,7 +84,7 @@
 let CATEGORIES = {};
 let state = {
   phase: 'loading',
-  players: [],
+  playerCount: 4,
   chameleonIndex: null,
   secretWord: '',
   currentPlayerIndex: 0,
@@ -138,15 +138,7 @@ function loadingHTML() {
 }
 
 function setupHTML() {
-  const playersList = state.players.map((p, i) => `
-    <div class="flex items-center justify-between bg-white/10 rounded-xl px-4 py-2">
-      <span class="text-white flex items-center gap-2">
-        <span class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-sm font-bold">${i + 1}</span>
-        ${p}
-      </span>
-      <button onclick="removePlayer(${i})" class="text-red-400 hover:text-red-300 text-xl">×</button>
-    </div>
-  `).join('');
+  const n = state.playerCount;
 
   return `
     <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border border-white/20 fade-in">
@@ -155,41 +147,41 @@ function setupHTML() {
         <h1 class="text-3xl font-bold text-white">L'impostore</h1>
       </div>
 
-      <div class="mb-4">
-        <div class="flex gap-2">
-          <input type="text" id="newPlayer" placeholder="Nome giocatore..." maxlength="15"
-            class="flex-1 px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-green-400"
-            onkeypress="if(event.key==='Enter')addPlayer()">
-          <button onclick="addPlayer()" ${state.players.length >= 10 ? 'disabled' : ''}
-            class="px-4 py-3 bg-green-500 hover:bg-green-400 disabled:bg-gray-500 text-white rounded-xl font-bold transition-all">+</button>
+      <div class="mb-6">
+        <p class="text-emerald-200 text-center mb-4">Quanti giocatori?</p>
+        <div class="flex items-center justify-center gap-4">
+          <button onclick="adjustPlayers(-1)" ${n <= 3 ? 'disabled' : ''}
+            class="w-12 h-12 bg-white/20 hover:bg-white/30 disabled:opacity-30 rounded-xl text-white font-bold text-2xl transition-all">-</button>
+          <div class="text-5xl font-bold text-white w-20 text-center">${n}</div>
+          <button onclick="adjustPlayers(1)" ${n >= 15 ? 'disabled' : ''}
+            class="w-12 h-12 bg-white/20 hover:bg-white/30 disabled:opacity-30 rounded-xl text-white font-bold text-2xl transition-all">+</button>
         </div>
       </div>
 
-      <div class="space-y-2 mb-6 max-h-48 overflow-y-auto">${playersList}</div>
-
-      ${state.players.length < 3 ? '<p class="text-yellow-300 text-center text-sm mb-4">Servono almeno 3 giocatori</p>' : ''}
-
-      <button onclick="startGame()" ${state.players.length < 3 ? 'disabled' : ''}
-        class="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 disabled:from-gray-500 disabled:to-gray-600 text-white rounded-xl font-bold text-lg transition-all shadow-lg">
+      <button onclick="startGame()"
+        class="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 text-white rounded-xl font-bold text-lg transition-all shadow-lg">
         ${state.gameStarted ? '🔄 Nuova Parola' : '🎮 Inizia Partita'}
       </button>
     </div>`;
 }
 
 function revealHTML() {
-  const playerDots = state.players.map((p, i) => `
-    <div class="px-3 py-1 rounded-full text-sm ${
+  const current = state.currentPlayerIndex + 1;
+  const total = state.playerCount;
+
+  const playerDots = Array.from({length: total}, (_, i) => `
+    <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
       state.revealedPlayers.has(i) ? 'bg-green-500/50 text-white' :
       i === state.currentPlayerIndex ? 'bg-yellow-500/50 text-white animate-pulse' :
       'bg-white/20 text-white/50'
-    }">${p}</div>
+    }">${i + 1}</div>
   `).join('');
 
   const isChameleon = state.currentPlayerIndex === state.chameleonIndex;
 
   return `
     <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border border-white/20 text-center fade-in">
-      <h2 class="text-2xl font-bold text-white mb-4">${state.players[state.currentPlayerIndex]}</h2>
+      <h2 class="text-2xl font-bold text-white mb-4">Giocatore ${current}</h2>
 
       <div class="card-container mb-4" id="cardContainer">
         <!-- Hidden content underneath -->
@@ -216,7 +208,7 @@ function revealHTML() {
       </div>
 
       <button onclick="nextPlayer()" class="w-full py-3 bg-green-500 hover:bg-green-400 text-white rounded-xl font-bold transition-all">
-        ${state.currentPlayerIndex < state.players.length - 1 ? 'Prossimo →' : 'Fine →'}
+        ${state.currentPlayerIndex < total - 1 ? 'Prossimo →' : 'Fine →'}
       </button>
 
       <div class="mt-4 flex flex-wrap gap-2 justify-center">${playerDots}</div>
@@ -224,25 +216,18 @@ function revealHTML() {
 }
 
 // Game functions
-function addPlayer() {
-  const input = document.getElementById('newPlayer');
-  const name = input.value.trim();
-  if (name && state.players.length < 10) {
-    state.players.push(name);
-    input.value = '';
+function adjustPlayers(delta) {
+  const newCount = state.playerCount + delta;
+  if (newCount >= 3 && newCount <= 15) {
+    state.playerCount = newCount;
     render();
   }
-}
-
-function removePlayer(i) {
-  state.players.splice(i, 1);
-  render();
 }
 
 function startGame() {
   const allWords = Object.values(CATEGORIES).flat();
   state.secretWord = allWords[Math.floor(Math.random() * allWords.length)];
-  state.chameleonIndex = Math.floor(Math.random() * state.players.length);
+  state.chameleonIndex = Math.floor(Math.random() * state.playerCount);
   state.currentPlayerIndex = 0;
   state.revealedPlayers = new Set();
   state.gameStarted = true;
@@ -306,7 +291,7 @@ function initDragReveal() {
 }
 
 function nextPlayer() {
-  if (state.currentPlayerIndex < state.players.length - 1) {
+  if (state.currentPlayerIndex < state.playerCount - 1) {
     state.currentPlayerIndex++;
     render();
   } else {
