@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Party Games</title>
+  <meta name="theme-color" content="#1e1b4b">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { -webkit-tap-highlight-color: transparent; user-select: none; }
+    body { overscroll-behavior: none; }
+    .fade-in { animation: fadeIn 0.3s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .game-card {
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    }
+    .game-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .game-card:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+  <div class="p-4 flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-md fade-in">
+      <div class="text-center mb-8">
+        <div class="text-6xl mb-3">🎮</div>
+        <h1 class="text-3xl font-bold text-white mb-2">Party Games</h1>
+        <p class="text-white/60">Scegli un gioco da giocare con i tuoi amici</p>
+      </div>
+
+      <div class="space-y-4">
+        <!-- L'impostore -->
+        <a href="impostore/" class="game-card block bg-gradient-to-r from-emerald-800 to-green-700 rounded-2xl p-5 border border-white/10">
+          <div class="flex items-center gap-4">
+            <div class="text-5xl">🥷</div>
+            <div class="flex-1">
+              <h2 class="text-xl font-bold text-white">L'impostore</h2>
+              <p class="text-emerald-200 text-sm">Trova chi non conosce la parola segreta</p>
+            </div>
+            <div class="text-white/40 text-2xl">→</div>
+          </div>
+        </a>
+
+        <!-- Lupus in Tabula -->
+        <a href="lupus/" class="game-card block bg-gradient-to-r from-indigo-800 to-purple-700 rounded-2xl p-5 border border-white/10">
+          <div class="flex items-center gap-4">
+            <div class="text-5xl">🐺</div>
+            <div class="flex-1">
+              <h2 class="text-xl font-bold text-white">Lupus in Tabula</h2>
+              <p class="text-indigo-200 text-sm">Assegna i ruoli per una partita a Lupus</p>
+            </div>
+            <div class="text-white/40 text-2xl">→</div>
+          </div>
+        </a>
+
+        <!-- Pictionary -->
+        <a href="pictionary/" class="game-card block bg-gradient-to-r from-violet-800 to-fuchsia-700 rounded-2xl p-5 border border-white/10">
+          <div class="flex items-center gap-4">
+            <div class="text-5xl">🎨</div>
+            <div class="flex-1">
+              <h2 class="text-xl font-bold text-white">Pictionary</h2>
+              <p class="text-violet-200 text-sm">Estrai una parola casuale da disegnare</p>
+            </div>
+            <div class="text-white/40 text-2xl">→</div>
+          </div>
+        </a>
+      </div>
+
+      <p class="text-center text-white/30 text-sm mt-8">Passa il telefono e divertiti!</p>
+    </div>
+  </div>
+</body>
+</html>
