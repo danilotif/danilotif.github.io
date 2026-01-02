@@ -73,29 +73,50 @@
     <div id="game" class="w-full max-w-md"></div>
   </div>
 
+  <!-- Info Modal -->
+  <div id="infoModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-indigo-950/95 rounded-3xl p-5 max-w-md w-full max-h-[85vh] flex flex-col border border-white/20 shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-xl font-bold text-white">📜 Ruoli</h3>
+        <button onclick="hideInfo()" class="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full text-white font-bold">×</button>
+      </div>
+      <div class="overflow-y-auto flex-1 space-y-3" id="infoContent"></div>
+    </div>
+  </div>
+
 <script>
 const ROLES = {
   lupo: { emoji: '🐺', name: 'Lupo', color: 'red', description: 'Di notte scegli una vittima con gli altri lupi' },
   veggente: { emoji: '🔮', name: 'Veggente', color: 'blue', description: 'Di notte puoi scoprire il ruolo di un giocatore' },
-  medico: { emoji: '💉', name: 'Medico', color: 'green', description: 'Di notte puoi salvare un giocatore dalla morte' },
+  guardia: { emoji: '🗡️', name: 'Guardia', color: 'green', description: 'Di notte puoi salvare un giocatore dalla morte' },
   villico: { emoji: '🧑‍🌾', name: 'Villico', color: 'yellow', description: 'Di giorno vota per eliminare i sospetti' },
   cacciatore: { emoji: '🏹', name: 'Cacciatore', color: 'orange', description: 'Se muori, puoi portare qualcuno con te' },
   strega: { emoji: '🧙‍♀️', name: 'Strega', color: 'purple', description: 'Hai una pozione per salvare e una per uccidere' },
-  cupido: { emoji: '💘', name: 'Cupido', color: 'pink', description: 'All\'inizio scegli due innamorati' },
-  bodyguard: { emoji: '🛡️', name: 'Guardia', color: 'cyan', description: 'Di notte proteggi un giocatore (non te stesso)' }
+  cupido: { emoji: '💘', name: 'Cupido', color: 'pink', description: 'All\'inizio scegli due innamorati' }
 };
 
 const PRESETS = {
-  '5-6': { lupo: 1, veggente: 1, medico: 1, villico: 'rest' },
-  '7-8': { lupo: 2, veggente: 1, medico: 1, villico: 'rest' },
-  '9-10': { lupo: 2, veggente: 1, medico: 1, cacciatore: 1, villico: 'rest' },
-  '11-12': { lupo: 3, veggente: 1, medico: 1, cacciatore: 1, strega: 1, villico: 'rest' },
-  '13+': { lupo: 3, veggente: 1, medico: 1, cacciatore: 1, strega: 1, cupido: 1, bodyguard: 1, villico: 'rest' }
+  5: { lupo: 1, veggente: 1, guardia: 1, villico: 'rest' },
+  6: { lupo: 1, veggente: 1, guardia: 1, villico: 'rest' },
+  7: { lupo: 2, veggente: 1, guardia: 1, villico: 'rest' },
+  8: { lupo: 2, veggente: 1, guardia: 1, villico: 'rest' },
+  9: { lupo: 2, veggente: 1, guardia: 1, cacciatore: 1, villico: 'rest' },
+  10: { lupo: 2, veggente: 1, guardia: 1, cacciatore: 1, villico: 'rest' },
+  11: { lupo: 3, veggente: 1, guardia: 1, cacciatore: 1, strega: 1, villico: 'rest' },
+  12: { lupo: 3, veggente: 1, guardia: 1, cacciatore: 1, strega: 1, villico: 'rest' },
+  13: { lupo: 3, veggente: 1, guardia: 1, cacciatore: 1, strega: 1, cupido: 1, villico: 'rest' },
+  14: { lupo: 3, veggente: 1, guardia: 1, cacciatore: 1, strega: 1, cupido: 1, villico: 'rest' },
+  15: { lupo: 4, veggente: 1, guardia: 1, cacciatore: 1, strega: 1, cupido: 1, villico: 'rest' },
+  16: { lupo: 4, veggente: 1, guardia: 1, cacciatore: 1, strega: 1, cupido: 1, villico: 'rest' },
+  17: { lupo: 4, veggente: 1, guardia: 1, cacciatore: 1, strega: 1, cupido: 1, villico: 'rest' },
+  18: { lupo: 4, veggente: 1, guardia: 1, cacciatore: 1, strega: 1, cupido: 1, villico: 'rest' },
+  19: { lupo: 5, veggente: 1, guardia: 1, cacciatore: 1, strega: 1, cupido: 1, villico: 'rest' },
+  20: { lupo: 5, veggente: 1, guardia: 1, cacciatore: 1, strega: 1, cupido: 1, villico: 'rest' }
 };
 
 let state = {
   phase: 'setup',
-  players: [],
+  playerCount: 8,
   roles: {},
   currentPlayerIndex: 0,
   revealedPlayers: new Set(),
@@ -123,16 +144,6 @@ function getPhaseHTML() {
 }
 
 function setupHTML() {
-  const playersList = state.players.map((p, i) => `
-    <div class="flex items-center justify-between bg-white/10 rounded-xl px-4 py-2">
-      <span class="text-white flex items-center gap-2">
-        <span class="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center text-sm font-bold">${i + 1}</span>
-        ${p}
-      </span>
-      <button onclick="removePlayer(${i})" class="text-red-400 hover:text-red-300 text-xl">×</button>
-    </div>
-  `).join('');
-
   return `
     <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border border-white/20 fade-in">
       <div class="text-center mb-6">
@@ -140,36 +151,27 @@ function setupHTML() {
         <h1 class="text-3xl font-bold text-white">Lupus in Tabula</h1>
       </div>
 
-      <div class="mb-4">
-        <div class="flex gap-2">
-          <input type="text" id="newPlayer" placeholder="Nome giocatore..." maxlength="15"
-            class="flex-1 px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-            onkeypress="if(event.key==='Enter')addPlayer()">
-          <button onclick="addPlayer()" ${state.players.length >= 20 ? 'disabled' : ''}
-            class="px-4 py-3 bg-indigo-500 hover:bg-indigo-400 disabled:bg-gray-500 text-white rounded-xl font-bold transition-all">+</button>
+      <div class="mb-6">
+        <label class="text-indigo-200 text-sm mb-2 block text-center">Numero di giocatori</label>
+        <div class="flex items-center justify-center gap-4">
+          <button onclick="adjustPlayerCount(-1)" ${state.playerCount <= 5 ? 'disabled' : ''}
+            class="w-14 h-14 bg-white/20 hover:bg-white/30 disabled:bg-white/5 disabled:text-white/30 rounded-xl text-white text-2xl font-bold transition-all">-</button>
+          <div class="text-5xl font-bold text-white w-20 text-center">${state.playerCount}</div>
+          <button onclick="adjustPlayerCount(1)" ${state.playerCount >= 20 ? 'disabled' : ''}
+            class="w-14 h-14 bg-white/20 hover:bg-white/30 disabled:bg-white/5 disabled:text-white/30 rounded-xl text-white text-2xl font-bold transition-all">+</button>
         </div>
       </div>
 
-      <div class="space-y-2 mb-6 max-h-48 overflow-y-auto">${playersList}</div>
-
-      ${state.players.length < 5 ? '<p class="text-yellow-300 text-center text-sm mb-4">Servono almeno 5 giocatori</p>' : ''}
-
-      <button onclick="goToRoles()" ${state.players.length < 5 ? 'disabled' : ''}
-        class="w-full py-4 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-400 hover:to-purple-400 disabled:from-gray-500 disabled:to-gray-600 text-white rounded-xl font-bold text-lg transition-all shadow-lg">
+      <button onclick="goToRoles()"
+        class="w-full py-4 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-400 hover:to-purple-400 text-white rounded-xl font-bold text-lg transition-all shadow-lg">
         Configura Ruoli →
       </button>
     </div>`;
 }
 
 function rolesHTML() {
-  const n = state.players.length;
-  let preset;
-  if (n <= 6) preset = PRESETS['5-6'];
-  else if (n <= 8) preset = PRESETS['7-8'];
-  else if (n <= 10) preset = PRESETS['9-10'];
-  else if (n <= 12) preset = PRESETS['11-12'];
-  else preset = PRESETS['13+'];
-
+  const n = state.playerCount;
+  const preset = PRESETS[n] || PRESETS[20];
   const currentRoles = state.customRoles || preset;
 
   const roleCards = Object.entries(ROLES).map(([key, role]) => {
@@ -178,15 +180,15 @@ function rolesHTML() {
     const displayCount = isRest ? '?' : count;
 
     return `
-      <div class="bg-white/10 rounded-xl p-3 flex items-center justify-between">
+      <div class="bg-white/10 rounded-xl p-2 flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <span class="text-2xl">${role.emoji}</span>
-          <span class="text-white font-medium">${role.name}</span>
+          <span class="text-xl">${role.emoji}</span>
+          <span class="text-white font-medium text-sm">${role.name}</span>
         </div>
-        <div class="flex items-center gap-2">
-          <button onclick="adjustRole('${key}', -1)" class="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-lg text-white font-bold">-</button>
-          <span class="w-8 text-center text-white font-bold">${displayCount}</span>
-          <button onclick="adjustRole('${key}', 1)" class="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-lg text-white font-bold">+</button>
+        <div class="flex items-center gap-1">
+          <button onclick="adjustRole('${key}', -1)" class="w-7 h-7 bg-white/20 hover:bg-white/30 rounded-lg text-white font-bold text-sm">-</button>
+          <span class="w-6 text-center text-white font-bold text-sm">${displayCount}</span>
+          <button onclick="adjustRole('${key}', 1)" class="w-7 h-7 bg-white/20 hover:bg-white/30 rounded-lg text-white font-bold text-sm">+</button>
         </div>
       </div>
     `;
@@ -196,23 +198,24 @@ function rolesHTML() {
   const isValid = totalAssigned === n;
 
   return `
-    <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border border-white/20 fade-in">
-      <div class="text-center mb-4">
-        <h2 class="text-2xl font-bold text-white">Configura Ruoli</h2>
-        <p class="text-indigo-200">${n} giocatori - ${totalAssigned} ruoli assegnati</p>
+    <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-4 shadow-2xl border border-white/20 fade-in max-h-[calc(100vh-2rem)] flex flex-col">
+      <div class="text-center mb-3 flex-shrink-0 relative">
+        <button onclick="showInfo()" class="absolute right-0 top-0 w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full text-white text-sm">ℹ️</button>
+        <h2 class="text-xl font-bold text-white">Configura Ruoli</h2>
+        <p class="text-indigo-200 text-sm">${n} giocatori - ${totalAssigned} ruoli assegnati</p>
       </div>
 
-      <div class="space-y-2 mb-4 max-h-64 overflow-y-auto">${roleCards}</div>
+      <div class="space-y-1.5 mb-3 overflow-y-auto flex-1 min-h-0">${roleCards}</div>
 
-      ${!isValid ? `<p class="text-yellow-300 text-center text-sm mb-4">Assegna esattamente ${n} ruoli</p>` : ''}
+      ${!isValid ? `<p class="text-yellow-300 text-center text-sm mb-3 flex-shrink-0">Assegna esattamente ${n} ruoli</p>` : ''}
 
-      <div class="flex gap-2">
+      <div class="flex gap-2 flex-shrink-0">
         <button onclick="state.phase='setup';state.customRoles=null;render()"
-          class="flex-1 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-xl font-bold transition-all">
+          class="flex-1 py-2.5 bg-gray-600 hover:bg-gray-500 text-white rounded-xl font-bold transition-all">
           ← Indietro
         </button>
         <button onclick="startGame()" ${!isValid ? 'disabled' : ''}
-          class="flex-1 py-3 bg-indigo-500 hover:bg-indigo-400 disabled:bg-gray-500 text-white rounded-xl font-bold transition-all">
+          class="flex-1 py-2.5 bg-indigo-500 hover:bg-indigo-400 disabled:bg-gray-500 text-white rounded-xl font-bold transition-all">
           Inizia! 🎮
         </button>
       </div>
@@ -220,12 +223,15 @@ function rolesHTML() {
 }
 
 function revealHTML() {
-  const playerDots = state.players.map((p, i) => `
-    <div class="px-3 py-1 rounded-full text-sm ${
+  const n = state.playerCount;
+  const current = state.currentPlayerIndex + 1;
+
+  const playerDots = Array.from({ length: n }, (_, i) => `
+    <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
       state.revealedPlayers.has(i) ? 'bg-indigo-500/50 text-white' :
-      i === state.currentPlayerIndex ? 'bg-yellow-500/50 text-white animate-pulse' :
+      i === state.currentPlayerIndex ? 'bg-yellow-500 text-black animate-pulse' :
       'bg-white/20 text-white/50'
-    }">${p}</div>
+    }">${i + 1}</div>
   `).join('');
 
   const playerRole = state.roles[state.currentPlayerIndex];
@@ -245,15 +251,21 @@ function revealHTML() {
   // Find other wolves if this player is a wolf
   let teammates = '';
   if (playerRole === 'lupo') {
-    const otherWolves = state.players.filter((p, i) => state.roles[i] === 'lupo' && i !== state.currentPlayerIndex);
-    if (otherWolves.length > 0) {
-      teammates = `<div class="text-red-200 text-sm mt-2">🐺 Altri lupi: ${otherWolves.join(', ')}</div>`;
+    const wolfIndices = [];
+    for (let i = 0; i < n; i++) {
+      if (state.roles[i] === 'lupo' && i !== state.currentPlayerIndex) {
+        wolfIndices.push(i + 1);
+      }
+    }
+    if (wolfIndices.length > 0) {
+      teammates = `<div class="text-red-200 text-sm mt-2">🐺 Altri lupi: Giocatore ${wolfIndices.join(', ')}</div>`;
     }
   }
 
   return `
-    <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border border-white/20 text-center fade-in">
-      <h2 class="text-2xl font-bold text-white mb-4">${state.players[state.currentPlayerIndex]}</h2>
+    <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border border-white/20 text-center fade-in relative">
+      <button onclick="showInfo()" class="absolute right-4 top-4 w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full text-white text-sm">ℹ️</button>
+      <h2 class="text-2xl font-bold text-white mb-4">Giocatore ${current}</h2>
 
       <div class="card-container mb-4" id="cardContainer">
         <div class="card-content ${bgColors[roleInfo.color]} border-2" style="border-radius: 1rem;">
@@ -272,7 +284,7 @@ function revealHTML() {
       </div>
 
       <button onclick="nextPlayer()" class="w-full py-3 bg-indigo-500 hover:bg-indigo-400 text-white rounded-xl font-bold transition-all">
-        ${state.currentPlayerIndex < state.players.length - 1 ? 'Prossimo →' : 'Fine →'}
+        ${state.currentPlayerIndex < n - 1 ? 'Prossimo →' : 'Fine →'}
       </button>
 
       <div class="mt-4 flex flex-wrap gap-2 justify-center">${playerDots}</div>
@@ -299,7 +311,8 @@ function summaryHTML() {
   }).join('');
 
   return `
-    <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border border-white/20 text-center fade-in">
+    <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border border-white/20 text-center fade-in relative">
+      <button onclick="showInfo()" class="absolute right-4 top-4 w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full text-white text-sm">ℹ️</button>
       <div class="text-6xl mb-4">🌙</div>
       <h2 class="text-2xl font-bold text-white mb-2">Il villaggio dorme...</h2>
       <p class="text-indigo-200 mb-6">Tutti hanno visto il loro ruolo</p>
@@ -320,19 +333,13 @@ function summaryHTML() {
 }
 
 // Game functions
-function addPlayer() {
-  const input = document.getElementById('newPlayer');
-  const name = input.value.trim();
-  if (name && state.players.length < 20) {
-    state.players.push(name);
-    input.value = '';
+function adjustPlayerCount(delta) {
+  const newCount = state.playerCount + delta;
+  if (newCount >= 5 && newCount <= 20) {
+    state.playerCount = newCount;
+    state.customRoles = null;
     render();
   }
-}
-
-function removePlayer(i) {
-  state.players.splice(i, 1);
-  render();
 }
 
 function goToRoles() {
@@ -342,13 +349,8 @@ function goToRoles() {
 }
 
 function adjustRole(role, delta) {
-  const n = state.players.length;
-  let preset;
-  if (n <= 6) preset = PRESETS['5-6'];
-  else if (n <= 8) preset = PRESETS['7-8'];
-  else if (n <= 10) preset = PRESETS['9-10'];
-  else if (n <= 12) preset = PRESETS['11-12'];
-  else preset = PRESETS['13+'];
+  const n = state.playerCount;
+  const preset = PRESETS[n] || PRESETS[20];
 
   if (!state.customRoles) {
     state.customRoles = {};
@@ -375,14 +377,8 @@ function calculateTotalRoles(roles) {
 }
 
 function startGame() {
-  const n = state.players.length;
-  let preset;
-  if (n <= 6) preset = PRESETS['5-6'];
-  else if (n <= 8) preset = PRESETS['7-8'];
-  else if (n <= 10) preset = PRESETS['9-10'];
-  else if (n <= 12) preset = PRESETS['11-12'];
-  else preset = PRESETS['13+'];
-
+  const n = state.playerCount;
+  const preset = PRESETS[n] || PRESETS[20];
   const roleConfig = state.customRoles || preset;
 
   // Build role array
@@ -404,9 +400,9 @@ function startGame() {
 
   // Assign
   state.roles = {};
-  state.players.forEach((_, i) => {
+  for (let i = 0; i < n; i++) {
     state.roles[i] = roleArray[i];
-  });
+  }
 
   state.currentPlayerIndex = 0;
   state.revealedPlayers = new Set();
@@ -471,13 +467,37 @@ function initDragReveal() {
 }
 
 function nextPlayer() {
-  if (state.currentPlayerIndex < state.players.length - 1) {
+  if (state.currentPlayerIndex < state.playerCount - 1) {
     state.currentPlayerIndex++;
     render();
   } else {
     state.phase = 'summary';
     render();
   }
+}
+
+function showInfo() {
+  const modal = document.getElementById('infoModal');
+  const content = document.getElementById('infoContent');
+
+  content.innerHTML = Object.entries(ROLES).map(([_, role]) => `
+    <div class="bg-white/10 rounded-xl p-3">
+      <div class="flex items-center gap-2 mb-1">
+        <span class="text-2xl">${role.emoji}</span>
+        <span class="text-white font-bold">${role.name}</span>
+      </div>
+      <p class="text-white/70 text-sm pl-9">${role.description}</p>
+    </div>
+  `).join('');
+
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+}
+
+function hideInfo() {
+  const modal = document.getElementById('infoModal');
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
 }
 
 // Initialize
