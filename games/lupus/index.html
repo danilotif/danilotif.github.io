@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Lupus in Tabula</title>
+  <meta name="theme-color" content="#1e1b4b">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐺</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { -webkit-tap-highlight-color: transparent; user-select: none; }
+    body { overscroll-behavior: none; }
+    .fade-in { animation: fadeIn 0.3s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card-container {
+      position: relative;
+      height: 260px;
+      overflow: hidden;
+      border-radius: 1rem;
+      touch-action: none;
+    }
+    .card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .card-curtain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: linear-gradient(to bottom, #1e1b4b 0%, #312e81 50%, #3730a3 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      transition: transform 0.4s ease-out;
+      z-index: 10;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .card-curtain:active { cursor: grabbing; }
+    .card-curtain.dragging { transition: none; }
+    .drag-hint {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: white;
+    }
+    .drag-arrow {
+      font-size: 2rem;
+      animation: bounce 1s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-slate-900">
+  <div id="app" class="p-4 flex items-center justify-center min-h-screen">
+    <div id="game" class="w-full max-w-md"></div>
+  </div>
+
+<script>
+const ROLES = {
+  lupo: { emoji: '🐺', name: 'Lupo', color: 'red', description: 'Di notte scegli una vittima con gli altri lupi' },
+  veggente: { emoji: '🔮', name: 'Veggente', color: 'blue', description: 'Di notte puoi scoprire il ruolo di un giocatore' },
+  medico: { emoji: '💉', name: 'Medico', color: 'green', description: 'Di notte puoi salvare un giocatore dalla morte' },
+  villico: { emoji: '🧑‍🌾', name: 'Villico', color: 'yellow', description: 'Di giorno vota per eliminare i sospetti' },
+  cacciatore: { emoji: '🏹', name: 'Cacciatore', color: 'orange', description: 'Se muori, puoi portare qualcuno con te' },
+  strega: { emoji: '🧙‍♀️', name: 'Strega', color: 'purple', description: 'Hai una pozione per salvare e una per uccidere' },
+  cupido: { emoji: '💘', name: 'Cupido', color: 'pink', description: 'All\'inizio scegli due innamorati' },
+  bodyguard: { emoji: '🛡️', name: 'Guardia', color: 'cyan', description: 'Di notte proteggi un giocatore (non te stesso)' }
+};
+
+const PRESETS = {
+  '5-6': { lupo: 1, veggente: 1, medico: 1, villico: 'rest' },
+  '7-8': { lupo: 2, veggente: 1, medico: 1, villico: 'rest' },
+  '9-10': { lupo: 2, veggente: 1, medico: 1, cacciatore: 1, villico: 'rest' },
+  '11-12': { lupo: 3, veggente: 1, medico: 1, cacciatore: 1, strega: 1, villico: 'rest' },
+  '13+': { lupo: 3, veggente: 1, medico: 1, cacciatore: 1, strega: 1, cupido: 1, bodyguard: 1, villico: 'rest' }
+};
+
+let state = {
+  phase: 'setup',
+  players: [],
+  roles: {},
+  currentPlayerIndex: 0,
+  revealedPlayers: new Set(),
+  customRoles: null
+};
+
+function render() {
+  const game = document.getElementById('game');
+  game.innerHTML = getPhaseHTML();
+  game.querySelector('.fade-in')?.classList.add('fade-in');
+
+  if (state.phase === 'reveal') {
+    initDragReveal();
+  }
+}
+
+function getPhaseHTML() {
+  switch(state.phase) {
+    case 'setup': return setupHTML();
+    case 'roles': return rolesHTML();
+    case 'reveal': return revealHTML();
+    case 'summary': return summaryHTML();
+    default: return '';
+  }
+}
+
+function setupHTML() {
+  const playersList = state.players.map((p, i) => `
+    <div class="flex items-center justify-between bg-white/10 rounded-xl px-4 py-2">
+      <span class="text-white flex items-center gap-2">
+        <span class="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center text-sm font-bold">${i + 1}</span>
+        ${p}
+      </span>
+      <button onclick="removePlayer(${i})" class="text-red-400 hover:text-red-300 text-xl">×</button>
+    </div>
+  `).join('');
+
+  return `
+    <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border border-white/20 fade-in">
+      <div class="text-center mb-6">
+        <div class="text-6xl mb-2">🐺</div>
+        <h1 class="text-3xl font-bold text-white">Lupus in Tabula</h1>
+      </div>
+
+      <div class="mb-4">
+        <div class="flex gap-2">
+          <input type="text" id="newPlayer" placeholder="Nome giocatore..." maxlength="15"
+            class="flex-1 px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            onkeypress="if(event.key==='Enter')addPlayer()">
+          <button onclick="addPlayer()" ${state.players.length >= 20 ? 'disabled' : ''}
+            class="px-4 py-3 bg-indigo-500 hover:bg-indigo-400 disabled:bg-gray-500 text-white rounded-xl font-bold transition-all">+</button>
+        </div>
+      </div>
+
+      <div class="space-y-2 mb-6 max-h-48 overflow-y-auto">${playersList}</div>
+
+      ${state.players.length < 5 ? '<p class="text-yellow-300 text-center text-sm mb-4">Servono almeno 5 giocatori</p>' : ''}
+
+      <button onclick="goToRoles()" ${state.players.length < 5 ? 'disabled' : ''}
+        class="w-full py-4 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-400 hover:to-purple-400 disabled:from-gray-500 disabled:to-gray-600 text-white rounded-xl font-bold text-lg transition-all shadow-lg">
+        Configura Ruoli →
+      </button>
+    </div>`;
+}
+
+function rolesHTML() {
+  const n = state.players.length;
+  let preset;
+  if (n <= 6) preset = PRESETS['5-6'];
+  else if (n <= 8) preset = PRESETS['7-8'];
+  else if (n <= 10) preset = PRESETS['9-10'];
+  else if (n <= 12) preset = PRESETS['11-12'];
+  else preset = PRESETS['13+'];
+
+  const currentRoles = state.customRoles || preset;
+
+  const roleCards = Object.entries(ROLES).map(([key, role]) => {
+    const count = currentRoles[key] || 0;
+    const isRest = currentRoles[key] === 'rest';
+    const displayCount = isRest ? '?' : count;
+
+    return `
+      <div class="bg-white/10 rounded-xl p-3 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">${role.emoji}</span>
+          <span class="text-white font-medium">${role.name}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="adjustRole('${key}', -1)" class="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-lg text-white font-bold">-</button>
+          <span class="w-8 text-center text-white font-bold">${displayCount}</span>
+          <button onclick="adjustRole('${key}', 1)" class="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-lg text-white font-bold">+</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const totalAssigned = calculateTotalRoles(currentRoles);
+  const isValid = totalAssigned === n;
+
+  return `
+    <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border border-white/20 fade-in">
+      <div class="text-center mb-4">
+        <h2 class="text-2xl font-bold text-white">Configura Ruoli</h2>
+        <p class="text-indigo-200">${n} giocatori - ${totalAssigned} ruoli assegnati</p>
+      </div>
+
+      <div class="space-y-2 mb-4 max-h-64 overflow-y-auto">${roleCards}</div>
+
+      ${!isValid ? `<p class="text-yellow-300 text-center text-sm mb-4">Assegna esattamente ${n} ruoli</p>` : ''}
+
+      <div class="flex gap-2">
+        <button onclick="state.phase='setup';state.customRoles=null;render()"
+          class="flex-1 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-xl font-bold transition-all">
+          ← Indietro
+        </button>
+        <button onclick="startGame()" ${!isValid ? 'disabled' : ''}
+          class="flex-1 py-3 bg-indigo-500 hover:bg-indigo-400 disabled:bg-gray-500 text-white rounded-xl font-bold transition-all">
+          Inizia! 🎮
+        </button>
+      </div>
+    </div>`;
+}
+
+function revealHTML() {
+  const playerDots = state.players.map((p, i) => `
+    <div class="px-3 py-1 rounded-full text-sm ${
+      state.revealedPlayers.has(i) ? 'bg-indigo-500/50 text-white' :
+      i === state.currentPlayerIndex ? 'bg-yellow-500/50 text-white animate-pulse' :
+      'bg-white/20 text-white/50'
+    }">${p}</div>
+  `).join('');
+
+  const playerRole = state.roles[state.currentPlayerIndex];
+  const roleInfo = ROLES[playerRole];
+
+  const bgColors = {
+    red: 'bg-red-500/30 border-red-400',
+    blue: 'bg-blue-500/30 border-blue-400',
+    green: 'bg-green-500/30 border-green-400',
+    yellow: 'bg-yellow-500/30 border-yellow-400',
+    orange: 'bg-orange-500/30 border-orange-400',
+    purple: 'bg-purple-500/30 border-purple-400',
+    pink: 'bg-pink-500/30 border-pink-400',
+    cyan: 'bg-cyan-500/30 border-cyan-400'
+  };
+
+  // Find other wolves if this player is a wolf
+  let teammates = '';
+  if (playerRole === 'lupo') {
+    const otherWolves = state.players.filter((p, i) => state.roles[i] === 'lupo' && i !== state.currentPlayerIndex);
+    if (otherWolves.length > 0) {
+      teammates = `<div class="text-red-200 text-sm mt-2">🐺 Altri lupi: ${otherWolves.join(', ')}</div>`;
+    }
+  }
+
+  return `
+    <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border border-white/20 text-center fade-in">
+      <h2 class="text-2xl font-bold text-white mb-4">${state.players[state.currentPlayerIndex]}</h2>
+
+      <div class="card-container mb-4" id="cardContainer">
+        <div class="card-content ${bgColors[roleInfo.color]} border-2" style="border-radius: 1rem;">
+          <div class="text-6xl mb-2">${roleInfo.emoji}</div>
+          <div class="text-2xl font-bold text-white">${roleInfo.name}</div>
+          <div class="text-white/80 text-sm mt-2 px-4">${roleInfo.description}</div>
+          ${teammates}
+        </div>
+
+        <div class="card-curtain" id="cardCurtain">
+          <div class="drag-hint">
+            <div class="drag-arrow">⬆️</div>
+            <div class="text-lg font-medium">Trascina per scoprire</div>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="nextPlayer()" class="w-full py-3 bg-indigo-500 hover:bg-indigo-400 text-white rounded-xl font-bold transition-all">
+        ${state.currentPlayerIndex < state.players.length - 1 ? 'Prossimo →' : 'Fine →'}
+      </button>
+
+      <div class="mt-4 flex flex-wrap gap-2 justify-center">${playerDots}</div>
+    </div>`;
+}
+
+function summaryHTML() {
+  const roleCounts = {};
+  Object.values(state.roles).forEach(role => {
+    roleCounts[role] = (roleCounts[role] || 0) + 1;
+  });
+
+  const summary = Object.entries(roleCounts).map(([role, count]) => {
+    const info = ROLES[role];
+    return `
+      <div class="flex items-center justify-between bg-white/10 rounded-xl px-4 py-2">
+        <span class="text-white flex items-center gap-2">
+          <span class="text-xl">${info.emoji}</span>
+          ${info.name}
+        </span>
+        <span class="text-white font-bold">${count}</span>
+      </div>
+    `;
+  }).join('');
+
+  return `
+    <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border border-white/20 text-center fade-in">
+      <div class="text-6xl mb-4">🌙</div>
+      <h2 class="text-2xl font-bold text-white mb-2">Il villaggio dorme...</h2>
+      <p class="text-indigo-200 mb-6">Tutti hanno visto il loro ruolo</p>
+
+      <div class="space-y-2 mb-6">${summary}</div>
+
+      <div class="flex gap-2">
+        <button onclick="state.phase='setup';render()"
+          class="flex-1 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-xl font-bold transition-all">
+          🏠 Menu
+        </button>
+        <button onclick="restartGame()"
+          class="flex-1 py-3 bg-indigo-500 hover:bg-indigo-400 text-white rounded-xl font-bold transition-all">
+          🔄 Nuova Partita
+        </button>
+      </div>
+    </div>`;
+}
+
+// Game functions
+function addPlayer() {
+  const input = document.getElementById('newPlayer');
+  const name = input.value.trim();
+  if (name && state.players.length < 20) {
+    state.players.push(name);
+    input.value = '';
+    render();
+  }
+}
+
+function removePlayer(i) {
+  state.players.splice(i, 1);
+  render();
+}
+
+function goToRoles() {
+  state.customRoles = null;
+  state.phase = 'roles';
+  render();
+}
+
+function adjustRole(role, delta) {
+  const n = state.players.length;
+  let preset;
+  if (n <= 6) preset = PRESETS['5-6'];
+  else if (n <= 8) preset = PRESETS['7-8'];
+  else if (n <= 10) preset = PRESETS['9-10'];
+  else if (n <= 12) preset = PRESETS['11-12'];
+  else preset = PRESETS['13+'];
+
+  if (!state.customRoles) {
+    state.customRoles = {};
+    Object.entries(preset).forEach(([r, v]) => {
+      if (v === 'rest') {
+        const assigned = Object.entries(preset).filter(([_, val]) => val !== 'rest').reduce((sum, [_, val]) => sum + val, 0);
+        state.customRoles[r] = n - assigned;
+      } else {
+        state.customRoles[r] = v;
+      }
+    });
+  }
+
+  const current = state.customRoles[role] || 0;
+  state.customRoles[role] = Math.max(0, current + delta);
+  render();
+}
+
+function calculateTotalRoles(roles) {
+  return Object.entries(roles).reduce((sum, [_, v]) => {
+    if (v === 'rest') return sum;
+    return sum + v;
+  }, 0);
+}
+
+function startGame() {
+  const n = state.players.length;
+  let preset;
+  if (n <= 6) preset = PRESETS['5-6'];
+  else if (n <= 8) preset = PRESETS['7-8'];
+  else if (n <= 10) preset = PRESETS['9-10'];
+  else if (n <= 12) preset = PRESETS['11-12'];
+  else preset = PRESETS['13+'];
+
+  const roleConfig = state.customRoles || preset;
+
+  // Build role array
+  const roleArray = [];
+  Object.entries(roleConfig).forEach(([role, count]) => {
+    if (count === 'rest') {
+      const assigned = Object.entries(roleConfig).filter(([_, v]) => v !== 'rest').reduce((sum, [_, v]) => sum + v, 0);
+      for (let i = 0; i < n - assigned; i++) roleArray.push(role);
+    } else {
+      for (let i = 0; i < count; i++) roleArray.push(role);
+    }
+  });
+
+  // Shuffle
+  for (let i = roleArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [roleArray[i], roleArray[j]] = [roleArray[j], roleArray[i]];
+  }
+
+  // Assign
+  state.roles = {};
+  state.players.forEach((_, i) => {
+    state.roles[i] = roleArray[i];
+  });
+
+  state.currentPlayerIndex = 0;
+  state.revealedPlayers = new Set();
+  state.phase = 'reveal';
+  render();
+}
+
+function restartGame() {
+  state.currentPlayerIndex = 0;
+  state.revealedPlayers = new Set();
+  startGame();
+}
+
+function initDragReveal() {
+  const curtain = document.getElementById('cardCurtain');
+  const container = document.getElementById('cardContainer');
+  if (!curtain || !container) return;
+
+  let isDragging = false;
+  let startY = 0;
+  let currentY = 0;
+  const containerHeight = container.offsetHeight;
+
+  function getY(e) {
+    return e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+  }
+
+  function onStart(e) {
+    isDragging = true;
+    startY = getY(e);
+    curtain.classList.add('dragging');
+    e.preventDefault();
+  }
+
+  function onMove(e) {
+    if (!isDragging) return;
+    const y = getY(e);
+    const deltaY = startY - y;
+    currentY = Math.max(0, Math.min(containerHeight, deltaY));
+    curtain.style.transform = `translateY(-${currentY}px)`;
+
+    if (currentY > containerHeight * 0.5) {
+      state.revealedPlayers.add(state.currentPlayerIndex);
+    }
+    e.preventDefault();
+  }
+
+  function onEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    curtain.classList.remove('dragging');
+    curtain.style.transform = 'translateY(0)';
+    currentY = 0;
+  }
+
+  curtain.addEventListener('mousedown', onStart);
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup', onEnd);
+  curtain.addEventListener('touchstart', onStart, { passive: false });
+  document.addEventListener('touchmove', onMove, { passive: false });
+  document.addEventListener('touchend', onEnd);
+}
+
+function nextPlayer() {
+  if (state.currentPlayerIndex < state.players.length - 1) {
+    state.currentPlayerIndex++;
+    render();
+  } else {
+    state.phase = 'summary';
+    render();
+  }
+}
+
+// Initialize
+render();
+</script>
+</body>
+</html>
