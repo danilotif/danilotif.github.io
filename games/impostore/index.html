@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>🦎 Il Camaleonte</title>
-  <meta name="description" content="Il Camaleonte - Party game per 3-10 giocatori">
+  <title>🦎 L'impostore</title>
   <meta name="theme-color" content="#065f46">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦎</text></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -88,7 +87,7 @@ function setupHTML() {
     <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border border-white/20 fade-in">
       <div class="text-center mb-6">
         <div class="text-6xl mb-2">🦎</div>
-        <h1 class="text-3xl font-bold text-white">Il Camaleonte</h1>
+        <h1 class="text-3xl font-bold text-white">L'intruso</h1>
       </div>
 
       <div class="mb-4">
@@ -138,7 +137,7 @@ function revealHTML() {
       <div class="p-6 rounded-2xl mb-4 ${isChameleon ? 'bg-red-500/30 border-2 border-red-400' : 'bg-green-500/30 border-2 border-green-400'}">
         ${isChameleon ? `
           <div class="text-5xl mb-2">🦎</div>
-          <div class="text-2xl font-bold text-white">Sei il Camaleonte!</div>
+          <div class="text-2xl font-bold text-white">Sei l'intruso!</div>
           <div class="text-red-200 mt-2">Non conosci la parola. Bluffa!</div>
         ` : `
           <div class="text-5xl mb-2">✨</div>
