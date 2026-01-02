@@ -8,10 +8,71 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥷</text></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    * { -webkit-tap-highlight-color: transparent; }
+    * { -webkit-tap-highlight-color: transparent; user-select: none; }
     body { overscroll-behavior: none; }
     .fade-in { animation: fadeIn 0.3s ease-out; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card-container {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+      border-radius: 1rem;
+      touch-action: none;
+    }
+    .card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .card-curtain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: linear-gradient(to bottom, #065f46 0%, #047857 50%, #059669 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      transition: transform 0.4s ease-out;
+      z-index: 10;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .card-curtain:active { cursor: grabbing; }
+    .card-curtain.dragging { transition: none; }
+    .drag-hint {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: white;
+    }
+    .drag-arrow {
+      font-size: 2rem;
+      animation: bounce 1s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .drag-handle {
+      width: 60px;
+      height: 6px;
+      background: rgba(255,255,255,0.4);
+      border-radius: 3px;
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-green-900 via-emerald-800 to-teal-900">
@@ -27,7 +88,6 @@ let state = {
   chameleonIndex: null,
   secretWord: '',
   currentPlayerIndex: 0,
-  showingRole: false,
   revealedPlayers: new Set(),
   gameStarted: false
 };
@@ -53,6 +113,11 @@ function render() {
   const game = document.getElementById('game');
   game.innerHTML = getPhaseHTML();
   game.querySelector('.fade-in')?.classList.add('fade-in');
+
+  // Initialize drag functionality if we're in reveal phase
+  if (state.phase === 'reveal') {
+    initDragReveal();
+  }
 }
 
 function getPhaseHTML() {
@@ -120,40 +185,41 @@ function revealHTML() {
     }">${p}</div>
   `).join('');
 
-  if (!state.showingRole) {
-    return `
-      <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border border-white/20 text-center fade-in">
-        <h2 class="text-2xl font-bold text-white mb-6">${state.players[state.currentPlayerIndex]}, tocca per vedere il tuo ruolo</h2>
-        <button onclick="handleReveal()" class="w-32 h-32 mx-auto bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-6xl shadow-lg hover:scale-105 transition-transform active:scale-95">👆</button>
-        <div class="mt-6 flex flex-wrap gap-2 justify-center">${playerDots}</div>
-      </div>`;
-  }
-
   const isChameleon = state.currentPlayerIndex === state.chameleonIndex;
+
   return `
     <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border border-white/20 text-center fade-in">
-      <h2 class="text-2xl font-bold text-white mb-6">${state.players[state.currentPlayerIndex]}</h2>
-      
-      <div class="p-6 rounded-2xl mb-4 ${isChameleon ? 'bg-red-500/30 border-2 border-red-400' : 'bg-green-500/30 border-2 border-green-400'}">
-        ${isChameleon ? `
-          <div class="text-5xl mb-2">🥷</div>
-          <div class="text-2xl font-bold text-white">Sei l'impostore!</div>
-          <div class="text-red-200 mt-2">Non conosci la parola. Bluffa!</div>
-        ` : `
-          <div class="text-5xl mb-2">✨</div>
-          <div class="text-green-200">La parola segreta è:</div>
-          <div class="text-3xl font-bold text-white mt-2">${state.secretWord}</div>
-        `}
+      <h2 class="text-2xl font-bold text-white mb-4">${state.players[state.currentPlayerIndex]}</h2>
+
+      <div class="card-container mb-4" id="cardContainer">
+        <!-- Hidden content underneath -->
+        <div class="card-content ${isChameleon ? 'bg-red-500/30 border-2 border-red-400' : 'bg-green-500/30 border-2 border-green-400'}" style="border-radius: 1rem;">
+          ${isChameleon ? `
+            <div class="text-5xl mb-2">🥷</div>
+            <div class="text-2xl font-bold text-white">Sei l'impostore!</div>
+            <div class="text-red-200 mt-2">Non conosci la parola. Bluffa!</div>
+          ` : `
+            <div class="text-5xl mb-2">✨</div>
+            <div class="text-green-200">La parola segreta è:</div>
+            <div class="text-3xl font-bold text-white mt-2">${state.secretWord}</div>
+          `}
+        </div>
+
+        <!-- Draggable curtain on top -->
+        <div class="card-curtain" id="cardCurtain">
+          <!--<div class="drag-handle"></div>-->
+          <div class="drag-hint">
+            <div class="drag-arrow">⬆️</div>
+            <div class="text-lg font-medium">Trascina per scoprire</div>
+          </div>
+        </div>
       </div>
 
-      <div class="flex gap-2">
-        <button onclick="handleHide()" class="flex-1 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-xl font-bold transition-all">Nascondi</button>
-        <button onclick="nextPlayer()" class="flex-1 py-3 bg-green-500 hover:bg-green-400 text-white rounded-xl font-bold transition-all">
-          ${state.currentPlayerIndex < state.players.length - 1 ? 'Prossimo →' : 'Fine →'}
-        </button>
-      </div>
+      <button onclick="nextPlayer()" class="w-full py-3 bg-green-500 hover:bg-green-400 text-white rounded-xl font-bold transition-all">
+        ${state.currentPlayerIndex < state.players.length - 1 ? 'Prossimo →' : 'Fine →'}
+      </button>
 
-      <div class="mt-6 flex flex-wrap gap-2 justify-center">${playerDots}</div>
+      <div class="mt-4 flex flex-wrap gap-2 justify-center">${playerDots}</div>
     </div>`;
 }
 
@@ -178,26 +244,68 @@ function startGame() {
   state.secretWord = allWords[Math.floor(Math.random() * allWords.length)];
   state.chameleonIndex = Math.floor(Math.random() * state.players.length);
   state.currentPlayerIndex = 0;
-  state.showingRole = false;
   state.revealedPlayers = new Set();
   state.gameStarted = true;
   state.phase = 'reveal';
   render();
 }
 
-function handleReveal() {
-  state.showingRole = true;
-  state.revealedPlayers.add(state.currentPlayerIndex);
-  render();
-}
+function initDragReveal() {
+  const curtain = document.getElementById('cardCurtain');
+  const container = document.getElementById('cardContainer');
+  if (!curtain || !container) return;
 
-function handleHide() { 
-  state.showingRole = false; 
-  render(); 
+  let isDragging = false;
+  let startY = 0;
+  let currentY = 0;
+  const containerHeight = container.offsetHeight;
+
+  function getY(e) {
+    return e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+  }
+
+  function onStart(e) {
+    isDragging = true;
+    startY = getY(e);
+    curtain.classList.add('dragging');
+    e.preventDefault();
+  }
+
+  function onMove(e) {
+    if (!isDragging) return;
+    const y = getY(e);
+    const deltaY = startY - y; // positive when dragging up
+    currentY = Math.max(0, Math.min(containerHeight, deltaY));
+    curtain.style.transform = `translateY(-${currentY}px)`;
+
+    // Mark as revealed once dragged past threshold
+    if (currentY > containerHeight * 0.5) {
+      state.revealedPlayers.add(state.currentPlayerIndex);
+    }
+    e.preventDefault();
+  }
+
+  function onEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    curtain.classList.remove('dragging');
+    // Snap back down
+    curtain.style.transform = 'translateY(0)';
+    currentY = 0;
+  }
+
+  // Mouse events
+  curtain.addEventListener('mousedown', onStart);
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup', onEnd);
+
+  // Touch events
+  curtain.addEventListener('touchstart', onStart, { passive: false });
+  document.addEventListener('touchmove', onMove, { passive: false });
+  document.addEventListener('touchend', onEnd);
 }
 
 function nextPlayer() {
-  state.showingRole = false;
   if (state.currentPlayerIndex < state.players.length - 1) {
     state.currentPlayerIndex++;
     render();

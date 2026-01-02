@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Pictionary</title>
+  <meta name="theme-color" content="#7c3aed">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { -webkit-tap-highlight-color: transparent; user-select: none; }
+    body { overscroll-behavior: none; }
+    .fade-in { animation: fadeIn 0.3s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pop {
+      0% { transform: scale(0.8); opacity: 0; }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .pop { animation: pop 0.4s ease-out; }
+    @keyframes shake {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-5deg); }
+      75% { transform: rotate(5deg); }
+    }
+    .shake { animation: shake 0.3s ease-in-out; }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-violet-900 via-purple-800 to-fuchsia-900">
+  <div id="app" class="p-4 flex items-center justify-center min-h-screen">
+    <div id="game" class="w-full max-w-md"></div>
+  </div>
+
+<script>
+const WORDS = [
+  // Animali
+  "Cane", "Gatto", "Elefante", "Giraffa", "Leone", "Tigre", "Pinguino", "Farfalla", "Serpente", "Delfino",
+  "Cavallo", "Mucca", "Maiale", "Gallina", "Pesce", "Rana", "Tartaruga", "Ragno", "Ape", "Coccodrillo",
+  "Scimmia", "Orso", "Lupo", "Volpe", "Coniglio", "Topo", "Gufo", "Aquila", "Pappagallo", "Squalo",
+
+  // Oggetti
+  "Ombrello", "Chitarra", "Televisore", "Telefono", "Lampada", "Sedia", "Tavolo", "Letto", "Orologio", "Occhiali",
+  "Scarpa", "Cappello", "Borsa", "Chiave", "Libro", "Penna", "Forbici", "Martello", "Spazzolino", "Forchetta",
+  "Bicchiere", "Bottiglia", "Vaso", "Specchio", "Finestra", "Porta", "Scale", "Ruota", "Pallone", "Bicicletta",
+
+  // Cibo
+  "Pizza", "Gelato", "Torta", "Banana", "Mela", "Hamburger", "Pasta", "Panino", "Uovo", "Formaggio",
+  "Carota", "Pomodoro", "Fragola", "Anguria", "Cioccolato", "Caramella", "Popcorn", "Sushi", "Hot Dog", "Patatine",
+
+  // Luoghi e natura
+  "Casa", "Castello", "Montagna", "Mare", "Sole", "Luna", "Stella", "Nuvola", "Albero", "Fiore",
+  "Isola", "Vulcano", "Cascata", "Deserto", "Arcobaleno", "Fulmine", "Neve", "Pioggia", "Fuoco", "Fiume",
+
+  // Persone e professioni
+  "Pirata", "Astronauta", "Medico", "Pompiere", "Poliziotto", "Chef", "Mago", "Re", "Regina", "Fantasma",
+  "Robot", "Alieno", "Vampiro", "Strega", "Ninja", "Cowboy", "Clown", "Ballerina", "Cantante", "Pittore",
+
+  // Mezzi di trasporto
+  "Auto", "Aereo", "Treno", "Nave", "Elicottero", "Moto", "Autobus", "Razzo", "Sottomarino", "Mongolfiera",
+
+  // Sport e azioni
+  "Calcio", "Tennis", "Nuoto", "Boxe", "Sci", "Surf", "Pesca", "Dormire", "Cucinare", "Ballare",
+  "Correre", "Saltare", "Cantare", "Piangere", "Ridere", "Mangiare", "Bere", "Leggere", "Scrivere", "Dipingere",
+
+  // Vari
+  "Cuore", "Corona", "Spada", "Scudo", "Diamante", "Tesoro", "Mappa", "Bandiera", "Candela", "Campana",
+  "Trono", "Gabbia", "Catena", "Ancora", "Bussola", "Telescopio", "Microscopio", "Bilancia", "Clessidra", "Dado"
+];
+
+let currentWord = null;
+let isRevealed = false;
+
+function render() {
+  const game = document.getElementById('game');
+  game.innerHTML = `
+    <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border border-white/20 text-center fade-in">
+      <div class="text-6xl mb-4">🎨</div>
+      <h1 class="text-3xl font-bold text-white mb-6">Pictionary</h1>
+
+      <div id="wordContainer" class="min-h-[120px] flex items-center justify-center mb-6">
+        ${currentWord ? `
+          <div class="pop">
+            <div class="text-purple-200 text-sm mb-2">Disegna:</div>
+            <div class="text-4xl font-bold text-white">${currentWord}</div>
+          </div>
+        ` : `
+          <div class="text-white/50 text-lg">Premi il pulsante per iniziare</div>
+        `}
+      </div>
+
+      <button onclick="pickWord()" id="pickBtn"
+        class="w-full py-4 bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-400 hover:to-fuchsia-400 text-white rounded-xl font-bold text-lg transition-all shadow-lg active:scale-95">
+        ${currentWord ? '🔄 Nuova Parola' : '🎲 Estrai Parola'}
+      </button>
+    </div>
+  `;
+}
+
+function pickWord() {
+  const btn = document.getElementById('pickBtn');
+  btn.classList.add('shake');
+
+  // Pick a random word different from the current one
+  let newWord;
+  do {
+    newWord = WORDS[Math.floor(Math.random() * WORDS.length)];
+  } while (newWord === currentWord && WORDS.length > 1);
+
+  currentWord = newWord;
+
+  setTimeout(() => {
+    render();
+  }, 300);
+}
+
+// Initialize
+render();
+</script>
+</body>
+</html>
