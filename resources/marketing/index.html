@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Mobile Game Marketing: A Technical Guide - Danilo Giuffrida</title>
+    <meta content="A comprehensive guide to mobile game marketing for technical professionals" name="description">
+    <meta content="mobile gaming, marketing, user acquisition, ASO, analytics, game development" name="keywords">
+
+    <!-- Favicons -->
+    <link href="../../assets/img/favicon.png" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0e13;
+            color: #e4e4e7;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            color: #3b82f6;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #60a5fa;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #a1a1aa;
+            margin-bottom: 3rem;
+        }
+
+        ul {
+            list-style: none;
+            margin-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+        }
+
+        .part {
+            margin-bottom: 2rem;
+        }
+
+        .chapter {
+            margin-left: 1rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #60a5fa;
+        }
+
+        .appendix {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid #27272a;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            .container {
+                padding: 20px 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Resources</a>
+
+        <h1>Mobile Game Marketing: A Technical Guide</h1>
+        <p class="subtitle">A comprehensive guide for developers, scientists, and technical professionals entering mobile game marketing</p>
+
+        <div class="part">
+            <h2>Part I: Foundations & Framework</h2>
+
+            <div class="chapter">
+                <h3>Chapter 1: The Mobile Gaming Ecosystem</h3>
+                <ul>
+                    <li>Platform dynamics (iOS vs Android)</li>
+                    <li>Distribution channels and their technical constraints</li>
+                    <li>The app store algorithm architecture</li>
+                    <li>Understanding the value chain: developers, publishers, ad networks, attribution providers</li>
+                    <li>Market sizing and segmentation frameworks</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 2: Core Marketing Metrics & KPIs</h3>
+                <ul>
+                    <li>User acquisition metrics: CPI, CPM, CPC, CPA</li>
+                    <li>Retention cohorts and calculation methodologies</li>
+                    <li>LTV (Lifetime Value): probabilistic vs. deterministic models</li>
+                    <li>ROAS and profitability at scale</li>
+                    <li>DAU/MAU ratios and engagement depth</li>
+                    <li>Conversion funnel analysis</li>
+                    <li>Churn prediction models</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 3: Attribution & Analytics Infrastructure</h3>
+                <ul>
+                    <li>Mobile attribution: deterministic vs. probabilistic matching</li>
+                    <li>SKAdNetwork and privacy-first attribution (iOS 14.5+)</li>
+                    <li>MMP (Mobile Measurement Partner) selection and implementation</li>
+                    <li>Setting up tracking SDKs correctly</li>
+                    <li>Deep linking architecture</li>
+                    <li>Data warehousing for marketing analytics</li>
+                    <li>Building your BI stack</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="part">
+            <h2>Part II: User Acquisition Strategy</h2>
+
+            <div class="chapter">
+                <h3>Chapter 4: Pre-Launch Strategy</h3>
+                <ul>
+                    <li>Market research: competitive analysis frameworks</li>
+                    <li>Beta testing strategies (closed, open, geographic soft launch)</li>
+                    <li>Building pre-registration campaigns</li>
+                    <li>Landing pages and conversion optimization</li>
+                    <li>PR and media outreach for technical products</li>
+                    <li>Community seeding strategies</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 5: App Store Optimization (ASO)</h3>
+                <ul>
+                    <li>App store ranking algorithms decoded</li>
+                    <li>Keyword research and optimization methodology</li>
+                    <li>Metadata optimization: titles, subtitles, descriptions</li>
+                    <li>Creative asset optimization (icons, screenshots, videos)</li>
+                    <li>Localization strategy and execution</li>
+                    <li>A/B testing frameworks for store listings</li>
+                    <li>Category selection and featuring strategies</li>
+                    <li>Review management and ratings optimization</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 6: Paid User Acquisition: Fundamentals</h3>
+                <ul>
+                    <li>UA channel landscape and evolution</li>
+                    <li>Auction mechanics and bidding strategies</li>
+                    <li>Creative production pipelines</li>
+                    <li>Campaign structure and taxonomies</li>
+                    <li>Budget allocation frameworks</li>
+                    <li>Incrementality testing methodologies</li>
+                    <li>Fraud detection and prevention</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 7: Facebook/Meta Advertising</h3>
+                <ul>
+                    <li>Campaign structure: CBO vs. ABO</li>
+                    <li>Audience targeting in the privacy era</li>
+                    <li>Creative best practices for mobile games</li>
+                    <li>Dynamic creative optimization</li>
+                    <li>Bid strategies and optimization goals</li>
+                    <li>Understanding the Learning Phase</li>
+                    <li>Advanced tactics: lookalike audiences, value-based bidding</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 8: Google User Acquisition Campaigns (UAC)</h3>
+                <ul>
+                    <li>How UAC automation works under the hood</li>
+                    <li>Asset group optimization</li>
+                    <li>tROAS bidding and optimization</li>
+                    <li>Pre-registration campaigns</li>
+                    <li>YouTube for action campaigns</li>
+                    <li>Google Play Store ads integration</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 9: TikTok, Unity, ironSource, and Emerging Channels</h3>
+                <ul>
+                    <li>TikTok for apps: algorithm and creative requirements</li>
+                    <li>Programmatic networks: Unity Ads, ironSource, AppLovin</li>
+                    <li>Playable ads: design and technical implementation</li>
+                    <li>Cross-promotion networks</li>
+                    <li>Reddit, Snapchat, and niche channels</li>
+                    <li>Evaluating new channels systematically</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 10: Organic Growth & Virality</h3>
+                <ul>
+                    <li>Viral mechanics and k-factor mathematics</li>
+                    <li>Referral program design and economics</li>
+                    <li>Social sharing optimization</li>
+                    <li>Content marketing for games</li>
+                    <li>SEO for mobile games (web-to-app funnels)</li>
+                    <li>Community-driven growth tactics</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="part">
+            <h2>Part III: Creative Strategy & Production</h2>
+
+            <div class="chapter">
+                <h3>Chapter 11: Ad Creative Development</h3>
+                <ul>
+                    <li>The creative testing framework</li>
+                    <li>Concept development and ideation processes</li>
+                    <li>Production workflows and tooling</li>
+                    <li>Video editing for performance marketing</li>
+                    <li>Static vs. video vs. playable ads</li>
+                    <li>Localization and cultural adaptation</li>
+                    <li>Creative fatigue: measurement and refresh cadence</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 12: High-Performance Creative Patterns</h3>
+                <ul>
+                    <li>Hook-retain-reward structure</li>
+                    <li>Gameplay vs. fake ads: ethics and performance</li>
+                    <li>UGC (User Generated Content) style creatives</li>
+                    <li>Influencer integration in ads</li>
+                    <li>Interactive end cards and engagement mechanics</li>
+                    <li>Platform-specific creative optimization</li>
+                    <li>Testing velocity: managing creative pipelines at scale</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="part">
+            <h2>Part IV: Retention & Monetization Marketing</h2>
+
+            <div class="chapter">
+                <h3>Chapter 13: Onboarding Optimization</h3>
+                <ul>
+                    <li>FTUE (First Time User Experience) analytics</li>
+                    <li>Tutorial design and conversion funnels</li>
+                    <li>Progressive disclosure strategies</li>
+                    <li>Day 1 retention optimization</li>
+                    <li>Personalization in onboarding</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 14: Lifecycle Marketing & CRM</h3>
+                <ul>
+                    <li>Push notification strategies and best practices</li>
+                    <li>Email marketing for mobile games</li>
+                    <li>In-game messaging and offers</li>
+                    <li>Segmentation strategies</li>
+                    <li>Triggered campaigns and automation</li>
+                    <li>Win-back and re-engagement tactics</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 15: LiveOps as a Marketing Function</h3>
+                <ul>
+                    <li>Event planning and calendaring</li>
+                    <li>Limited-time offers and FOMO mechanics</li>
+                    <li>Seasonal campaigns</li>
+                    <li>Cross-promotion of game features</li>
+                    <li>Coordinating LiveOps with UA campaigns</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 16: Monetization Strategy & Its Marketing Implications</h3>
+                <ul>
+                    <li>IAP vs. IAA vs. hybrid models</li>
+                    <li>Pricing psychology and experimentation</li>
+                    <li>Offer optimization and personalization</li>
+                    <li>Subscription models in mobile games</li>
+                    <li>How monetization design impacts UA efficiency</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="part">
+            <h2>Part V: Community & Content</h2>
+
+            <div class="chapter">
+                <h3>Chapter 17: Influencer Marketing</h3>
+                <ul>
+                    <li>Influencer identification and vetting</li>
+                    <li>Campaign structures and economics</li>
+                    <li>Measuring influencer ROI</li>
+                    <li>Long-term partnerships vs. one-off campaigns</li>
+                    <li>Platform-specific strategies (YouTube, TikTok, Twitch)</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 18: Community Building</h3>
+                <ul>
+                    <li>Discord, Reddit, and community platforms</li>
+                    <li>Moderation strategies and community guidelines</li>
+                    <li>User-generated content programs</li>
+                    <li>Ambassador and beta tester programs</li>
+                    <li>Community feedback loops into product</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 19: Content Marketing & Brand Building</h3>
+                <ul>
+                    <li>Social media strategy for mobile games</li>
+                    <li>Content calendars and production systems</li>
+                    <li>Meme culture and viral content</li>
+                    <li>Developer diaries and behind-the-scenes content</li>
+                    <li>Building a brand beyond the game</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="part">
+            <h2>Part VI: Advanced Topics & Optimization</h2>
+
+            <div class="chapter">
+                <h3>Chapter 20: Experimentation & A/B Testing</h3>
+                <ul>
+                    <li>Designing statistically valid experiments</li>
+                    <li>Sample size calculation and power analysis</li>
+                    <li>Multi-armed bandit vs. A/B testing</li>
+                    <li>Testing roadmap development</li>
+                    <li>Avoiding common statistical pitfalls</li>
+                    <li>Incrementality testing for channels</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 21: Predictive Analytics & Machine Learning</h3>
+                <ul>
+                    <li>LTV prediction models</li>
+                    <li>Churn prediction and early intervention</li>
+                    <li>Audience segmentation with clustering</li>
+                    <li>Creative performance prediction</li>
+                    <li>Automated bidding and optimization</li>
+                    <li>Building vs. buying ML solutions</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 22: Marketing Mix Modeling & Advanced Attribution</h3>
+                <ul>
+                    <li>Multi-touch attribution models</li>
+                    <li>Marketing Mix Modeling (MMM) fundamentals</li>
+                    <li>Incrementality measurement at scale</li>
+                    <li>Combining MMM and attribution</li>
+                    <li>Building a unified measurement framework</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 23: Scaling User Acquisition</h3>
+                <ul>
+                    <li>Transitioning from $10K/day to $100K/day to $1M/day</li>
+                    <li>Organizational structure for scale</li>
+                    <li>Automation and tooling requirements</li>
+                    <li>Creative production at scale</li>
+                    <li>Managing agency and partner relationships</li>
+                    <li>International expansion strategies</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 24: Market-Specific Strategies</h3>
+                <ul>
+                    <li>Geographic nuances: US, China, Japan, Korea, EU, LATAM, SEA</li>
+                    <li>Genre-specific playbooks: hyper-casual, puzzle, RPG, strategy, casino</li>
+                    <li>Platform-specific considerations: iOS whale hunting vs. Android scale</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="part">
+            <h2>Part VII: Strategy & Organization</h2>
+
+            <div class="chapter">
+                <h3>Chapter 25: Building a Marketing Team</h3>
+                <ul>
+                    <li>Roles and responsibilities</li>
+                    <li>In-house vs. agency vs. hybrid models</li>
+                    <li>Hiring and evaluating marketing talent</li>
+                    <li>Collaboration with product and analytics teams</li>
+                    <li>Setting team OKRs and KPIs</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 26: Budgeting & Financial Planning</h3>
+                <ul>
+                    <li>Building a marketing budget from scratch</li>
+                    <li>ROI thresholds and profitability gates</li>
+                    <li>Portfolio approach to game marketing</li>
+                    <li>Scenario planning and sensitivity analysis</li>
+                    <li>Communicating marketing performance to executives</li>
+                </ul>
+            </div>
+
+            <div class="chapter">
+                <h3>Chapter 27: The Future of Mobile Game Marketing</h3>
+                <ul>
+                    <li>Privacy-first marketing evolution</li>
+                    <li>Emerging platforms and channels</li>
+                    <li>AI and automation trends</li>
+                    <li>Web3, blockchain, and new business models</li>
+                    <li>Predictions and preparing for change</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="appendix">
+            <h2>Appendices</h2>
+            <ul>
+                <li><strong>Appendix A:</strong> Glossary of Terms</li>
+                <li><strong>Appendix B:</strong> Tool and Platform Directory</li>
+                <li><strong>Appendix C:</strong> Marketing Tech Stack Recommendations</li>
+                <li><strong>Appendix D:</strong> Template Library (campaign briefs, creative briefs, testing plans)</li>
+                <li><strong>Appendix E:</strong> Case Studies (detailed breakdowns)</li>
+                <li><strong>Appendix F:</strong> Further Reading & Resources</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Resources - Danilo Giuffrida</title>
+    <meta content="Books and knowledge resources by Danilo Giuffrida" name="description">
+    <meta content="resources, books, knowledge, learning, mobile gaming, laws, principles" name="keywords">
+
+    <!-- Favicons -->
+    <link href="../assets/img/favicon.png" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0e13 0%, #1a1d21 100%);
+            color: #e4e4e7;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a1a1aa;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .book-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .book-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #3b82f6;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+        }
+
+        .book-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .book-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-description {
+            color: #a1a1aa;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .book-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #71717a;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .book-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .status-complete {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .status-progress {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Resources</h1>
+        <p class="subtitle">Books and knowledge bases for continuous learning</p>
+
+        <div class="books-grid">
+            <a href="laws/index.html" class="book-card">
+                <div class="book-icon">⚖️</div>
+                <div class="book-title">Laws & Principles</div>
+                <div class="book-description">
+                    A comprehensive collection of fundamental laws, principles, biases, and heuristics that govern human behavior, systems, and decision-making.
+                </div>
+                <span class="status-badge status-complete">Complete</span>
+                <div class="book-meta">
+                    <span>📚 100+ laws</span>
+                    <span>🎯 Interactive examples</span>
+                </div>
+            </a>
+
+            <a href="marketing/index.html" class="book-card">
+                <div class="book-icon">📱</div>
+                <div class="book-title">Mobile Game Marketing</div>
+                <div class="book-description">
+                    A technical guide to mobile game marketing for developers, scientists, and technical professionals. From fundamentals to expert-level strategies.
+                </div>
+                <span class="status-badge status-progress">In Progress</span>
+                <div class="book-meta">
+                    <span>📖 27 chapters</span>
+                    <span>🎓 Expert level</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
