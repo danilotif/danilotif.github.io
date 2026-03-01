@@ -322,7 +322,7 @@ scrolled past it, that's on you. Maybe try using Ctrl+F? Actually, don't — tha
 cheating. The recipe reveals itself when you're ready for it. That's what Nonna would say.
 She never actually said that, but it sounds like something she would say.</p>`];class fe{el=null;complete=!1;callbacks=null;mount(e,t){this.callbacks=t,this.complete=!1,this.el=document.createElement("div"),this.el.className="challenge-find-content";const s=`
       <div class="blog-header">
-        <img src="/images/pasta-photograph.jpg" alt="A warm overhead photo of homemade pasta on a rustic wooden table with olive oil and fresh herbs, soft golden lighting, food photography style" class="blog-hero-img" />
+        <img src="/i-hate-ads/images/pasta-photograph.jpg" alt="A warm overhead photo of homemade pasta on a rustic wooden table with olive oil and fresh herbs, soft golden lighting, food photography style" class="blog-hero-img" />
         <h1>Nonna's AMAZING 15-Minute Garlic Pasta (Life-Changing!!!)</h1>
         <div class="blog-meta">By CookingWithSoul1987 | September 14, 2024 | 47 Comments | 12 min read</div>
         <div class="blog-shares">Share: Facebook | Pinterest | Twitter | Print | Email to Mom</div>
