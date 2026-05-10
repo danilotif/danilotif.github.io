@@ -108,8 +108,8 @@
     </button>
     <div class="menu-panel" id="menu-panel" role="menu">
         <button type="button" class="toggle-btn active" data-category="monuments">Monumenti</button>
-        <button type="button" class="toggle-btn active" data-category="food" disabled title="Ancora nessun posto">Cibo</button>
-        <button type="button" class="toggle-btn active" data-category="transportation">Trasporti</button>
+        <button type="button" class="toggle-btn active" data-category="food">Cibo</button>
+        <button type="button" class="toggle-btn" data-category="transportation">Trasporti</button>
         <button type="button" class="toggle-btn active" data-category="streets">Strade</button>
     </div>
 </div>
@@ -144,9 +144,10 @@
         }
     }
 
-    let monumentsCache = null;
+    let mapDataCache = null;
     let monumentImagesCache = {};
-    let monumentFeatures = [];
+    let monumentFeaturesByCategory = {};
+    const monumentLayerIds = [];
     const categoryRefs = {};
     function trackCategoryLayer(category, layerId) {
         if (!category) return;
@@ -175,18 +176,20 @@
 
     map.on('load', async () => {
         try {
-            const response = await fetch('monuments.json', { cache: 'no-store' });
-            if (!response.ok) throw new Error('Failed to load monuments.json: ' + response.status);
-            monumentsCache = await response.json();
+            const response = await fetch('map-data.json', { cache: 'no-store' });
+            if (!response.ok) throw new Error('Failed to load map-data.json: ' + response.status);
+            mapDataCache = await response.json();
 
-            for (let i = 0; i < monumentsCache.length; i++) {
-                const monument = monumentsCache[i];
+            const monuments = mapDataCache.monuments || [];
+            for (let i = 0; i < monuments.length; i++) {
+                const monument = monuments[i];
                 const iconId = `monument-icon-${i}`;
                 try {
                     const icon = await renderMonumentIcon(monument);
                     if (!icon) continue;
                     monumentImagesCache[iconId] = icon;
-                    monumentFeatures.push({
+                    const category = monument.category || 'monuments';
+                    (monumentFeaturesByCategory[category] ??= []).push({
                         type: 'Feature',
                         geometry: { type: 'Point', coordinates: [monument.lng, monument.lat] },
                         properties: {
@@ -204,12 +207,12 @@
 
             addCustomLayers();
         } catch (err) {
-            console.error('Could not load monuments:', err);
+            console.error('Could not load map data:', err);
         }
     });
 
     map.on('style.load', () => {
-        if (monumentsCache) addCustomLayers();
+        if (mapDataCache) addCustomLayers();
     });
 
     for (const btn of document.querySelectorAll('.toggle-btn')) {
@@ -238,8 +241,11 @@
         if (e.key === 'Escape') setMenuOpen(false);
     });
 
-    map.on('click', 'monuments-layer', (e) => {
-        const f = e.features[0];
+    map.on('click', (e) => {
+        if (!monumentLayerIds.length) return;
+        const features = map.queryRenderedFeatures(e.point, { layers: monumentLayerIds });
+        if (!features.length) return;
+        const f = features[0];
         const p = f.properties;
         const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`;
         const desc = p.description ? `<p>${escapeHtml(p.description)}</p>` : '';
@@ -251,29 +257,25 @@
         hoverPopup.remove();
         clickPopup.setLngLat(f.geometry.coordinates).setHTML(html).addTo(map);
     });
-    map.on('mouseenter', 'monuments-layer', (e) => {
+    map.on('mousemove', (e) => {
+        if (!monumentLayerIds.length) return;
+        const features = map.queryRenderedFeatures(e.point, { layers: monumentLayerIds });
+        if (!features.length) {
+            map.getCanvas().style.cursor = '';
+            hoverPopup.remove();
+            return;
+        }
         map.getCanvas().style.cursor = 'pointer';
         if (clickPopup.isOpen()) return;
         hoverPopup
-            .setLngLat(e.features[0].geometry.coordinates)
-            .setText(e.features[0].properties.name)
+            .setLngLat(features[0].geometry.coordinates)
+            .setText(features[0].properties.name)
             .addTo(map);
     });
-    map.on('mouseleave', 'monuments-layer', () => {
-        map.getCanvas().style.cursor = '';
-        hoverPopup.remove();
-    });
 
-    async function addCustomLayers() {
+    function addCustomLayers() {
         removeBasemapPoiLayers();
-        try {
-            const response = await fetch('map-layers.json', { cache: 'no-store' });
-            if (!response.ok) throw new Error('Failed to load map-layers.json: ' + response.status);
-            const config = await response.json();
-            for (const layer of config.layers) renderConfiguredLayer(layer);
-        } catch (err) {
-            console.error('Could not load map layers:', err);
-        }
+        for (const layer of (mapDataCache?.layers || [])) renderConfiguredLayer(layer);
 
         for (const [iconId, imageData] of Object.entries(monumentImagesCache)) {
             if (!map.hasImage(iconId)) {
@@ -281,26 +283,36 @@
             }
         }
 
-        map.addSource('monuments', {
-            type: 'geojson',
-            data: { type: 'FeatureCollection', features: monumentFeatures }
-        });
-        map.addLayer({
-            id: 'monuments-layer',
-            type: 'symbol',
-            source: 'monuments',
-            layout: {
-                'icon-image': ['get', 'iconId'],
-                'icon-size': [
-                    'interpolate', ['exponential', 1.5], ['zoom'],
-                    12, 0.5,
-                    17, 1.6
-                ],
-                'icon-allow-overlap': true,
-                'icon-anchor': 'center'
-            }
-        });
-        trackCategoryLayer('monuments', 'monuments-layer');
+        monumentLayerIds.length = 0;
+        for (const [category, features] of Object.entries(monumentFeaturesByCategory)) {
+            const sourceId = `monuments-${category}`;
+            const layerId = `monuments-${category}-layer`;
+            map.addSource(sourceId, {
+                type: 'geojson',
+                data: { type: 'FeatureCollection', features }
+            });
+            map.addLayer({
+                id: layerId,
+                type: 'symbol',
+                source: sourceId,
+                layout: {
+                    'icon-image': ['get', 'iconId'],
+                    'icon-size': [
+                        'interpolate', ['exponential', 1.5], ['zoom'],
+                        12, 0.5,
+                        17, 1.6
+                    ],
+                    'icon-allow-overlap': true,
+                    'icon-anchor': 'center'
+                }
+            });
+            trackCategoryLayer(category, layerId);
+            monumentLayerIds.push(layerId);
+        }
+
+        for (const btn of document.querySelectorAll('.toggle-btn')) {
+            setCategoryVisible(btn.dataset.category, btn.classList.contains('active'));
+        }
     }
 
     function renderConfiguredLayer(layer) {

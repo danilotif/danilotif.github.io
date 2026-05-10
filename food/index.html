@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Ingredients Dashboard</title>
+
+    <link href="../assets/img/favicon.png" rel="icon">
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body { padding: 2rem; background: #f8f9fa; }
+        .dashboard-header { margin-bottom: 1.5rem; }
+        .dashboard-header h1 { font-size: 1.8rem; font-weight: 600; }
+        .dashboard-header a { font-size: 0.9rem; }
+        .stats { margin-bottom: 1.5rem; }
+        .stats .card { text-align: center; }
+        .stats .card h3 { margin: 0; font-size: 1.6rem; font-weight: 700; color: #0d6efd; }
+        .stats .card p { margin: 0; font-size: 0.85rem; color: #6c757d; }
+        #ingredients-table { font-size: 0.82rem; }
+        #ingredients-table thead th { white-space: nowrap; position: sticky; top: 0; background: #fff; }
+        .table-container { overflow-x: auto; }
+        .loading { text-align: center; padding: 3rem; color: #6c757d; }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="dashboard-header d-flex justify-content-between align-items-center">
+        <h1>Ingredients Dashboard</h1>
+        <a href="../index.html">&larr; Back to home</a>
+    </div>
+
+    <div class="stats row g-3" id="stats-row"></div>
+
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">UMAP 2D Projection</h5>
+            <div id="umap-plot" style="width:100%; height:600px;"></div>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-body table-container">
+            <h5 class="card-title">Full Dataset</h5>
+            <div class="loading" id="loading">Loading data...</div>
+            <table id="ingredients-table" class="table table-striped table-hover" style="display:none; width:100%">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+// UMAP scatter plot
+Papa.parse('food_2d.csv', {
+    download: true,
+    header: true,
+    skipEmptyLines: true,
+    complete: function(results) {
+        const data = results.data;
+        const categories = [...new Set(data.map(r => r.Category))];
+
+        const traces = categories.map(cat => {
+            const rows = data.filter(r => r.Category === cat);
+            return {
+                x: rows.map(r => parseFloat(r.x)),
+                y: rows.map(r => parseFloat(r.y)),
+                text: rows.map(r => r.Description),
+                name: cat,
+                mode: 'markers',
+                type: 'scatter',
+                marker: { size: 4, opacity: 0.7 },
+                hovertemplate: '<b>%{text}</b><br>Category: ' + cat + '<extra></extra>'
+            };
+        });
+
+        Plotly.newPlot('umap-plot', traces, {
+            title: '',
+            xaxis: { title: 'UMAP 1', zeroline: false },
+            yaxis: { title: 'UMAP 2', zeroline: false },
+            legend: { title: { text: 'Category' }, font: { size: 10 } },
+            hovermode: 'closest',
+            margin: { t: 20 }
+        }, { responsive: true });
+    }
+});
+
+// Data table
+Papa.parse('ingredients.csv', {
+    download: true,
+    header: true,
+    skipEmptyLines: true,
+    complete: function(results) {
+        const data = results.data;
+        const columns = results.meta.fields;
+
+        // Stats
+        const categories = new Set(data.map(r => r['Category']));
+        const statsHtml = `
+            <div class="col-md-3"><div class="card p-3"><h3>${data.length.toLocaleString()}</h3><p>Ingredients</p></div></div>
+            <div class="col-md-3"><div class="card p-3"><h3>${categories.size}</h3><p>Categories</p></div></div>
+            <div class="col-md-3"><div class="card p-3"><h3>${columns.length}</h3><p>Columns</p></div></div>
+        `;
+        document.getElementById('stats-row').innerHTML = statsHtml;
+
+        // Build table header
+        const thead = document.querySelector('#ingredients-table thead');
+        const headerRow = document.createElement('tr');
+        columns.forEach(col => {
+            const th = document.createElement('th');
+            th.textContent = col.replace('Data.', '').replace('Data.', '');
+            headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+
+        // Build table body
+        const tbody = document.querySelector('#ingredients-table tbody');
+        data.forEach(row => {
+            const tr = document.createElement('tr');
+            columns.forEach(col => {
+                const td = document.createElement('td');
+                td.textContent = row[col] || '';
+                tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+        });
+
+        // Init DataTable
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('ingredients-table').style.display = 'table';
+
+        $('#ingredients-table').DataTable({
+            pageLength: 25,
+            scrollX: true,
+            order: [[0, 'asc']],
+            language: { search: 'Filter:' }
+        });
+    }
+});
+</script>
+
+</body>
+</html>
