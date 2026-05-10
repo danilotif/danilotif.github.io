@@ -22,5 +22,21 @@
     "image": "images/villa-bellini.png",
     "transparent": true,
     "size": 140
+  },
+  {
+    "name": "Stadio",
+    "lat": 37.5158,
+    "lng": 15.0715,
+    "image": "images/stadio.png",
+    "transparent": true,
+    "size": 140
+  },
+  {
+    "name": "Aeroporto",
+    "lat": 37.4689,
+    "lng": 15.0638,
+    "image": "images/airport.png",
+    "transparent": true,
+    "size": 240
   }
 ]

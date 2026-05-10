@@ -10,38 +10,70 @@
 
     <style>
         html, body { margin: 0; padding: 0; height: 100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-        body { display: flex; flex-direction: column; }
+        body { position: relative; }
+        #map { width: 100%; height: 100%; }
 
-        header.page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 1.25rem;
-            background: #fff;
-            border-bottom: 1px solid #e5e7eb;
-            z-index: 1;
+        .menu {
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
+            z-index: 10;
         }
-        header.page-header h1 { margin: 0; font-size: 1.25rem; font-weight: 600; }
-        header.page-header a { font-size: 0.9rem; color: #0d6efd; text-decoration: none; }
-        header.page-header a:hover { text-decoration: underline; }
-        header.page-header .controls { display: flex; align-items: center; gap: 1rem; }
-        header.page-header .toggles { display: flex; gap: 0.4rem; }
-        header.page-header .toggle-btn {
-            font-size: 0.85rem;
-            padding: 0.3rem 0.7rem;
+        .burger {
+            width: 36px; height: 36px;
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            background: #fff;
             border: 1px solid #d1d5db;
-            border-radius: 999px;
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 0;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+            transition: border-color 0.15s, background 0.15s;
+        }
+        .burger:hover { border-color: #0d6efd; }
+        .burger[aria-expanded="true"] { background: #0d6efd; border-color: #0d6efd; }
+        .burger span {
+            display: block;
+            width: 18px; height: 2px;
+            background: #495057;
+            border-radius: 2px;
+            transition: background 0.15s;
+        }
+        .burger[aria-expanded="true"] span { background: #fff; }
+        .menu-panel {
+            position: absolute;
+            top: calc(100% + 0.4rem);
+            left: 0;
+            background: #fff;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            padding: 0.4rem;
+            flex-direction: column;
+            gap: 0.3rem;
+            min-width: 160px;
+            display: none;
+        }
+        .menu-panel.open { display: flex; }
+        .toggle-btn {
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
             background: #fff;
             color: #495057;
             cursor: pointer;
+            text-align: left;
             transition: background 0.15s, color 0.15s, border-color 0.15s;
         }
-        header.page-header .toggle-btn:hover { border-color: #0d6efd; }
-        header.page-header .toggle-btn.active { background: #0d6efd; color: #fff; border-color: #0d6efd; }
-        header.page-header .toggle-btn:disabled { color: #adb5bd; cursor: not-allowed; }
-        header.page-header .toggle-btn:disabled:hover { border-color: #d1d5db; }
-
-        #map { flex: 1 1 auto; width: 100%; }
+        .toggle-btn:hover { border-color: #0d6efd; }
+        .toggle-btn.active { background: #0d6efd; color: #fff; border-color: #0d6efd; }
+        .toggle-btn:disabled { color: #adb5bd; cursor: not-allowed; }
+        .toggle-btn:disabled:hover { border-color: #d1d5db; }
         .map-marker {
             border-radius: 50%;
             border: 2px solid #fff;
@@ -58,19 +90,19 @@
 </head>
 <body>
 
-<header class="page-header">
-    <h1>Catania</h1>
-    <div class="controls">
-        <div class="toggles">
-            <button type="button" class="toggle-btn active" data-category="monuments">Monuments</button>
-            <button type="button" class="toggle-btn active" data-category="food" disabled title="No places yet">Food</button>
-            <button type="button" class="toggle-btn active" data-category="transportation">Transportation</button>
-        </div>
-        <a href="../index.html">&larr; Back to home</a>
-    </div>
-</header>
-
 <div id="map"></div>
+
+<div class="menu" id="layers-menu">
+    <button type="button" class="burger" id="burger-btn" aria-label="Layers" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+    <div class="menu-panel" id="menu-panel" role="menu">
+        <button type="button" class="toggle-btn active" data-category="monuments">Monuments</button>
+        <button type="button" class="toggle-btn active" data-category="food" disabled title="No places yet">Food</button>
+        <button type="button" class="toggle-btn active" data-category="transportation">Transportation</button>
+        <button type="button" class="toggle-btn active" data-category="streets">Streets</button>
+    </div>
+</div>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script>
@@ -81,10 +113,26 @@
         zoom: 13,
         minZoom: 12,
         maxZoom: 17,
-        maxBounds: [[14.97, 37.44], [15.18, 37.56]]
+        maxBounds: [[14.97, 37.44], [15.18, 37.56]],
+        attributionControl: false
     });
 
-    map.addControl(new maplibregl.NavigationControl(), 'top-right');
+    const blankImage = { width: 1, height: 1, data: new Uint8Array(4) };
+    map.on('styleimagemissing', (e) => {
+        if (!map.hasImage(e.id)) map.addImage(e.id, blankImage);
+    });
+
+    function removeBasemapPoiLayers() {
+        const layers = (map.getStyle()?.layers) || [];
+        for (const layer of layers) {
+            // OpenMapTiles puts all POIs (shops, restaurants, attractions,
+            // bus stops, etc.) in source-layer "poi". Stripping it removes
+            // the icons and the labels while leaving streets/buildings.
+            if (layer['source-layer'] === 'poi') {
+                map.removeLayer(layer.id);
+            }
+        }
+    }
 
     let monumentsCache = null;
     let monumentImagesCache = {};
@@ -156,6 +204,24 @@
         });
     }
 
+    const burgerBtn = document.getElementById('burger-btn');
+    const menuPanel = document.getElementById('menu-panel');
+    const menuRoot = document.getElementById('layers-menu');
+    function setMenuOpen(open) {
+        burgerBtn.setAttribute('aria-expanded', String(open));
+        menuPanel.classList.toggle('open', open);
+    }
+    burgerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setMenuOpen(burgerBtn.getAttribute('aria-expanded') !== 'true');
+    });
+    document.addEventListener('click', (e) => {
+        if (!menuRoot.contains(e.target)) setMenuOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setMenuOpen(false);
+    });
+
     map.on('click', 'monuments-layer', (e) => {
         const p = e.features[0].properties;
         const url = `https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`;
@@ -174,6 +240,7 @@
     });
 
     async function addCustomLayers() {
+        removeBasemapPoiLayers();
         try {
             const response = await fetch('map-layers.json', { cache: 'no-store' });
             if (!response.ok) throw new Error('Failed to load map-layers.json: ' + response.status);
