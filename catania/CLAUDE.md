@@ -15,4 +15,4 @@ Append an entry to `map-layers.json`. The generic `renderConfiguredLayer` in `in
 A burger button in the header opens a dropdown panel with toggles: monuments, food (placeholder), transportation, streets. State is tracked via `categoryRefs` (per-category map+HTML markers); `setCategoryVisible` flips MapLibre `visibility` and the marker element `display`. The panel closes on click-outside or Escape.
 
 ## Adding a new monument
-Add an entry to `monuments.json` and drop its image into `images/`. Monuments whose image fails to load are silently skipped (no gray-circle placeholder).
+Add an entry to `monuments.json` (fields: `name`, `description`, `lat`, `lng`, `image`, `transparent`, `size`) and drop its image into `images/`. Monuments whose image fails to load are silently skipped. Hovering shows the name; clicking opens a richer popup with name + description + a link to Google Maps.

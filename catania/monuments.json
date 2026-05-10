@@ -1,6 +1,7 @@
 [
   {
     "name": "Castello Ursino",
+    "description": "Castello svevo del XIII secolo, voluto da Federico II. Oggi sede del Museo Civico.",
     "lat": 37.4988,
     "lng": 15.0851,
     "image": "images/castello.png",
@@ -9,6 +10,7 @@
   },
   {
     "name": "Piazza del Duomo (Cattedrale + Fontana)",
+    "description": "Cuore di Catania, dominata dalla Cattedrale di Sant'Agata e dalla Fontana dell'Elefante.",
     "lat": 37.5025,
     "lng": 15.0870,
     "image": "images/duomo-fontana.png",
@@ -17,6 +19,7 @@
   },
   {
     "name": "Villa Bellini",
+    "description": "Il principale giardino pubblico storico di Catania, in centro città vicino a Via Etnea.",
     "lat": 37.51129974897618,
     "lng": 15.083366066231251,
     "image": "images/villa-bellini.png",
@@ -24,7 +27,8 @@
     "size": 140
   },
   {
-    "name": "Stadio",
+    "name": "Stadio Angelo Massimino",
+    "description": "Stadio del Catania FC.",
     "lat": 37.5158,
     "lng": 15.0715,
     "image": "images/stadio.png",
@@ -32,7 +36,8 @@
     "size": 140
   },
   {
-    "name": "Aeroporto",
+    "name": "Aeroporto Catania-Fontanarossa",
+    "description": "Il principale aeroporto della Sicilia, a sud della città.",
     "lat": 37.4689,
     "lng": 15.0638,
     "image": "images/airport.png",

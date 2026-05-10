@@ -74,6 +74,16 @@
         .toggle-btn.active { background: #0d6efd; color: #fff; border-color: #0d6efd; }
         .toggle-btn:disabled { color: #adb5bd; cursor: not-allowed; }
         .toggle-btn:disabled:hover { border-color: #d1d5db; }
+
+        .monument-popup .maplibregl-popup-content {
+            padding: 0.7rem 0.9rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+        .monument-popup h3 { margin: 0 0 0.35rem; font-size: 0.95rem; font-weight: 600; color: #212529; padding-right: 1rem; }
+        .monument-popup p { margin: 0 0 0.5rem; font-size: 0.85rem; color: #495057; line-height: 1.35; }
+        .monument-popup a { font-size: 0.85rem; color: #0d6efd; text-decoration: none; font-weight: 500; }
+        .monument-popup a:hover { text-decoration: underline; }
         .map-marker {
             border-radius: 50%;
             border: 2px solid #fff;
@@ -93,14 +103,14 @@
 <div id="map"></div>
 
 <div class="menu" id="layers-menu">
-    <button type="button" class="burger" id="burger-btn" aria-label="Layers" aria-expanded="false">
+    <button type="button" class="burger" id="burger-btn" aria-label="Livelli" aria-expanded="false">
         <span></span><span></span><span></span>
     </button>
     <div class="menu-panel" id="menu-panel" role="menu">
-        <button type="button" class="toggle-btn active" data-category="monuments">Monuments</button>
-        <button type="button" class="toggle-btn active" data-category="food" disabled title="No places yet">Food</button>
-        <button type="button" class="toggle-btn active" data-category="transportation">Transportation</button>
-        <button type="button" class="toggle-btn active" data-category="streets">Streets</button>
+        <button type="button" class="toggle-btn active" data-category="monuments">Monumenti</button>
+        <button type="button" class="toggle-btn active" data-category="food" disabled title="Ancora nessun posto">Cibo</button>
+        <button type="button" class="toggle-btn active" data-category="transportation">Trasporti</button>
+        <button type="button" class="toggle-btn active" data-category="streets">Strade</button>
     </div>
 </div>
 
@@ -156,7 +166,12 @@
             m.getElement().style.display = visible ? '' : 'none';
         }
     }
-    const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 18 });
+    const hoverPopup = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 18 });
+    const clickPopup = new maplibregl.Popup({ closeButton: true, closeOnClick: true, offset: 18, maxWidth: '280px', className: 'monument-popup' });
+
+    function escapeHtml(s) {
+        return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
 
     map.on('load', async () => {
         try {
@@ -176,6 +191,7 @@
                         geometry: { type: 'Point', coordinates: [monument.lng, monument.lat] },
                         properties: {
                             name: monument.name,
+                            description: monument.description ?? '',
                             lat: monument.lat,
                             lng: monument.lng,
                             iconId
@@ -223,20 +239,29 @@
     });
 
     map.on('click', 'monuments-layer', (e) => {
-        const p = e.features[0].properties;
-        const url = `https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`;
-        window.open(url, '_blank', 'noopener');
+        const f = e.features[0];
+        const p = f.properties;
+        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`;
+        const desc = p.description ? `<p>${escapeHtml(p.description)}</p>` : '';
+        const html = `
+            <h3>${escapeHtml(p.name)}</h3>
+            ${desc}
+            <a href="${mapsUrl}" target="_blank" rel="noopener">Apri su Maps &nearr;</a>
+        `;
+        hoverPopup.remove();
+        clickPopup.setLngLat(f.geometry.coordinates).setHTML(html).addTo(map);
     });
     map.on('mouseenter', 'monuments-layer', (e) => {
         map.getCanvas().style.cursor = 'pointer';
-        popup
+        if (clickPopup.isOpen()) return;
+        hoverPopup
             .setLngLat(e.features[0].geometry.coordinates)
             .setText(e.features[0].properties.name)
             .addTo(map);
     });
     map.on('mouseleave', 'monuments-layer', () => {
         map.getCanvas().style.cursor = '';
-        popup.remove();
+        hoverPopup.remove();
     });
 
     async function addCustomLayers() {
