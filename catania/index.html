@@ -24,15 +24,50 @@
         header.page-header h1 { margin: 0; font-size: 1.25rem; font-weight: 600; }
         header.page-header a { font-size: 0.9rem; color: #0d6efd; text-decoration: none; }
         header.page-header a:hover { text-decoration: underline; }
+        header.page-header .controls { display: flex; align-items: center; gap: 1rem; }
+        header.page-header .toggles { display: flex; gap: 0.4rem; }
+        header.page-header .toggle-btn {
+            font-size: 0.85rem;
+            padding: 0.3rem 0.7rem;
+            border: 1px solid #d1d5db;
+            border-radius: 999px;
+            background: #fff;
+            color: #495057;
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s, border-color 0.15s;
+        }
+        header.page-header .toggle-btn:hover { border-color: #0d6efd; }
+        header.page-header .toggle-btn.active { background: #0d6efd; color: #fff; border-color: #0d6efd; }
+        header.page-header .toggle-btn:disabled { color: #adb5bd; cursor: not-allowed; }
+        header.page-header .toggle-btn:disabled:hover { border-color: #d1d5db; }
 
         #map { flex: 1 1 auto; width: 100%; }
+        .map-marker {
+            border-radius: 50%;
+            border: 2px solid #fff;
+            color: #fff;
+            font-weight: 700;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            cursor: default;
+        }
     </style>
 </head>
 <body>
 
 <header class="page-header">
     <h1>Catania</h1>
-    <a href="../index.html">&larr; Back to home</a>
+    <div class="controls">
+        <div class="toggles">
+            <button type="button" class="toggle-btn active" data-category="monuments">Monuments</button>
+            <button type="button" class="toggle-btn active" data-category="food" disabled title="No places yet">Food</button>
+            <button type="button" class="toggle-btn active" data-category="transportation">Transportation</button>
+        </div>
+        <a href="../index.html">&larr; Back to home</a>
+    </div>
 </header>
 
 <div id="map"></div>
@@ -51,76 +86,44 @@
 
     map.addControl(new maplibregl.NavigationControl(), 'top-right');
 
+    let monumentsCache = null;
+    let monumentImagesCache = {};
+    let monumentFeatures = [];
+    const categoryRefs = {};
+    function trackCategoryLayer(category, layerId) {
+        if (!category) return;
+        (categoryRefs[category] ??= { layerIds: [], markers: [] }).layerIds.push(layerId);
+    }
+    function trackCategoryMarker(category, marker) {
+        if (!category) return;
+        (categoryRefs[category] ??= { layerIds: [], markers: [] }).markers.push(marker);
+    }
+    function setCategoryVisible(category, visible) {
+        const refs = categoryRefs[category];
+        if (!refs) return;
+        for (const id of refs.layerIds) {
+            if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', visible ? 'visible' : 'none');
+        }
+        for (const m of refs.markers) {
+            m.getElement().style.display = visible ? '' : 'none';
+        }
+    }
+    const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 18 });
+
     map.on('load', async () => {
         try {
-            const response = await fetch('monuments.json');
+            const response = await fetch('monuments.json', { cache: 'no-store' });
             if (!response.ok) throw new Error('Failed to load monuments.json: ' + response.status);
-            const monuments = await response.json();
+            monumentsCache = await response.json();
 
-            map.addSource('historic-centre', {
-                type: 'geojson',
-                data: {
-                    type: 'Feature',
-                    geometry: {
-                        type: 'Polygon',
-                        coordinates: [[
-                            [15.080, 37.497],
-                            [15.094, 37.497],
-                            [15.094, 37.510],
-                            [15.080, 37.510],
-                            [15.080, 37.497]
-                        ]]
-                    }
-                }
-            });
-            map.addLayer({
-                id: 'historic-centre-fill',
-                type: 'fill',
-                source: 'historic-centre',
-                paint: { 'fill-color': '#0d6efd', 'fill-opacity': 0.08 }
-            });
-            map.addLayer({
-                id: 'historic-centre-outline',
-                type: 'line',
-                source: 'historic-centre',
-                paint: { 'line-color': '#0d6efd', 'line-width': 1.5, 'line-dasharray': [2, 2] }
-            });
-
-            const routeOrder = [
-                'Castello Ursino',
-                'Cattedrale di Sant\'Agata',
-                'Fontana dell\'Elefante',
-                'Teatro Massimo Bellini',
-                'Monastero dei Benedettini'
-            ];
-            const byName = Object.fromEntries(monuments.map(m => [m.name, m]));
-            const routeCoords = routeOrder
-                .map(name => byName[name])
-                .filter(Boolean)
-                .map(m => [m.lng, m.lat]);
-            map.addSource('walking-route', {
-                type: 'geojson',
-                data: {
-                    type: 'Feature',
-                    geometry: { type: 'LineString', coordinates: routeCoords }
-                }
-            });
-            map.addLayer({
-                id: 'walking-route-line',
-                type: 'line',
-                source: 'walking-route',
-                layout: { 'line-cap': 'round', 'line-join': 'round' },
-                paint: { 'line-color': '#dc3545', 'line-width': 3, 'line-opacity': 0.85 }
-            });
-
-            const features = [];
-            for (let i = 0; i < monuments.length; i++) {
-                const monument = monuments[i];
+            for (let i = 0; i < monumentsCache.length; i++) {
+                const monument = monumentsCache[i];
                 const iconId = `monument-icon-${i}`;
                 try {
-                    const imageData = await renderMonumentIcon(monument);
-                    map.addImage(iconId, imageData, { pixelRatio: 2 });
-                    features.push({
+                    const icon = await renderMonumentIcon(monument);
+                    if (!icon) continue;
+                    monumentImagesCache[iconId] = icon;
+                    monumentFeatures.push({
                         type: 'Feature',
                         geometry: { type: 'Point', coordinates: [monument.lng, monument.lat] },
                         properties: {
@@ -135,48 +138,142 @@
                 }
             }
 
-            map.addSource('monuments', {
-                type: 'geojson',
-                data: { type: 'FeatureCollection', features }
-            });
-            map.addLayer({
-                id: 'monuments-layer',
-                type: 'symbol',
-                source: 'monuments',
-                layout: {
-                    'icon-image': ['get', 'iconId'],
-                    'icon-size': [
-                        'interpolate', ['exponential', 1.5], ['zoom'],
-                        12, 0.5,
-                        17, 1.6
-                    ],
-                    'icon-allow-overlap': true,
-                    'icon-anchor': 'center'
-                }
-            });
-
-            map.on('click', 'monuments-layer', (e) => {
-                const p = e.features[0].properties;
-                const url = `https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`;
-                window.open(url, '_blank', 'noopener');
-            });
-
-            const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 18 });
-            map.on('mouseenter', 'monuments-layer', (e) => {
-                map.getCanvas().style.cursor = 'pointer';
-                popup
-                    .setLngLat(e.features[0].geometry.coordinates)
-                    .setText(e.features[0].properties.name)
-                    .addTo(map);
-            });
-            map.on('mouseleave', 'monuments-layer', () => {
-                map.getCanvas().style.cursor = '';
-                popup.remove();
-            });
+            addCustomLayers();
         } catch (err) {
             console.error('Could not load monuments:', err);
         }
     });
+
+    map.on('style.load', () => {
+        if (monumentsCache) addCustomLayers();
+    });
+
+    for (const btn of document.querySelectorAll('.toggle-btn')) {
+        btn.addEventListener('click', () => {
+            if (btn.disabled) return;
+            const active = btn.classList.toggle('active');
+            setCategoryVisible(btn.dataset.category, active);
+        });
+    }
+
+    map.on('click', 'monuments-layer', (e) => {
+        const p = e.features[0].properties;
+        const url = `https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`;
+        window.open(url, '_blank', 'noopener');
+    });
+    map.on('mouseenter', 'monuments-layer', (e) => {
+        map.getCanvas().style.cursor = 'pointer';
+        popup
+            .setLngLat(e.features[0].geometry.coordinates)
+            .setText(e.features[0].properties.name)
+            .addTo(map);
+    });
+    map.on('mouseleave', 'monuments-layer', () => {
+        map.getCanvas().style.cursor = '';
+        popup.remove();
+    });
+
+    async function addCustomLayers() {
+        try {
+            const response = await fetch('map-layers.json', { cache: 'no-store' });
+            if (!response.ok) throw new Error('Failed to load map-layers.json: ' + response.status);
+            const config = await response.json();
+            for (const layer of config.layers) renderConfiguredLayer(layer);
+        } catch (err) {
+            console.error('Could not load map layers:', err);
+        }
+
+        for (const [iconId, imageData] of Object.entries(monumentImagesCache)) {
+            if (!map.hasImage(iconId)) {
+                map.addImage(iconId, imageData, { pixelRatio: 2 });
+            }
+        }
+
+        map.addSource('monuments', {
+            type: 'geojson',
+            data: { type: 'FeatureCollection', features: monumentFeatures }
+        });
+        map.addLayer({
+            id: 'monuments-layer',
+            type: 'symbol',
+            source: 'monuments',
+            layout: {
+                'icon-image': ['get', 'iconId'],
+                'icon-size': [
+                    'interpolate', ['exponential', 1.5], ['zoom'],
+                    12, 0.5,
+                    17, 1.6
+                ],
+                'icon-allow-overlap': true,
+                'icon-anchor': 'center'
+            }
+        });
+        trackCategoryLayer('monuments', 'monuments-layer');
+    }
+
+    function renderConfiguredLayer(layer) {
+        map.addSource(layer.id, { type: 'geojson', data: layer.geojson });
+
+        const addedIds = [];
+        if (layer.fill) {
+            const id = `${layer.id}-fill`;
+            map.addLayer({
+                id,
+                type: 'fill',
+                source: layer.id,
+                paint: { 'fill-color': layer.fill.color, 'fill-opacity': layer.fill.opacity ?? 1 }
+            });
+            addedIds.push(id);
+        }
+        if (layer.outline) {
+            const id = `${layer.id}-outline`;
+            const paint = { 'line-color': layer.outline.color, 'line-width': layer.outline.width ?? 1 };
+            if (layer.outline.dasharray) paint['line-dasharray'] = layer.outline.dasharray;
+            if (layer.outline.opacity != null) paint['line-opacity'] = layer.outline.opacity;
+            map.addLayer({ id, type: 'line', source: layer.id, paint });
+            addedIds.push(id);
+        }
+        if (layer.line) {
+            const id = `${layer.id}-stroke`;
+            map.addLayer({
+                id,
+                type: 'line',
+                source: layer.id,
+                layout: { 'line-cap': 'round', 'line-join': 'round' },
+                paint: {
+                    'line-color': layer.line.color,
+                    'line-width': layer.line.width ?? 2,
+                    'line-opacity': layer.line.opacity ?? 1
+                }
+            });
+            addedIds.push(id);
+        }
+        for (const id of addedIds) trackCategoryLayer(layer.category, id);
+
+        if (layer.markers) addMarkersFromGeoJSON(layer.geojson, layer.markers, layer.category);
+    }
+
+    function addMarkersFromGeoJSON(geojson, cfg, category) {
+        const features = geojson.type === 'FeatureCollection' ? geojson.features : [geojson];
+        const targets = cfg.onFeatures === 'last' ? [features[features.length - 1]] : features;
+        const seen = new Set();
+        for (const feature of targets) {
+            if (!feature || feature.geometry?.type !== 'LineString') continue;
+            for (const coord of feature.geometry.coordinates) {
+                const key = coord.join(',');
+                if (seen.has(key)) continue;
+                seen.add(key);
+                const el = document.createElement('div');
+                el.className = 'map-marker';
+                el.textContent = cfg.label;
+                el.style.background = cfg.color;
+                el.style.width = el.style.height = `${cfg.size}px`;
+                el.style.fontSize = `${cfg.fontSize}px`;
+                const marker = new maplibregl.Marker({ element: el }).setLngLat(coord).addTo(map);
+                trackCategoryMarker(category, marker);
+            }
+        }
+    }
 
     function loadImageElement(src) {
         return new Promise((resolve, reject) => {
@@ -192,7 +289,7 @@
         try {
             img = await loadImageElement(monument.image);
         } catch (e) {
-            // image missing → grey placeholder for circular style
+            return null;
         }
 
         const dpr = 2;

@@ -1,39 +1,25 @@
 [
   {
-    "name": "Cattedrale di Sant'Agata",
-    "lat": 37.5036,
-    "lng": 15.0876,
-    "image": "images/cattedrale.jpg"
-  },
-  {
-    "name": "Fontana dell'Elefante",
-    "lat": 37.5034,
-    "lng": 15.0866,
-    "image": "images/elefante.jpg"
-  },
-  {
-    "name": "Teatro Massimo Bellini",
-    "lat": 37.5044,
-    "lng": 15.0907,
-    "image": "images/teatro-bellini.jpg"
-  },
-  {
     "name": "Castello Ursino",
     "lat": 37.4988,
     "lng": 15.0851,
-    "image": "images/castello-ursino.jpg"
-  },
-  {
-    "name": "Monastero dei Benedettini",
-    "lat": 37.5076,
-    "lng": 15.0843,
-    "image": "images/monastero-benedettini.jpg"
+    "image": "images/castello.png",
+    "transparent": true,
+    "size": 140
   },
   {
     "name": "Piazza del Duomo (Cattedrale + Fontana)",
     "lat": 37.5025,
     "lng": 15.0870,
     "image": "images/duomo-fontana.png",
+    "transparent": true,
+    "size": 140
+  },
+  {
+    "name": "Villa Bellini",
+    "lat": 37.51129974897618,
+    "lng": 15.083366066231251,
+    "image": "images/villa-bellini.png",
     "transparent": true,
     "size": 140
   }
