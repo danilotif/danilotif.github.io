@@ -43,5 +43,14 @@
     "image": "images/airport.png",
     "transparent": true,
     "size": 240
+  },
+  {
+    "name": "Piazza Stesicoro",
+    "description": "Piazza centrale",
+    "lat": 37.5075,
+    "lng": 15.0866,
+    "image": "images/stesicoro.png",
+    "transparent": true,
+    "size": 110
   }
 ]
