@@ -5,7 +5,7 @@
     "lng": 15.0851,
     "image": "images/castello.png",
     "transparent": true,
-    "size": 140
+    "size": 120
   },
   {
     "name": "Piazza del Duomo (Cattedrale + Fontana)",
@@ -13,7 +13,7 @@
     "lng": 15.0870,
     "image": "images/duomo-fontana.png",
     "transparent": true,
-    "size": 140
+    "size": 170
   },
   {
     "name": "Villa Bellini",
